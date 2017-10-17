@@ -7,16 +7,24 @@ namespace ScarletChaos
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class GameInstance : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public GraphicsDeviceManager graphics;
+        public SpriteBatch spriteBatch;
+        public static GameInstance PrimaryGameInstance;
+        public GraphicsOptions Options;
 
-        public Game1()
+        public GameInstance()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            PrimaryGameInstance = this;
+            Options = new GraphicsOptions(graphics);
+            Options.ApplyGraphicOptions();
         }
+
+
+
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -32,8 +40,7 @@ namespace ScarletChaos
         }
 
         /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
+        /// LoadContent will be called once per game and is the place to load Content.
         /// </summary>
         protected override void LoadContent()
         {
