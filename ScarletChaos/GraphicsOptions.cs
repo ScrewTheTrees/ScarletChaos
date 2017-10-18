@@ -25,10 +25,8 @@ namespace ScarletChaos
         public static int SCREENMODE_FULLSCREEN = 1;
         public static int SCREENMODE_BORDERLESSFULLSCREEN = 2;
 
-        public GraphicsOptions(GraphicsDeviceManager graphics)
-        {
-            Graphics = graphics;
-        }
+        public GraphicsOptions(GraphicsDeviceManager graphics) => Graphics = graphics;
+
 
         public void LoadGraphicsOptions()
         {
@@ -46,6 +44,11 @@ namespace ScarletChaos
 
         public void ApplyGraphicOptions()
         {
+            //TODO: Screen sizes.
+            Graphics.PreferredBackBufferWidth = 1280;
+            Graphics.PreferredBackBufferHeight = 720;
+
+
             if (ScreenMode == SCREENMODE_WINDOWED)
             { 
                 if (Graphics.IsFullScreen == true)
@@ -63,10 +66,6 @@ namespace ScarletChaos
                 if (Graphics.IsFullScreen == false)
                     Graphics.ToggleFullScreen();
             }
-
-            //TODO: Screen sizes.
-            Graphics.PreferredBackBufferWidth = 1280;
-            Graphics.PreferredBackBufferHeight = 720;
 
             Graphics.ApplyChanges();
         }
