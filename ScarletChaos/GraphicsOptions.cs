@@ -22,8 +22,8 @@ namespace ScarletChaos
         public static string SECTION_DISPLAY = "Display";
 
         public static int SCREENMODE_WINDOWED = 0;
-        public static int SCREENMODE_FULLSCREEN = 0;
-        public static int SCREENMODE_BORDERLESSFULLSCREEN = 0;
+        public static int SCREENMODE_FULLSCREEN = 1;
+        public static int SCREENMODE_BORDERLESSFULLSCREEN = 2;
 
         public GraphicsOptions(GraphicsDeviceManager graphics)
         {
