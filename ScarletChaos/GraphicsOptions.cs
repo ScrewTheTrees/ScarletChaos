@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ScarletChaos.DataUtility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,15 @@ namespace ScarletChaos
 
         public bool OptionFullscreen = false;
         public bool OptionRealFullscreen = false;
-        public ScreenMode Mode = ScreenMode.WINDOWED;
+        public int ScreenMode = SCREENMODE_WINDOWED;
+
+        public static string FILENAME_GRAPHICS = "Graphics.ini";
+
+        public static string SECTION_DISPLAY = "Display";
+
+        public static int SCREENMODE_WINDOWED = 0;
+        public static int SCREENMODE_FULLSCREEN = 0;
+        public static int SCREENMODE_BORDERLESSFULLSCREEN = 0;
 
         public GraphicsOptions(GraphicsDeviceManager graphics)
         {
@@ -23,23 +32,32 @@ namespace ScarletChaos
 
         public void LoadGraphicsOptions()
         {
+            IniFile file = new IniFile(FILENAME_GRAPHICS);
 
+            int.TryParse(file.Read("ScreenMode", SECTION_DISPLAY), out ScreenMode);
+
+        }
+        public void SaveGraphicsOptions()
+        {
+            IniFile file = new IniFile(FILENAME_GRAPHICS);
+
+            file.Write("ScreenMode", ScreenMode.ToString(), SECTION_DISPLAY);
         }
 
         public void ApplyGraphicOptions()
         {
-            if (Mode == ScreenMode.WINDOWED)
+            if (ScreenMode == SCREENMODE_WINDOWED)
             { 
                 if (Graphics.IsFullScreen == true)
                     Graphics.ToggleFullScreen();
             }
-            else if (Mode == ScreenMode.FULLSCREEN)
+            else if (ScreenMode == SCREENMODE_FULLSCREEN)
             {
                 Graphics.HardwareModeSwitch = true;
                 if (Graphics.IsFullScreen == false)
                     Graphics.ToggleFullScreen();
             }
-            else if (Mode == ScreenMode.BORDERLESSFULLSCREEN)
+            else if (ScreenMode == SCREENMODE_BORDERLESSFULLSCREEN)
             {
                 Graphics.HardwareModeSwitch = false;
                 if (Graphics.IsFullScreen == false)
@@ -54,14 +72,5 @@ namespace ScarletChaos
         }
 
 
-    }
-    /// <summary>
-    /// Mode to render the screen in.
-    /// </summary>
-    public enum ScreenMode
-    {
-        WINDOWED = 0,
-        FULLSCREEN = 1,
-        BORDERLESSFULLSCREEN = 2
     }
 }

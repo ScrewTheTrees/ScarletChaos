@@ -1,4 +1,4 @@
-﻿using ScarletChaos.DataStructs;
+﻿using ScarletChaos.DataUtility;
 
 namespace ScarletChaos
 {

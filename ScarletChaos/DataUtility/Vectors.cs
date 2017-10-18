@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScarletChaos.DataStructs
+namespace ScarletChaos.DataUtility
 {
     public struct EntityVector2
     {

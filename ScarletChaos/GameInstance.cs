@@ -22,7 +22,9 @@ namespace ScarletChaos
             Content.RootDirectory = "Content";
             PrimaryGameInstance = this;
             Options = new GraphicsOptions(graphics);
+            Options.LoadGraphicsOptions();
             Options.ApplyGraphicOptions();
+            Options.SaveGraphicsOptions();
         }
 
 
@@ -140,51 +142,8 @@ namespace ScarletChaos
 
         // Q: UrrDurridurr why no pure delta timer fred? 
         // A: Delta timers are bad for platformers where pixel perfect jumps is a thing. Atleast the Draw event and StepRaw use Delta timers.
-        private void Step1s()
-        {
-            Delta1s -= 1;
-            Entity[] list = EntityList.ToArray();
-            for (var i = 0; i < list.Length; i++)
-            {
-                list[i].Step1s();
-            }
-        }
-        private void Step1()
-        {
-            Delta1 -= 1;
-            Entity[] list = EntityList.ToArray();
-            for (var i = 0; i < list.Length; i++)
-            {
-                list[i].Step1();
-            }
-        }
-        private void Step10()
-        {
-            Delta10 -= 1;
-            Entity[] list = EntityList.ToArray();
-            for (var i = 0; i < list.Length; i++)
-            {
-                list[i].Step10();
-            }
-        }
-        private void Step30()
-        {
-            Delta30 -= 1;
-            Entity[] list = EntityList.ToArray();
-            for (var i = 0; i < list.Length; i++)
-            {
-                list[i].Step30();
-            }
-        }
-        private void Step60()
-        {
-            Delta60 -= 1;
-            Entity[] list = EntityList.ToArray();
-            for (var i = 0; i < list.Length; i++)
-            {
-                list[i].Step60();
-            }
-        }
+
+
         private void Step120()
         {
             Delta120 -= 1;
@@ -199,6 +158,51 @@ namespace ScarletChaos
             for (var i = 0; i < list.Length; i++)
             {
                 list[i].Step120();
+            }
+        }
+        private void Step60()
+        {
+            Delta60 -= 1;
+            Entity[] list = EntityList.ToArray();
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].Step60();
+            }
+        }
+        private void Step30()
+        {
+            Delta30 -= 1;
+            Entity[] list = EntityList.ToArray();
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].Step30();
+            }
+        }
+        private void Step10()
+        {
+            Delta10 -= 1;
+            Entity[] list = EntityList.ToArray();
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].Step10();
+            }
+        }
+        private void Step1()
+        {
+            Delta1 -= 1;
+            Entity[] list = EntityList.ToArray();
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].Step1();
+            }
+        }
+        private void Step1s()
+        {
+            Delta1s -= 1;
+            Entity[] list = EntityList.ToArray();
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].Step1s();
             }
         }
 
