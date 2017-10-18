@@ -78,6 +78,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DataUtility\IniFile.cs" />
+    <Compile Include="DataUtility\ScreenSize.cs" />
     <Compile Include="DataUtility\Vectors.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="GameInstance.cs" />
