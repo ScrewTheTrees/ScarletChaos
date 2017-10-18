@@ -41,6 +41,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DataStructs\Vectors.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="GameInstance.cs" />
     <Compile Include="GraphicsOptions.cs" />
     <Compile Include="Program.cs" />

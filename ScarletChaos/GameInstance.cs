@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace ScarletChaos
 {
@@ -12,7 +13,8 @@ namespace ScarletChaos
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
         public static GameInstance PrimaryGameInstance;
-        public GraphicsOptions Options;
+        public static GraphicsOptions Options;
+        public static List<Entity> EntityList = new List<Entity>();
 
         public GameInstance()
         {
@@ -24,6 +26,26 @@ namespace ScarletChaos
         }
 
 
+        public static Entity EntityCreate(Entity e)
+        {
+            e.EntityID = NextEntityID;
+            e.Create();
+            EntityList.Add(e);
+            return e;
+        }
+        public static Entity EntityCreate(Entity e, ulong EntityID)
+        {
+            e.EntityID = EntityID;
+            e.Create();
+            EntityList.Add(e);
+            return e;
+        }
+        public static Entity EntityDestroy(Entity e)
+        {
+            e.Destroy();
+            EntityList.Remove(e);
+            return e;
+        }
 
 
         /// <summary>
@@ -35,7 +57,6 @@ namespace ScarletChaos
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
@@ -46,7 +67,7 @@ namespace ScarletChaos
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+           
             // TODO: use this.Content to load your game content here
         }
 
@@ -59,32 +80,141 @@ namespace ScarletChaos
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+
+        public static double Delta1s = 0;
+        public static double Delta1 = 0;
+        public static double Delta10 = 0;
+        public static double Delta30 = 0;
+        public static double Delta60 = 0;
+        public static double Delta120 = 0;
+
+        public static double StepTime;
+        public static double DrawTime;
+
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            //StepTime  is technically a second
+            var deltaTime = gameTime.ElapsedGameTime;
+            StepTime = (deltaTime.Milliseconds * 0.001);
+            Delta1s += (StepTime) * 0.01;
+            Delta1 += (StepTime) * 1;
+            Delta10 += (StepTime) * 10;
+            Delta30 += (StepTime) * 30;
+            Delta60 += (StepTime) * 60;
+            Delta120 += (StepTime) * 120;
+
+            while (Delta120 > 1) { Step120(); }
+            while (Delta60 > 1) { Step60(); }
+            while (Delta30 > 1) { Step30(); }
+            while (Delta10 > 1) { Step10(); }
+            while (Delta1 > 1) { Step1(); }
+            while (Delta1s > 1) { Step1s(); }
+            
+
+            Entity[] list = EntityList.ToArray();
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].StepRaw();
+            }
 
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
+            var deltaTime = gameTime.ElapsedGameTime;
+            DrawTime = deltaTime.Milliseconds * 0.001;
 
-            // TODO: Add your drawing code here
+            Entity[] list = EntityList.ToArray();
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].Draw();
+            }
 
             base.Draw(gameTime);
         }
+
+        // Q: UrrDurridurr why no pure delta timer fred? 
+        // A: Delta timers are bad for platformers where pixel perfect jumps is a thing. Atleast the Draw event and StepRaw use Delta timers.
+        private void Step1s()
+        {
+            Delta1s -= 1;
+            Entity[] list = EntityList.ToArray();
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].Step1s();
+            }
+        }
+        private void Step1()
+        {
+            Delta1 -= 1;
+            Entity[] list = EntityList.ToArray();
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].Step1();
+            }
+        }
+        private void Step10()
+        {
+            Delta10 -= 1;
+            Entity[] list = EntityList.ToArray();
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].Step10();
+            }
+        }
+        private void Step30()
+        {
+            Delta30 -= 1;
+            Entity[] list = EntityList.ToArray();
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].Step30();
+            }
+        }
+        private void Step60()
+        {
+            Delta60 -= 1;
+            Entity[] list = EntityList.ToArray();
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].Step60();
+            }
+        }
+        private void Step120()
+        {
+            Delta120 -= 1;
+            Entity[] list = EntityList.ToArray();
+
+            //Always update this first, that way it will be ready for the next batch of BS
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].UpdateEntityData();
+            }
+
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].Step120();
+            }
+        }
+
+        private static ulong NextEntityID
+        {
+            get
+            {
+                NextEntityID += 1;
+                return NextEntityID;
+            }
+            set
+            {
+                NextEntityID = value;
+            }
+        }
+
+
     }
 }

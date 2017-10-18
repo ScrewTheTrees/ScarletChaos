@@ -46,6 +46,9 @@ namespace ScarletChaos
                     Graphics.ToggleFullScreen();
             }
 
+            //TODO: Screen sizes.
+            Graphics.PreferredBackBufferWidth = 1280;
+            Graphics.PreferredBackBufferHeight = 720;
 
             Graphics.ApplyChanges();
         }
