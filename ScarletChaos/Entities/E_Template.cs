@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ScarletChaos.Entities
 {
-    class EntityPlayable : Entity
+    class EntityTemplate : Entity
     {
-        public new int EntityType = ENTITY_PLAYABLE;
-
+        public new int EntityType = ENTITY_BASE;
     }
 }

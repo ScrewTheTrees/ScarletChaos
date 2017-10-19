@@ -63,7 +63,7 @@ namespace ScarletChaos
 
 
         public const int ENTITY_BASE = 0;
-        public const int ENTITY_PLATFORMER = 1;
+        public const int ENTITY_PLAYABLE = 1;
 
         public static Type GetEntityTypeFromID(int eid)
         {
@@ -72,7 +72,7 @@ namespace ScarletChaos
             switch (eid)
             {
                 //Base cases
-                case ENTITY_BASE: case ENTITY_PLATFORMER:
+                case ENTITY_BASE: case ENTITY_PLAYABLE:
                     ret = null; break;
                 
             }
