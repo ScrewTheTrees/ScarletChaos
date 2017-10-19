@@ -12,7 +12,7 @@ namespace ScarletChaos
     {
         public ulong EntityID;
         public ulong LatestStepIndex = 0;
-        public int EntityType = ENTITY_BASE;
+        public int EntityType = ENTITY_BASE; //Must be assigned
 
         public Vector2 Location = new Vector2(0, 0);
         public Vector2 PreviousLocation = new Vector2(0,0);

@@ -8,6 +8,6 @@ namespace ScarletChaos.Entities
 {
     class EntityTemplate : Entity
     {
-        public new int EntityType = ENTITY_BASE;
+        public new int EntityType = ENTITY_BASE; //Must be assigned
     }
 }
