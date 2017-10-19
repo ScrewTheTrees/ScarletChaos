@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ScarletChaos.DataUtility;
+using ScarletChaos.Entities;
 using System;
 
 namespace ScarletChaos
@@ -64,6 +65,7 @@ namespace ScarletChaos
 
         public const int ENTITY_BASE = 0;
         public const int ENTITY_PLAYABLE = 1;
+        public const int ENTITY_PLAYER = 10000;
 
         public static Type GetEntityTypeFromID(int eid)
         {
@@ -71,10 +73,13 @@ namespace ScarletChaos
 
             switch (eid)
             {
-                //Base cases
-                case ENTITY_BASE: case ENTITY_PLAYABLE:
-                    ret = null; break;
-                
+                    
+
+
+                case ENTITY_PLAYER: ret = typeof(EntityPlayer);  break;
+
+
+                default: ret = null; break;
             }
 
             return ret;
