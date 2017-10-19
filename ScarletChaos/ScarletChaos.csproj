@@ -83,11 +83,17 @@
     <Compile Include="DataUtility\IniFile.cs" />
     <Compile Include="DataUtility\ScreenSize.cs" />
     <Compile Include="DebugLog.cs" />
-    <Compile Include="Entity.cs" />
+    <Compile Include="Entities\EntityPlayer.cs" />
+    <Compile Include="Entities\E_Template.cs" />
+    <Compile Include="Entities\EntityPlayable.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="EntityAI\NpcAI.cs" />
     <Compile Include="GameInstance.cs" />
     <Compile Include="GraphicsOptions.cs" />
+    <Compile Include="InputOptions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DataUtility\Teams.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

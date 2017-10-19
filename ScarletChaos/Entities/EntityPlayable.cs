@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ScarletChaos.DataUtility;
+using ScarletChaos.EnityAI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +19,7 @@ namespace ScarletChaos.Entities
         //Important control stuff
         public bool CanControl = true;
         public bool IsNpcControlled = true;
-        public int NpcAI = 0;
+        public NpcAI EntityAI;
         public String Name = null;
 
         //Movement
@@ -30,7 +32,7 @@ namespace ScarletChaos.Entities
         public float Gravity = 0.25f;
         public float MaxGravity = 10f;
 
-        //Damage System
+        //Entity Stats System
         public Team EntityTeam = new Team(false,false,false);
         public float HealthMax = 10000f;
         public float FocusMax = 10000f;
@@ -39,13 +41,9 @@ namespace ScarletChaos.Entities
         public float Focus = 10000f;
         public float Stamina = 10000f;
 
-
         //Input
         public bool[] Press = new bool[InputOptions.PRESS_MAX];
         public bool[] Pressed = new bool[InputOptions.PRESS_MAX];
         public bool[] Released = new bool[InputOptions.PRESS_MAX];
-
-        
-
     }
 }
