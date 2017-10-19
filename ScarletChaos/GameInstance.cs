@@ -1,9 +1,9 @@
-﻿using ScarletPipeline;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ScarletChaos.Entities;
+using ScarletPipeline;
 using System.Collections.Generic;
-using System.IO;
 
 namespace ScarletChaos
 {

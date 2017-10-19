@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScarletPipeline
 {
-    class TextureBatch
+    public class TextureBatch
     {
     }
 }

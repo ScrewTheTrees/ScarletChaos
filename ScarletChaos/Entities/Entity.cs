@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ScarletChaos.Entities;
 using System;
 
-namespace ScarletChaos
+namespace ScarletChaos.Entities
 {
     /// <summary>
     /// Parental class for all Game Entities that are used to move around and make logic happen.
