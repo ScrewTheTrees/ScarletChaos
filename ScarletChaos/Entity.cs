@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ScarletChaos.DataUtility;
+using System;
 
 namespace ScarletChaos
 {
@@ -10,6 +11,8 @@ namespace ScarletChaos
     public class Entity
     {
         public ulong EntityID;
+        public ulong LatestStepIndex = 0;
+        public int EntityType = ENTITY_BASE;
 
         public Vector2 Location = new Vector2(0, 0);
         public Vector2 PreviousLocation = new Vector2(0,0);
@@ -38,6 +41,7 @@ namespace ScarletChaos
             PreviousLocation.X = Location.X;
             PreviousLocation.Y = Location.Y;
         }
+
         public Vector2 GetDeltaPosition()
         {
             var x1 = Location.X;
@@ -54,5 +58,27 @@ namespace ScarletChaos
             return new Vector2(xNew, yNew);
         }
         //End
+
+
+
+
+        public const int ENTITY_BASE = 0;
+        public const int ENTITY_PLATFORMER = 1;
+
+        public static Type GetEntityTypeFromID(int eid)
+        {
+            Type ret = null;
+
+            switch (eid)
+            {
+                //Base cases
+                case ENTITY_BASE: case ENTITY_PLATFORMER:
+                    ret = null; break;
+                
+            }
+
+            return ret;
+        }
+
     }
 }

@@ -50,7 +50,11 @@
   <ItemGroup>
     <Folder Include="Assets\Music\" />
     <Folder Include="Assets\Sounds\" />
-    <Folder Include="Assets\Textures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Textures\Icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
