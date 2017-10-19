@@ -22,8 +22,6 @@ namespace ScarletChaos
             Content.RootDirectory = "Content";
             PrimaryGameInstance = this;
            
-
-
             Options = new GraphicsOptions(graphics);
             Options.LoadGraphicsOptions();
             Options.ApplyGraphicOptions();

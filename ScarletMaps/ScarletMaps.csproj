@@ -43,5 +43,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ContentPipeline\ScarletPipeline.csproj">
+      <Project>{66b36bc4-c3b4-41a1-8ee6-600a24765dbc}</Project>
+      <Name>ScarletPipeline</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

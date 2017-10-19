@@ -57,11 +57,5 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ScarletMaps\ScarletMaps.csproj">
-      <Project>{358104d1-caa3-4725-9469-23dd00b1579d}</Project>
-      <Name>ScarletMaps</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
