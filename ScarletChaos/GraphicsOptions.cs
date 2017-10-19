@@ -63,8 +63,8 @@ namespace ScarletChaos
         public void ApplyGraphicOptions()
         {
             //TODO: Screen sizes.
-            Graphics.PreferredBackBufferWidth = 1280;
-            Graphics.PreferredBackBufferHeight = 720;
+            Graphics.PreferredBackBufferWidth = ScreenResolution.Width;
+            Graphics.PreferredBackBufferHeight = ScreenResolution.Height;
 
 
             if (ScreenMode == SCREENMODE_WINDOWED)
