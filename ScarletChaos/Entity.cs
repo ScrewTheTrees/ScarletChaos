@@ -1,4 +1,6 @@
-﻿using ScarletChaos.DataUtility;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ScarletChaos.DataUtility;
 
 namespace ScarletChaos
 {
@@ -9,15 +11,15 @@ namespace ScarletChaos
     {
         public ulong EntityID;
 
-        public EntityVector2 Location = new EntityVector2(0, 0);
-        public EntityVector2 PreviousLocation = new EntityVector2(0,0);
+        public Vector2 Location = new Vector2(0, 0);
+        public Vector2 PreviousLocation = new Vector2(0,0);
 
         public double DrawDelta;
         public double StepDelta;
 
         public void Create() { }
         public void Destroy() { }
-        public void Draw() { }
+        public void Draw(SpriteBatch spriteBatch) { }
 
         public void StepRaw() { }
         public void Step1s() { }
@@ -27,11 +29,8 @@ namespace ScarletChaos
         public void Step60() { }
         public void Step120() { }
 
-
-
-
-        public void SetLocation(EntityVector2 vec) { Location.X = vec.X; Location.Y = vec.Y; }
-        public void SetLocation(double x, double y) { Location.X = x; Location.Y = y; }
+        public void SetLocation(Vector2 vec) { Location.X = vec.X; Location.Y = vec.Y; }
+        public void SetLocation(float x, float y) { Location.X = x; Location.Y = y; }
 
         /// <summary>Updated just before .</summary>
         public void UpdateEntityData()
@@ -39,7 +38,7 @@ namespace ScarletChaos
             PreviousLocation.X = Location.X;
             PreviousLocation.Y = Location.Y;
         }
-        public EntityVector2 GetDeltaPosition()
+        public Vector2 GetDeltaPosition()
         {
             var x1 = Location.X;
             var y1 = Location.Y;
@@ -48,11 +47,11 @@ namespace ScarletChaos
 
             var xNew = x1 - x2;
             var yNew = y1 - y2;
-            xNew = xNew * GameInstance.Delta120;
-            yNew = yNew * GameInstance.Delta120;
+            xNew = (float)(xNew * GameInstance.Delta120);
+            yNew = (float)(yNew * GameInstance.Delta120);
             xNew += x1;
             yNew += y1;
-            return new EntityVector2(xNew, yNew);
+            return new Vector2(xNew, yNew);
         }
         //End
     }

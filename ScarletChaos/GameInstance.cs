@@ -1,26 +1,29 @@
-﻿using Microsoft.Xna.Framework;
+﻿using ScarletPipeline;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ScarletChaos
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
     public class GameInstance : Game
     {
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
         public static GameInstance PrimaryGameInstance;
-        public static GraphicsOptions Options;
-        public static List<Entity> EntityList = new List<Entity>();
+        public GraphicsOptions Options;
+        public List<Entity> EntityList = new List<Entity>();
+        public TextureContent texturePipeline;
 
         public GameInstance()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             PrimaryGameInstance = this;
+           
+
+
             Options = new GraphicsOptions(graphics);
             Options.LoadGraphicsOptions();
             Options.ApplyGraphicOptions();
@@ -32,21 +35,22 @@ namespace ScarletChaos
         {
             e.EntityID = NextEntityID;
             e.Create();
-            EntityList.Add(e);
+            PrimaryGameInstance.EntityList.Add(e);
             return e;
         }
         public static Entity EntityCreate(Entity e, ulong EntityID)
         {
             e.EntityID = EntityID;
             e.Create();
-            EntityList.Add(e);
+            PrimaryGameInstance.EntityList.Add(e);
             return e;
         }
         public static Entity EntityDestroy(Entity e)
         {
             e.Destroy();
-            EntityList.Remove(e);
+            PrimaryGameInstance.EntityList.Remove(e);
             return e;
+            
         }
 
 
@@ -68,8 +72,11 @@ namespace ScarletChaos
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
            
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            texturePipeline = new TextureContent(GraphicsDevice);
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -80,6 +87,7 @@ namespace ScarletChaos
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            texturePipeline.FlushAllTextures();
         }
 
 
@@ -130,11 +138,15 @@ namespace ScarletChaos
             var deltaTime = gameTime.ElapsedGameTime;
             DrawTime = deltaTime.Milliseconds * 0.001;
 
+            spriteBatch.Begin();
+
             Entity[] list = EntityList.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
-                list[i].Draw();
+                list[i].Draw(spriteBatch);
             }
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
@@ -147,15 +159,15 @@ namespace ScarletChaos
             Delta120 -= 1;
             Entity[] list = EntityList.ToArray();
 
-            //Always update this last, that way it will be ready for the next batch of BS
-            for (var i = 0; i < list.Length; i++)
-            {
-                list[i].UpdateEntityData();
-            }
-
             for (var i = 0; i < list.Length; i++)
             {
                 list[i].Step120();
+            }
+
+            //Always update this last, that way it will be ready for the next step.
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].UpdateEntityData();
             }
         }
         private void Step60()
