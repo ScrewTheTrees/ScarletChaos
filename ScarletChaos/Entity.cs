@@ -33,7 +33,7 @@ namespace ScarletChaos
         public void SetLocation(EntityVector2 vec) { Location.X = vec.X; Location.Y = vec.Y; }
         public void SetLocation(double x, double y) { Location.X = x; Location.Y = y; }
 
-        /// <summary>Updated after step120, after all the step events have been executed.</summary>
+        /// <summary>Updated just before .</summary>
         public void UpdateEntityData()
         {
             PreviousLocation.X = Location.X;

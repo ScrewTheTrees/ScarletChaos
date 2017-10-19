@@ -13,12 +13,7 @@ namespace ScarletChaos
     {
         private GraphicsDeviceManager Graphics;
 
-        public bool OptionFullscreen = false;
-        public bool OptionRealFullscreen = false;
         public int ScreenMode = SCREENMODE_WINDOWED;
-
-        ///<summary>Aspect ratio used to render to screen.</summary>
-        public int ScreenAspectRatio = 1;
         public ScreenSize ScreenResolution = ScreenSize.SS_169_1280X720;
 
         public static string FILENAME_GRAPHICS = "Graphics.ini";
@@ -37,15 +32,22 @@ namespace ScarletChaos
             IniFile file = new IniFile(FILENAME_GRAPHICS);
 
             int.TryParse(file.Read("ScreenMode", SECTION_DISPLAY), out ScreenMode);
-            int.TryParse(file.Read("ScreenAspectRatio", SECTION_DISPLAY), out ScreenAspectRatio);
 
             int temp;
             if (int.TryParse(file.Read("ScreenResolution", SECTION_DISPLAY), out temp))
             {
-                ScreenResolution = ScreenSize.All_RESOLUTIONS.FirstOrDefault(x => x.MetaID == temp);
-                
+                if (ScreenSize.All_RESOLUTIONS.Any(x => x.MetaID == temp))
+                    ScreenResolution = ScreenSize.All_RESOLUTIONS.First(x => x.MetaID == temp);
+                else
+                {
+                    int ScreenWidth, ScreenHeight;
+                    if (int.TryParse(file.Read("ScreenWidth", SECTION_DISPLAY), out ScreenWidth)
+                    && int.TryParse(file.Read("ScreenHeight", SECTION_DISPLAY), out ScreenHeight))
+                    {
+                        ScreenResolution = new ScreenSize(ScreenWidth, ScreenHeight, "custom resolution", 0);
+                    }
+                }
             }
-
         }
         public void SaveGraphicsOptions()
         {
@@ -54,6 +56,8 @@ namespace ScarletChaos
             file.Write("ScreenMode", ScreenMode.ToString(), SECTION_DISPLAY);
             file.Write("ScreenAspectRatio", ScreenResolution.AspectRatio.ToString(), SECTION_DISPLAY);
             file.Write("ScreenResolution", ScreenResolution.MetaID.ToString(), SECTION_DISPLAY);
+            file.Write("ScreenWidth", ScreenResolution.Width.ToString(), SECTION_DISPLAY);
+            file.Write("ScreenHeight", ScreenResolution.Height.ToString(), SECTION_DISPLAY);
         }
 
         public void ApplyGraphicOptions()

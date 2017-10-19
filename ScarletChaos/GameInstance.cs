@@ -108,13 +108,12 @@ namespace ScarletChaos
             Delta60 += (StepTime) * 60;
             Delta120 += (StepTime) * 120;
 
-            while (Delta120 > 1) { Step120(); }
-            while (Delta60 > 1) { Step60(); }
-            while (Delta30 > 1) { Step30(); }
-            while (Delta10 > 1) { Step10(); }
-            while (Delta1 > 1) { Step1(); }
             while (Delta1s > 1) { Step1s(); }
-            
+            while (Delta1 > 1) { Step1(); }
+            while (Delta10 > 1) { Step10(); }
+            while (Delta30 > 1) { Step30(); }
+            while (Delta60 > 1) { Step60(); }
+            while (Delta120 > 1) { Step120(); }
 
             Entity[] list = EntityList.ToArray();
             for (var i = 0; i < list.Length; i++)
@@ -143,13 +142,12 @@ namespace ScarletChaos
         // Q: UrrDurridurr why no pure delta timer fred? 
         // A: Delta timers are bad for platformers where pixel perfect jumps is a thing. Atleast the Draw event and StepRaw use Delta timers.
 
-
         private void Step120()
         {
             Delta120 -= 1;
             Entity[] list = EntityList.ToArray();
 
-            //Always update this first, that way it will be ready for the next batch of BS
+            //Always update this last, that way it will be ready for the next batch of BS
             for (var i = 0; i < list.Length; i++)
             {
                 list[i].UpdateEntityData();
