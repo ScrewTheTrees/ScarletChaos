@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScarletMaps
+namespace ScarletResource.MapObjects
 {
     public class Solid
     {

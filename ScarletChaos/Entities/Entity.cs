@@ -83,8 +83,10 @@ namespace ScarletChaos.Entities
 
         //Ohno
         public const int ENTITY_BASE = 0;
-        public const int ENTITY_PLAYABLE = 1;
-        public const int ENTITY_PLAYER = 10000;
+        public const int ENTITY_PLAYABLE = 10000;
+        public const int ENTITY_PLAYER = 11000;
+        public const int ENTITY_ENEMY = 20000;
+        public const int ENTITY_NPC = 30000;
 
         public static Type GetEntityTypeFromID(int eid)
         {

@@ -7,8 +7,8 @@
     <ProjectGuid>{66B36BC4-C3B4-41A1-8EE6-600A24765DBC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScarletPipeline</RootNamespace>
-    <AssemblyName>ScarletPipeline</AssemblyName>
+    <RootNamespace>ScarletResource</RootNamespace>
+    <AssemblyName>ScarletResource</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -42,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Map.cs" />
     <Compile Include="PipeLine.cs" />
     <Compile Include="Animation.cs" />
+    <Compile Include="MapObjects\Solid.cs" />
     <Compile Include="TextureContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
