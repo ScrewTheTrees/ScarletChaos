@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScarletChaos.DataUtility
 {
-    class PlayerOptions
+    public class PlayerOptions
     {
         public string Name;
         public bool PlayingOnline;

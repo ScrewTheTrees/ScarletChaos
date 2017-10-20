@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScarletChaos.Networking
 {
-    class NetworkMessage
+    class MSG
     {
         public const int MSG_DEADPACKET = 0;
 
@@ -15,7 +15,7 @@ namespace ScarletChaos.Networking
         public const int MSG_LEAVE = 110;
         public const int MSG_LEAVE_HANDSHAKE = 111;
         public const int MSG_REQUEST_ENTITYID = 120;
-
+        public const int MSG_SEND_PLAYERINFO = 130;
 
     }
 }

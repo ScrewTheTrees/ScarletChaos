@@ -16,6 +16,10 @@ namespace ScarletChaos.Entities
 
         /// <summary> Entites that arent visible wont perform Draw events (at all) </summary>
         public bool Visible = true;
+        /// <summary> These Entities wont be cleansed on room changes. </summary>
+        public bool Persistent = false;
+        /// <summary> These Entities are Active and will execute Step commands. </summary>
+        public bool Active = false;
 
         public Vector2 Location = new Vector2(0, 0);
         public Vector2 PreviousLocation = new Vector2(0,0);

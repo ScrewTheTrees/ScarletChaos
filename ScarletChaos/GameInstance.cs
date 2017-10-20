@@ -14,7 +14,8 @@ namespace ScarletChaos
         public static GameInstance PrimaryGameInstance;
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
-        public GraphicsOptions Options;
+        public GraphicsOptions OptionsGraphics;
+        public PlayerOptions OptionsPlayer;
         public List<Entity> EntityList = new List<Entity>();
         public TextureContent texturePipeline;
         public GameSession Session;
@@ -24,11 +25,13 @@ namespace ScarletChaos
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             PrimaryGameInstance = this;
-           
-            Options = new GraphicsOptions(graphics);
-            Options.LoadGraphicsOptions();
-            Options.ApplyGraphicOptions();
-            Options.SaveGraphicsOptions();
+
+            OptionsGraphics = new GraphicsOptions(graphics);
+            OptionsGraphics.LoadGraphicsOptions();
+            OptionsGraphics.ApplyGraphicOptions();
+            OptionsGraphics.SaveGraphicsOptions();
+
+            OptionsPlayer = new PlayerOptions();
         }
 
 
@@ -85,9 +88,7 @@ namespace ScarletChaos
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-           
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
             texturePipeline = new TextureContent(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
@@ -172,16 +173,17 @@ namespace ScarletChaos
         {
             Delta120 -= 1;
             Entity[] list = EntityList.ToArray();
-
             for (var i = 0; i < list.Length; i++)
             {
-                list[i].Step120();
+                if (list[i].Active == true)
+                    list[i].Step120();
             }
 
             //Always update this last, that way it will be ready for the next step.
             for (var i = 0; i < list.Length; i++)
             {
-                list[i].UpdateEntityData();
+                if (list[i].Active == true)
+                    list[i].UpdateEntityData();
             }
         }
         private void Step60()
@@ -190,7 +192,8 @@ namespace ScarletChaos
             Entity[] list = EntityList.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
-                list[i].Step60();
+                if (list[i].Active == true)
+                    list[i].Step60();
             }
         }
         private void Step30()
@@ -199,7 +202,8 @@ namespace ScarletChaos
             Entity[] list = EntityList.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
-                list[i].Step30();
+                if (list[i].Active == true)
+                    list[i].Step30();
             }
         }
         private void Step10()
@@ -208,7 +212,8 @@ namespace ScarletChaos
             Entity[] list = EntityList.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
-                list[i].Step10();
+                if (list[i].Active == true)
+                    list[i].Step10();
             }
         }
         private void Step1()
@@ -217,7 +222,8 @@ namespace ScarletChaos
             Entity[] list = EntityList.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
-                list[i].Step1();
+                if (list[i].Active == true)
+                    list[i].Step1();
             }
         }
         private void Step1s()
@@ -226,7 +232,8 @@ namespace ScarletChaos
             Entity[] list = EntityList.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
-                list[i].Step1s();
+                if (list[i].Active == true)
+                    list[i].Step1s();
             }
         }
 
