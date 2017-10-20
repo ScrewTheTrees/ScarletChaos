@@ -14,6 +14,9 @@ namespace ScarletChaos.Entities
         public ulong LatestStepIndex = 0;
         public int EntityType = ENTITY_BASE; //Must be assigned
 
+        /// <summary> Entites that arent visible wont perform Draw events (at all) </summary>
+        public bool Visible = true;
+
         public Vector2 Location = new Vector2(0, 0);
         public Vector2 PreviousLocation = new Vector2(0,0);
 
@@ -42,7 +45,8 @@ namespace ScarletChaos.Entities
             PreviousLocation.Y = Location.Y;
         }
 
-        public Vector2 GetDeltaPosition()
+        /// <summary> This shit calculates where this thing is actually supposed to be drawn.</summary>
+        public Vector2 GetDrawingPosition()
         {
             var x1 = Location.X;
             var y1 = Location.Y;
@@ -61,7 +65,7 @@ namespace ScarletChaos.Entities
 
 
 
-
+        //Ohno
         public const int ENTITY_BASE = 0;
         public const int ENTITY_PLAYABLE = 1;
         public const int ENTITY_PLAYER = 10000;
@@ -72,9 +76,6 @@ namespace ScarletChaos.Entities
 
             switch (eid)
             {
-                    
-
-
                 case ENTITY_PLAYER: ret = typeof(EntityPlayer);  break;
 
 

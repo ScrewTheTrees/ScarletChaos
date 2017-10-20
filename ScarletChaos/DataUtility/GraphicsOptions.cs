@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScarletChaos
+namespace ScarletChaos.DataUtility
 {
     public class GraphicsOptions
     {
@@ -33,16 +33,14 @@ namespace ScarletChaos
 
             int.TryParse(file.Read("ScreenMode", SECTION_DISPLAY), out ScreenMode);
 
-            int temp;
-            if (int.TryParse(file.Read("ScreenResolution", SECTION_DISPLAY), out temp))
+            if (int.TryParse(file.Read("ScreenResolution", SECTION_DISPLAY), out int temp))
             {
                 if (ScreenSize.All_RESOLUTIONS.Any(x => x.MetaID == temp))
                     ScreenResolution = ScreenSize.All_RESOLUTIONS.First(x => x.MetaID == temp);
                 else
                 {
-                    int ScreenWidth, ScreenHeight;
-                    if (int.TryParse(file.Read("ScreenWidth", SECTION_DISPLAY), out ScreenWidth)
-                    && int.TryParse(file.Read("ScreenHeight", SECTION_DISPLAY), out ScreenHeight))
+                    if (int.TryParse(file.Read("ScreenWidth", SECTION_DISPLAY), out int ScreenWidth)
+                    && int.TryParse(file.Read("ScreenHeight", SECTION_DISPLAY), out int ScreenHeight))
                     {
                         ScreenResolution = new ScreenSize(ScreenWidth, ScreenHeight, "custom resolution", 0);
                     }

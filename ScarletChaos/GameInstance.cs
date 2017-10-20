@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ScarletChaos.DataUtility;
 using ScarletChaos.Entities;
+using ScarletChaos.Networking;
 using ScarletPipeline;
 using System.Collections.Generic;
 
@@ -9,12 +11,13 @@ namespace ScarletChaos
 {
     public class GameInstance : Game
     {
+        public static GameInstance PrimaryGameInstance;
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
-        public static GameInstance PrimaryGameInstance;
         public GraphicsOptions Options;
         public List<Entity> EntityList = new List<Entity>();
         public TextureContent texturePipeline;
+        public GameSession Session;
 
         public GameInstance()
         {
@@ -48,7 +51,19 @@ namespace ScarletChaos
             e.Destroy();
             PrimaryGameInstance.EntityList.Remove(e);
             return e;
-            
+        }
+
+        public static bool IsOnline()
+        {
+            if (PrimaryGameInstance.Session == null) return false;
+
+            return true;
+        }
+        public static bool IsHost()
+        {
+            if (PrimaryGameInstance.Session == null) return true;
+            if (PrimaryGameInstance.Session.IsHost == true) return true;
+            return false;
         }
 
 
@@ -141,7 +156,8 @@ namespace ScarletChaos
             Entity[] list = EntityList.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
-                list[i].Draw(spriteBatch);
+                if (list[i].Visible == true)
+                    list[i].Draw(spriteBatch);
             }
 
             spriteBatch.End();
