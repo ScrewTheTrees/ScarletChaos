@@ -12,7 +12,7 @@ namespace ScarletChaos.Entities
     /// </summary>
     class EntityPlayer : EntityPlayable
     {
-        public new int EntityType = ENTITY_BASE; //Must be assigned
+        public new int EntityType = ENTITY_PLAYER; //Must be assigned
         public bool IsLocalPlayer = false;
         public new bool IsNpcControlled = false;
 

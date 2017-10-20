@@ -33,7 +33,7 @@ namespace ScarletChaos.Entities
         public float MaxGravity = 10f;
 
         //Entity Stats System
-        public Team EntityTeam = new Team(false,false,false);
+        public Team EntityTeam = new Team(false, false, false);
         public float HealthMax = 10000f;
         public float FocusMax = 10000f;
         public float StaminaMax = 10000f;

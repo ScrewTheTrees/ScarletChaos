@@ -13,18 +13,26 @@ namespace ScarletPipeline
         public Texture2D Sprite;
 
         public bool IsAnimated = false;
-        public bool Active = true;
         public bool Looping = false;
 
         private float Speed = 1f;
 
-        public float FrameIndex;
-        private int FrameIndexTotal;
+        public float FrameIndex = 0f;
+        private int FrameIndexTotal = 1;
 
         public Rectangle FrameRect;
 
         public int FrameWidth;
         public int FrameHeight;
+
+        /// <summary> Standard Sprite, no Animation </summary>
+        public Animation(Texture2D sprite)
+        {
+            Sprite = sprite;
+            FrameWidth = sprite.Width;
+            FrameHeight = sprite.Height;
+            FrameRect = new Rectangle(0, 0, FrameWidth, FrameHeight);
+        }
 
 
         public void Draw(SpriteBatch batch)
@@ -33,10 +41,10 @@ namespace ScarletPipeline
 
         public void Update(GameTime gameTime)
         {
-            if (Active == false) return;
+            if (IsAnimated == false) return;
 
             //Averages at about 60 frames per second ;)
-            FrameIndex += (float) (((gameTime.ElapsedGameTime.TotalMilliseconds * 0.001) * 60) * Speed);
+            FrameIndex += (float)(((gameTime.ElapsedGameTime.TotalMilliseconds * 0.001) * 60) * Speed);
 
             while (FrameIndex >= FrameIndexTotal)
             {
@@ -48,7 +56,6 @@ namespace ScarletPipeline
         {
             return (int)FrameIndex; //We want it rounded down anyway!
         }
-
 
         public void SetAnimationSpeed(float PlaybackSpeed)
         {

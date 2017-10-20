@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ScarletPipeline;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace ScarletMaps
     public class Solid
     {
         public bool Visible = false;
-        public Texture2D texture;
+        public Animation texture;
 
         public bool Destructible = false;
         public bool CollideEntity = true;

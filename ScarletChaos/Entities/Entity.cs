@@ -72,11 +72,11 @@ namespace ScarletChaos.Entities
         //Animations
         public Animation Sprite;
 
-        private void DrawAnimation(SpriteBatch spriteBatch)
+        public void DrawAnimation(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Sprite.Sprite, GetDrawingPosition(), Sprite.FrameRect, Color.White);
         }
-        private void DrawAnimation(SpriteBatch spriteBatch, Vector2 Position)
+        public void DrawAnimation(SpriteBatch spriteBatch, Vector2 Position)
         {
             spriteBatch.Draw(Sprite.Sprite, Position, Sprite.FrameRect, Color.White);
         }

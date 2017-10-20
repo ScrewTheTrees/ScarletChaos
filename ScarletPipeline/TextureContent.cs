@@ -13,7 +13,7 @@ namespace ScarletPipeline
         private GraphicsDevice Graphics;
         private Dictionary<string, Texture2D> LoadedTextures = new Dictionary<string, Texture2D>();
         private Texture2D DefaultTex;
-        
+
 
         public TextureContent(GraphicsDevice d)
         {
@@ -27,7 +27,7 @@ namespace ScarletPipeline
         public Texture2D GetTexture(string texPath)
         {
             Texture2D tex = DefaultTex;
-            
+
             if (LoadedTextures.ContainsKey(texPath))
             {
                 tex = LoadedTextures[texPath];

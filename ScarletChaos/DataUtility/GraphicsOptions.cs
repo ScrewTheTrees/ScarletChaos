@@ -66,7 +66,7 @@ namespace ScarletChaos.DataUtility
 
 
             if (ScreenMode == SCREENMODE_WINDOWED)
-            { 
+            {
                 if (Graphics.IsFullScreen == true)
                     Graphics.ToggleFullScreen();
             }
