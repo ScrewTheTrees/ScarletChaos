@@ -159,6 +159,9 @@ namespace ScarletChaos
             {
                 if (list[i].Visible == true)
                     list[i].Draw(spriteBatch);
+
+                if (list[i].Sprite != null)
+                    list[i].Sprite.Update(gameTime);
             }
 
             spriteBatch.End();

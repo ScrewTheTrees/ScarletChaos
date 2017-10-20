@@ -11,7 +11,7 @@ namespace ScarletChaos.Networking
     public class GameSession
     {
         /// <summary> The host controls all Online activity from NPC and Enemies. </summary>
-        public bool IsHost = false;    
+        public bool IsHost = false;
         public bool Connected = false;
         public NetPeerConfiguration config = new NetPeerConfiguration("ScarletChaos");
         public NetPeer Network;
@@ -63,49 +63,56 @@ namespace ScarletChaos.Networking
 
         public void ReciveMessage()
         {
-            NetIncomingMessage msg;
-            while ((msg = Network.ReadMessage()) != null)
+            try
             {
-                switch (msg.MessageType)
+                NetIncomingMessage msg;
+                while ((msg = Network.ReadMessage()) != null)
                 {
-                    case NetIncomingMessageType.VerboseDebugMessage:
-                    case NetIncomingMessageType.DebugMessage:
-                        DebugLog.LogDebug("Unhandled type: " + msg.MessageType);
-                        DebugLog.LogDebug("Containing: " + msg.ReadString());
-                        break;
-                    case NetIncomingMessageType.WarningMessage:
-                    case NetIncomingMessageType.ErrorMessage:
-                        DebugLog.LogWarning("Unhandled type: " + msg.MessageType);
-                        DebugLog.LogWarning("Containing: " + msg.ReadString());
-                        break;
-                    case NetIncomingMessageType.ConnectionLatencyUpdated:
-                        DebugLog.LogInfo("ConnectionLatency Updated: " + msg.ReadString());
-                        break;
-                    case NetIncomingMessageType.ConnectionApproval:
-                        if (msg.ReadVariableInt32() == MSG.MSG_JOIN)
-                        {
-                            msg.SenderConnection.Approve();
-                            var ip = msg.SenderEndPoint.Address;
-                            var port = msg.SenderEndPoint.Port;
-                            Players.Add(new PlayerClient(port, ip.ToString(), null));
-                            DebugLog.LogInfo("Player Connected: " + msg.ReadString());
-                        }
-                        else msg.SenderConnection.Deny();
-                        break;
-                    case NetIncomingMessageType.StatusChanged:
-                        byte Status = msg.ReadByte();
-                        DebugLog.LogInfo("ConnectionLatency Updated: " + msg.ReadString());
-                        break;
+                    switch (msg.MessageType)
+                    {
+                        case NetIncomingMessageType.DebugMessage:
+                            DebugLog.LogDebug("Unhandled type: " + msg.MessageType);
+                            DebugLog.LogDebug("Containing: " + msg.ReadString());
+                            break;
+                        case NetIncomingMessageType.WarningMessage:
+                        case NetIncomingMessageType.ErrorMessage:
+                            DebugLog.LogWarning("Unhandled type: " + msg.MessageType);
+                            DebugLog.LogWarning("Containing: " + msg.ReadString());
+                            break;
+                        case NetIncomingMessageType.ConnectionLatencyUpdated:
+                            DebugLog.LogInfo("ConnectionLatency Updated: " + msg.ReadString());
+                            break;
+                        case NetIncomingMessageType.ConnectionApproval:
+                            if (msg.ReadVariableInt32() == MSG.MSG_JOIN)
+                            {
+                                msg.SenderConnection.Approve();
+                                var ip = msg.SenderEndPoint.Address;
+                                var port = msg.SenderEndPoint.Port;
+                                Players.Add(new PlayerClient(port, ip.ToString(), null));
+                                DebugLog.LogInfo("Player Connected: " + msg.ReadString());
+                            }
+                            else msg.SenderConnection.Deny();
+                            break;
+                        case NetIncomingMessageType.StatusChanged:
+                            byte Status = msg.ReadByte();
+                            DebugLog.LogInfo("ConnectionLatency Updated: " + msg.ReadString());
+                            break;
 
-                    case NetIncomingMessageType.UnconnectedData:
-                    case NetIncomingMessageType.Data:
-                        SwitchMessages(msg);
-                        break;
-                    default:
-                        DebugLog.LogWarning("Wtf something weird occured with connection: " + msg.ReadString());
-                        break;
+                        case NetIncomingMessageType.UnconnectedData:
+                        case NetIncomingMessageType.Data:
+                            SwitchMessages(msg);
+                            break;
+                        default:
+                            DebugLog.LogWarning("Wtf something weird occured with connection: " + msg.ReadString());
+                            break;
+                    }
+                    Network.Recycle(msg);
                 }
-                Network.Recycle(msg);
+            }
+            catch (Exception e)
+            {
+                DebugLog.LogCritical(e.Message);
+                DebugLog.LogCritical(e.StackTrace);
             }
         }
 

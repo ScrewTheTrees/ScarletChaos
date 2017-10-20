@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PipeLine.cs" />
-    <Compile Include="TextureBatch.cs" />
+    <Compile Include="Animation.cs" />
     <Compile Include="TextureContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

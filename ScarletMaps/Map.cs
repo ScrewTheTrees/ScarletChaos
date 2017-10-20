@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScarletPipeline
+namespace ScarletMaps
 {
-    public class TextureBatch
+    public class Map
     {
     }
 }

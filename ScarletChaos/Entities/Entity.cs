@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ScarletChaos.Entities;
+using ScarletPipeline;
 using System;
 
 namespace ScarletChaos.Entities
@@ -22,7 +23,7 @@ namespace ScarletChaos.Entities
         public bool Active = false;
 
         public Vector2 Location = new Vector2(0, 0);
-        public Vector2 PreviousLocation = new Vector2(0,0);
+        public Vector2 PreviousLocation = new Vector2(0, 0);
 
         public double DrawDelta;
         public double StepDelta;
@@ -68,6 +69,17 @@ namespace ScarletChaos.Entities
         //End
 
 
+        //Animations
+        public Animation Sprite;
+
+        private void DrawAnimation(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(Sprite.Sprite, GetDrawingPosition(), Sprite.FrameRect, Color.White);
+        }
+        private void DrawAnimation(SpriteBatch spriteBatch, Vector2 Position)
+        {
+            spriteBatch.Draw(Sprite.Sprite, Position, Sprite.FrameRect, Color.White);
+        }
 
         //Ohno
         public const int ENTITY_BASE = 0;
@@ -80,14 +92,12 @@ namespace ScarletChaos.Entities
 
             switch (eid)
             {
-                case ENTITY_PLAYER: ret = typeof(EntityPlayer);  break;
-
+                case ENTITY_PLAYER: ret = typeof(EntityPlayer); break;
 
                 default: ret = null; break;
             }
 
             return ret;
         }
-
     }
 }
