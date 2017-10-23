@@ -10,6 +10,12 @@ namespace ScarletResource
     public class Map
     {
         public List<Solid> Solids = new List<Solid>();
+        public int BlockWidth = 64;
+        public int BlockHeight = 64;
+
+
+        public int MapWidth = 64 * 64;
+        public int MapHeight = 32 * 64;
 
     }
 }

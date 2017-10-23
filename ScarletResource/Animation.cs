@@ -61,7 +61,7 @@ namespace ScarletResource
             }
             else FrameIndexTotal = TotalFrames;
         }
-        /// <summary> Manually define entire sprite. </summary>
+        /// <summary> Manually define entire sprite including optional origin. </summary>
         /// <param name="sprite">Sprite Texture</param>
         /// <param name="width">Width of each Frame</param>
         /// <param name="height">Height of each Frame</param>
@@ -75,11 +75,6 @@ namespace ScarletResource
             OriginX = originX;
             OriginY = originY;
         }
-
-
-
-
-
 
 
 
@@ -109,10 +104,10 @@ namespace ScarletResource
         {
             Speed = 60f / PlaybackSpeedByFramesSecond;
         }
-
-
         public void DrawAnimation(SpriteBatch spriteBatch, Vector2 DrawPosition)
         {
+            DrawPosition.X += OriginX;
+            DrawPosition.Y += OriginY;
             spriteBatch.Draw(Sprite, DrawPosition, FrameRect, Color.White);
         }
 
