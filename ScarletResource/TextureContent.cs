@@ -48,7 +48,7 @@ namespace ScarletResource
             if (File.Exists(PipeLine.TEXTURES + path))
             {
                 var stream = new FileStream(PipeLine.TEXTURES + path, FileMode.Open);
-                c = Texture2D.FromStream(Graphics, stream); //TODO: Shit
+                c = Texture2D.FromStream(Graphics, stream);
                 stream.Dispose();
                 LoadedTextures.Add(path, c);
             }

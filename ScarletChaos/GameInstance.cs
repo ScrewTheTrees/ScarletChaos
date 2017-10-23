@@ -166,7 +166,7 @@ namespace ScarletChaos
             base.Update(gameTime);
         }
 
-        Animation what;
+        Animation what; //TODO: Remove
 
         protected override void Draw(GameTime gameTime)
         {

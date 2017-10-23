@@ -22,9 +22,9 @@ namespace ScarletResource
         public bool IsAnimated = false;
         public bool Looping = false;
 
-        private float Speed = 1f;
+        private float Speed = 1;
         public float Rotation = 0;
-        public float FrameIndex = 0f;
+        public float FrameIndex = 0;
         private int FrameIndexTotal = 1;
         public int FrameWidth;
         public int FrameHeight;
@@ -86,7 +86,7 @@ namespace ScarletResource
             //Averages at about 60 frames per second ;)
             FrameIndex += (float)(((gameTime.ElapsedGameTime.TotalMilliseconds * 0.001) * 60) * Speed);
 
-            while (FrameIndex >= FrameIndexTotal)
+            while (FrameIndex >= FrameIndexTotal && FrameIndexTotal > 0)
             {
                 FrameIndex -= FrameIndexTotal;
             }
@@ -101,9 +101,9 @@ namespace ScarletResource
         {
             Speed = PlaybackSpeed;
         }
-        public void SetAnimationSpeed(int PlaybackSpeedByFramesSecond)
+        public void SetAnimationSpeed(int FramesPerSecond)
         {
-            Speed = 60f / PlaybackSpeedByFramesSecond;
+            Speed = 60f / FramesPerSecond;
         }
         public void DrawAnimation(SpriteBatch spriteBatch, Vector2 DrawPosition, Single depth)
         {
