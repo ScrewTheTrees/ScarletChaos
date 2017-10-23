@@ -16,10 +16,11 @@ namespace ScarletResource
         public Collision collision;
         public Color ColorBlend = Color.White;
 
-        Vector2 Origin = new Vector2(0, 0);
-        Vector2 Scale = new Vector2(1, 1);
+        public Vector2 Origin = new Vector2(0, 0);
+        public Vector2 Offset = new Vector2(0, 0);
+        public Vector2 Scale = new Vector2(1, 1);
 
-        public bool IsAnimated = false;
+        public bool IsAnimated = true;
         public bool Looping = false;
 
         private float Speed = 1;
@@ -49,6 +50,8 @@ namespace ScarletResource
         {
             Sprite = sprite;
 
+            Offset.X = offsetX;
+            Offset.Y = offsetY;
             FrameWidth = Math.Max(width, 1);
             FrameHeight = Math.Max(height, 1);
             FrameRect = new Rectangle(offsetX, offsetY, FrameWidth, FrameHeight);
@@ -61,6 +64,8 @@ namespace ScarletResource
                 }
             }
             else FrameIndexTotal = TotalFrames;
+
+            if (FrameIndexTotal > 1) IsAnimated = true;
         }
         /// <summary> Manually define entire sprite including optional origin. </summary>
         /// <param name="sprite">Sprite Texture</param>
@@ -90,6 +95,8 @@ namespace ScarletResource
             {
                 FrameIndex -= FrameIndexTotal;
             }
+            FrameRect.X = (int)(Offset.X + ((int)FrameIndex * FrameWidth));
+            FrameRect.Y = (int)(Offset.Y);
         }
 
         public int GetCurrentFrame()
@@ -103,7 +110,7 @@ namespace ScarletResource
         }
         public void SetAnimationSpeed(int FramesPerSecond)
         {
-            Speed = 60f / FramesPerSecond;
+            Speed = FramesPerSecond / 60f;
         }
         public void DrawAnimation(SpriteBatch spriteBatch, Vector2 DrawPosition, Single depth)
         {

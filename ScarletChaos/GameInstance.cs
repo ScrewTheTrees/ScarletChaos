@@ -45,31 +45,6 @@ namespace ScarletChaos
             DebugLog.LogInfo("Game Instance constructor loaded.");
         }
 
-
-        public static Entity EntityCreate(Entity e)
-        {
-            e.EntityID = NextEntityID;
-            e.Create();
-            PrimaryGameInstance.EntityList.Add(e);
-            DebugLog.LogDebug("Created Entity of type: " + e.EntityType + " with id: " + e.EntityID);
-            return e;
-        }
-        public static Entity EntityCreate(Entity e, ulong EntityID)
-        {
-            e.EntityID = EntityID;
-            e.Create();
-            PrimaryGameInstance.EntityList.Add(e);
-            DebugLog.LogDebug("Created Entity of type: " + e.EntityType + " with id: " + e.EntityID);
-            return e;
-        }
-        public static Entity EntityDestroy(Entity e)
-        {
-            e.Destroy();
-            PrimaryGameInstance.EntityList.Remove(e);
-            DebugLog.LogDebug("Destroyed Entity of type: " + e.EntityType + " with id: " + e.EntityID);
-            return e;
-        }
-
         public static bool IsOnline()
         {
             if (PrimaryGameInstance.Session == null) return false;
@@ -135,6 +110,40 @@ namespace ScarletChaos
         public static double StepTime;
         public static double DrawTime;
 
+        Animation what; //TODO: Remove
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.Black);
+            var deltaTime = gameTime.ElapsedGameTime;
+            DrawTime = deltaTime.Milliseconds * 0.001;
+
+            //Roll up shit
+            GameCam.Update();
+            spriteBatch.GraphicsDevice.Viewport = GameCam.MainView;
+            spriteBatch.Begin(SpriteSortMode.BackToFront);
+
+            what.DrawAnimation(spriteBatch, new Vector2(200, 200), 0);
+
+            Entity[] list = EntityList.ToArray();
+            for (var i = 0; i < list.Length; i++)
+            {
+                if (list[i].Visible == true)
+                    list[i].Draw(spriteBatch);
+
+                if (list[i].Sprite != null)
+                    list[i].Sprite.Update(gameTime);
+            }
+
+            what.Update(gameTime);
+
+            spriteBatch.End();
+
+            base.Draw(gameTime);
+        }
+
+        // Q: UrrDurridurr why no pure delta timer fred? 
+        // A: Delta timers are bad for platformers where pixel perfect jumps is a thing. Atleast the Draw event and StepRaw use Delta timers.
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -163,42 +172,9 @@ namespace ScarletChaos
                 list[i].StepRaw();
             }
 
+
             base.Update(gameTime);
         }
-
-        Animation what; //TODO: Remove
-
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.Black);
-            var deltaTime = gameTime.ElapsedGameTime;
-            DrawTime = deltaTime.Milliseconds * 0.001;
-
-            //Roll up shit
-            GameCam.Update();
-            spriteBatch.GraphicsDevice.Viewport = GameCam.MainView;
-            spriteBatch.Begin(SpriteSortMode.BackToFront);
-
-            what.DrawAnimation(spriteBatch, new Vector2(200, 200), 0);
-
-            Entity[] list = EntityList.ToArray();
-            for (var i = 0; i < list.Length; i++)
-            {
-                if (list[i].Visible == true)
-                    list[i].Draw(spriteBatch);
-
-                if (list[i].Sprite != null)
-                    list[i].Sprite.Update(gameTime);
-            }
-
-            spriteBatch.End();
-
-            base.Draw(gameTime);
-        }
-
-        // Q: UrrDurridurr why no pure delta timer fred? 
-        // A: Delta timers are bad for platformers where pixel perfect jumps is a thing. Atleast the Draw event and StepRaw use Delta timers.
-
         private void Step120()
         {
             Delta120 -= 1;
@@ -208,13 +184,22 @@ namespace ScarletChaos
                 if (list[i].Active == true)
                     list[i].Step120();
             }
-
             //Always update this last, that way it will be ready for the next step.
             for (var i = 0; i < list.Length; i++)
             {
                 if (list[i].Active == true)
                     list[i].UpdateEntityData();
             }
+
+            //TODO: Debug
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                var e = new EntityPlayer();
+                e.SetLocation(GetMouseLocation());
+                e.Sprite = texturePipeline.solidAnimations.TEST_LOAD;
+                e.Visible = true;
+            }
+
         }
         private void Step60()
         {
@@ -235,6 +220,7 @@ namespace ScarletChaos
                 if (list[i].Active == true)
                     list[i].Step30();
             }
+
         }
         private void Step10()
         {
@@ -245,6 +231,7 @@ namespace ScarletChaos
                 if (list[i].Active == true)
                     list[i].Step10();
             }
+
         }
         private void Step1()
         {
@@ -267,17 +254,24 @@ namespace ScarletChaos
             }
         }
 
-        private static ulong NextEntityID
+
+        public static Vector2 GetMouseLocation()
         {
-            get
-            {
-                NextEntityID += 1;
-                return NextEntityID;
-            }
-            set
-            {
-                NextEntityID = value;
-            }
+            Vector2 loc = new Vector2(0,0);
+            loc.X = Mouse.GetState().X * ((float)PrimaryGameInstance.GameCam.ViewW / PrimaryGameInstance.OptionsGraphics.ScreenResolution.Width);
+            loc.Y = Mouse.GetState().Y * ((float)PrimaryGameInstance.GameCam.ViewH / PrimaryGameInstance.OptionsGraphics.ScreenResolution.Height);
+            return loc;
+        }
+
+
+
+
+
+        private static ulong NextEntityID = 0;
+        public static ulong GetNextEntityID()
+        {
+            NextEntityID += 1;
+            return NextEntityID;
         }
 
 

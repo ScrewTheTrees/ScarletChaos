@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace ScarletResource.TextureContents
 {
@@ -21,7 +22,9 @@ namespace ScarletResource.TextureContents
         {
             get
             {
-                var ani = new Animation(Instance.GetTexture(@"Icon.ico"));
+                var ani = new Animation(Instance.GetTexture(@"kirbytest.png"), 23, 23, 8, 54, 10);
+                ani.SetAnimationSpeed(10);
+                ani.Scale = new Vector2(2,2);
                 return ani;
             }
         }

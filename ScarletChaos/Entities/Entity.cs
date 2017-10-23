@@ -11,6 +11,14 @@ namespace ScarletChaos.Entities
     /// </summary>
     public class Entity
     {
+        public Entity()
+        {
+            EntityID = GameInstance.GetNextEntityID();
+            Create();
+            GameInstance.PrimaryGameInstance.EntityList.Add(this);
+        }
+
+
         public ulong EntityID;
         public ulong LatestStepIndex = 0;
         public int EntityType = ENTITY_BASE; //Must be assigned
@@ -22,7 +30,7 @@ namespace ScarletChaos.Entities
         /// <summary> These Entities wont be cleansed on room changes. </summary>
         public bool Persistent = false;
         /// <summary> These Entities are Active and will execute Step commands. </summary>
-        public bool Active = false;
+        public bool Active = true;
 
         public Vector2 Location = new Vector2(0, 0);
         public Vector2 PreviousLocation = new Vector2(0, 0);
@@ -30,20 +38,20 @@ namespace ScarletChaos.Entities
         public double DrawDelta;
         public double StepDelta;
 
-        public void Create() { }
-        public void Destroy() { }
-        public void Draw(SpriteBatch spriteBatch) { }
+        virtual public void Create() { }
+        virtual public void Destroy() { }
+        virtual public void Draw(SpriteBatch spriteBatch) { }
 
-        public void StepRaw() { }
-        public void Step1s() { }
-        public void Step1() { }
-        public void Step10() { }
-        public void Step30() { }
-        public void Step60() { }
-        public void Step120() { }
+        virtual public void StepRaw() { }
+        virtual public void Step1s() { }
+        virtual public void Step1() { }
+        virtual public void Step10() { }
+        virtual public void Step30() { }
+        virtual public void Step60() { }
+        virtual public void Step120() { }
 
-        public void SetLocation(Vector2 vec) { Location.X = vec.X; Location.Y = vec.Y; }
-        public void SetLocation(float x, float y) { Location.X = x; Location.Y = y; }
+        public void SetLocation(Vector2 vec) { Location.X = vec.X; Location.Y = vec.Y; PreviousLocation.X = vec.X; PreviousLocation.Y = vec.Y; }
+        public void SetLocation(float x, float y) { Location.X = x; Location.Y = y; PreviousLocation.X = x; PreviousLocation.Y = y; }
 
         /// <summary>Updated just before .</summary>
         public void UpdateEntityData()

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace ScarletChaos.Entities
 {
@@ -18,6 +20,10 @@ namespace ScarletChaos.Entities
 
         public new Team EntityTeam = new Team(true, false, false);
 
+        override public void Draw(SpriteBatch spriteBatch)
+        {
+            Sprite.DrawAnimation(spriteBatch, GetDrawingPosition(), 0);
+        }
 
         public new void Step120()
         {

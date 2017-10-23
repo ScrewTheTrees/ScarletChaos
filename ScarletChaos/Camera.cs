@@ -32,6 +32,8 @@ namespace ScarletChaos
         public Camera(Viewport view)
         {
             MainView = view;
+            ViewW = view.Width;
+            ViewH = view.Height;
         }
     }
 }
