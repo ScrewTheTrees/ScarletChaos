@@ -110,7 +110,7 @@ namespace ScarletChaos
         public static double StepTime;
         public static double DrawTime;
 
-        Animation what; //TODO: Remove
+        Sprite what; //TODO: Remove
 
         protected override void Draw(GameTime gameTime)
         {

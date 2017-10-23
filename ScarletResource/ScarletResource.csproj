@@ -46,7 +46,7 @@
     <Compile Include="TextureContents\SolidAnimations.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="PipeLine.cs" />
-    <Compile Include="Animation.cs" />
+    <Compile Include="Sprite.cs" />
     <Compile Include="MapObjects\Solid.cs" />
     <Compile Include="TextureContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

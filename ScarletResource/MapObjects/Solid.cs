@@ -11,7 +11,7 @@ namespace ScarletResource.MapObjects
     public class Solid
     {
         public bool Visible = false;
-        public Animation texture;
+        public Sprite texture;
 
         public bool Destructible = false;
         public bool CollideEntity = true;

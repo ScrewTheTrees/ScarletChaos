@@ -18,11 +18,11 @@ namespace ScarletResource.TextureContents
         }
 
 
-        public Animation TEST_LOAD
+        public Sprite TEST_LOAD
         {
             get
             {
-                var ani = new Animation(Instance.GetTexture(@"kirbytest.png"), 23, 23, 8, 54, 10);
+                var ani = new Sprite(Instance.GetTexture(@"kirbytest.png"), 23, 23, 8, 54, 10);
                 ani.SetAnimationSpeed(10);
                 ani.Scale = new Vector2(2,2);
                 return ani;

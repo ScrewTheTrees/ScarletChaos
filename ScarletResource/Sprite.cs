@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ScarletResource
 {
-    public class Animation
+    public class Sprite
     {
-        public Texture2D Sprite;
+        public Texture2D Tex;
         public SpriteEffects spriteEffect = new SpriteEffects();
         public Rectangle FrameRect;
         public Collision collision;
@@ -31,24 +31,26 @@ namespace ScarletResource
         public int FrameHeight;
 
         /// <summary> Standard Sprite, no Animation </summary>
-        public Animation(Texture2D sprite) : this(sprite, sprite.Width, sprite.Height, 0, 0, 0) { }
+        /// <param name="tex">Sprite Texture</param>
+        public Sprite(Texture2D tex) : this(tex, tex.Width, tex.Height, 0, 0, 0) { }
 
         /// <summary> Simple Animation Sprite </summary>
+        /// <param name="tex">Sprite Texture</param>
         /// <param name="width">Width of each Frame</param>
         /// <param name="height">Height of each Frame</param>
         /// <param name="TotalFrames">Manually define the amount of frames.</param>
-        public Animation(Texture2D sprite, int width, int height, int TotalFrames = 0) : this(sprite, width, height, 0, 0, TotalFrames) { }
+        public Sprite(Texture2D tex, int width, int height, int TotalFrames = 0) : this(tex, width, height, 0, 0, TotalFrames) { }
 
         /// <summary> Manually define entire sprite. </summary>
-        /// <param name="sprite">Sprite Texture</param>
+        /// <param name="tex">Sprite Texture</param>
         /// <param name="width">Width of each Frame</param>
         /// <param name="height">Height of each Frame</param>
         /// <param name="offsetX">The starting X Offset of all frames.</param>
         /// <param name="offsetY">The starting Y Offset of all frames.</param>
         /// <param name="TotalFrames">Manually define the amount of frames.</param>
-        public Animation(Texture2D sprite, int width, int height, int offsetX, int offsetY, int TotalFrames = 0)
+        public Sprite(Texture2D tex, int width, int height, int offsetX, int offsetY, int TotalFrames = 0)
         {
-            Sprite = sprite;
+            Tex = tex;
 
             Offset.X = offsetX;
             Offset.Y = offsetY;
@@ -58,7 +60,7 @@ namespace ScarletResource
 
             if (TotalFrames <= 0)
             {
-                for (var i = offsetX; i < Sprite.Width - FrameWidth; i += FrameWidth)
+                for (var i = offsetX; i < Tex.Width - FrameWidth; i += FrameWidth)
                 {
                     FrameIndexTotal += 1;
                 }
@@ -68,7 +70,7 @@ namespace ScarletResource
             if (FrameIndexTotal > 1) IsAnimated = true;
         }
         /// <summary> Manually define entire sprite including optional origin. </summary>
-        /// <param name="sprite">Sprite Texture</param>
+        /// <param name="tex">Sprite Texture</param>
         /// <param name="width">Width of each Frame</param>
         /// <param name="height">Height of each Frame</param>
         /// <param name="offsetX">The starting X Offset of all frames.</param>
@@ -76,7 +78,7 @@ namespace ScarletResource
         /// <param name="originX">The X Origin (Center) of sprite. </param>
         /// <param name="originY">The Y Origin (Center) of sprite. </param>
         /// <param name="TotalFrames">Manually define the amount of frames.</param>
-        public Animation(Texture2D sprite, int width, int height, int offsetX, int offsetY, int originX, int originY, int TotalFrames = 0) : this(sprite, width, height, offsetX, offsetY, TotalFrames)
+        public Sprite(Texture2D tex, int width, int height, int offsetX, int offsetY, int originX, int originY, int TotalFrames = 0) : this(tex, width, height, offsetX, offsetY, TotalFrames)
         {
             Origin.X = originX;
             Origin.Y = originY;
@@ -114,7 +116,7 @@ namespace ScarletResource
         }
         public void DrawAnimation(SpriteBatch spriteBatch, Vector2 DrawPosition, Single depth)
         {
-            spriteBatch.Draw(Sprite, DrawPosition, FrameRect, ColorBlend, Rotation, Origin, Scale, spriteEffect, depth);
+            spriteBatch.Draw(Tex, DrawPosition, FrameRect, ColorBlend, Rotation, Origin, Scale, spriteEffect, depth);
         }
 
 

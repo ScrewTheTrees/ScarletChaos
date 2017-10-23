@@ -22,7 +22,7 @@ namespace ScarletChaos.Entities
         public ulong EntityID;
         public ulong LatestStepIndex = 0;
         public int EntityType = ENTITY_BASE; //Must be assigned
-        public Animation Sprite;
+        public Sprite Sprite;
         public Single Depth = 0;
 
         /// <summary> Entites that arent visible wont perform Draw events (at all) </summary>
