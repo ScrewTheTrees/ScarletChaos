@@ -25,8 +25,8 @@ namespace ScarletResource
         public int FrameWidth;
         public int FrameHeight;
 
-        private int OffsetX;
-        private int OffsetY;
+        public int OriginX;
+        public int OriginY;
 
         /// <summary> Standard Sprite, no Animation </summary>
         public Animation(Texture2D sprite) : this(sprite, sprite.Width, sprite.Height, 0, 0, 0) { }
@@ -48,12 +48,9 @@ namespace ScarletResource
         {
             Sprite = sprite;
 
-            OffsetX = offsetX;
-            OffsetY = offsetY;
-
             FrameWidth = Math.Max(width,1);
             FrameHeight = Math.Max(height,1);
-            FrameRect = new Rectangle(OffsetX, OffsetY, FrameWidth, FrameHeight);
+            FrameRect = new Rectangle(offsetX, offsetY, FrameWidth, FrameHeight);
 
             if (TotalFrames <= 0)
             {
@@ -64,6 +61,27 @@ namespace ScarletResource
             }
             else FrameIndexTotal = TotalFrames;
         }
+        /// <summary> Manually define entire sprite. </summary>
+        /// <param name="sprite">Sprite Texture</param>
+        /// <param name="width">Width of each Frame</param>
+        /// <param name="height">Height of each Frame</param>
+        /// <param name="offsetX">The starting X Offset of all frames.</param>
+        /// <param name="offsetY">The starting Y Offset of all frames.</param>
+        /// <param name="originX">The X Origin (Center) of sprite. </param>
+        /// <param name="originY">The Y Origin (Center) of sprite. </param>
+        /// <param name="TotalFrames">Manually define the amount of frames.</param>
+        public Animation(Texture2D sprite, int width, int height, int offsetX, int offsetY, int originX, int originY ,int TotalFrames = 0) : this(sprite, width, height, offsetX, offsetY, TotalFrames)
+        {
+            OriginX = originX;
+            OriginY = originY;
+        }
+
+
+
+
+
+
+
 
         public void Update(GameTime gameTime)
         {
