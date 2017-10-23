@@ -80,6 +80,7 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Animations\SolidAnimations.cs" />
     <Compile Include="DataUtility\IniFile.cs" />
     <Compile Include="DataUtility\PlayerOptions.cs" />
     <Compile Include="DataUtility\ScreenSize.cs" />

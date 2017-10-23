@@ -29,7 +29,7 @@ namespace ScarletResource
         private int OffsetY;
 
         /// <summary> Standard Sprite, no Animation </summary>
-        public Animation(Texture2D sprite, int TotalFrames = 0) : this(sprite, 0, 0, 0, 0, TotalFrames) { }
+        public Animation(Texture2D sprite) : this(sprite, sprite.Width, sprite.Height, 0, 0, 0) { }
 
         /// <summary> Simple Animation Sprite </summary>
         /// <param name="width">Width of each Frame</param>
@@ -47,9 +47,13 @@ namespace ScarletResource
         public Animation(Texture2D sprite, int width, int height, int offsetX, int offsetY, int TotalFrames = 0)
         {
             Sprite = sprite;
-            FrameWidth = width;
-            FrameHeight = height;
-            FrameRect = new Rectangle(0, 0, FrameWidth, FrameHeight);
+
+            OffsetX = offsetX;
+            OffsetY = offsetY;
+
+            FrameWidth = Math.Max(width,1);
+            FrameHeight = Math.Max(height,1);
+            FrameRect = new Rectangle(OffsetX, OffsetY, FrameWidth, FrameHeight);
 
             if (TotalFrames <= 0)
             {

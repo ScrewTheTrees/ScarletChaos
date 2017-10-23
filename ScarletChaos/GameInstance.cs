@@ -1,11 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ScarletChaos.Animations;
 using ScarletChaos.DataUtility;
 using ScarletChaos.Entities;
 using ScarletChaos.Networking;
-using ScarletPipeline;
+using ScarletResource;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ScarletChaos
 {
@@ -19,6 +21,8 @@ namespace ScarletChaos
         public List<Entity> EntityList = new List<Entity>();
         public TextureContent texturePipeline;
         public GameSession Session;
+
+        public static string GameDirectory = Directory.GetCurrentDirectory();
 
         public GameInstance()
         {
@@ -91,6 +95,9 @@ namespace ScarletChaos
             spriteBatch = new SpriteBatch(GraphicsDevice);
             texturePipeline = new TextureContent(GraphicsDevice);
 
+            what = SolidAnimations.TEST_LOAD; //TODO: Shit
+
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -146,13 +153,19 @@ namespace ScarletChaos
             base.Update(gameTime);
         }
 
+        Animation what;
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
             var deltaTime = gameTime.ElapsedGameTime;
             DrawTime = deltaTime.Milliseconds * 0.001;
+            
+            
 
             spriteBatch.Begin();
+
+            spriteBatch.Draw(what.Sprite, new Vector2(200,200),Color.White);
 
             Entity[] list = EntityList.ToArray();
             for (var i = 0; i < list.Length; i++)

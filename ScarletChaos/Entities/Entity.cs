@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ScarletChaos.Entities;
-using ScarletPipeline;
+using ScarletResource;
 using System;
 
 namespace ScarletChaos.Entities
