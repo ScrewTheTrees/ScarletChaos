@@ -10,8 +10,7 @@ namespace ScarletResource
     public class Map
     {
         public List<Solid> Solids = new List<Solid>();
-        public int BlockWidth = 64;
-        public int BlockHeight = 64;
+
 
 
         public int MapWidth = 64 * 64;
@@ -23,5 +22,8 @@ namespace ScarletResource
         public static string MapIDV1 = "SCM1";
 
 
+        //These wont ever change.
+        public const int BlockWidth = 64;
+        public const int BlockHeight = 64;
     }
 }

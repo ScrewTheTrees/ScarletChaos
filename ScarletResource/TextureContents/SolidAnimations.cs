@@ -15,9 +15,16 @@ namespace ScarletResource.TextureContents
         {
             Instance = instance;
         }
-        
 
-        public Animation TEST_LOAD { get { return new Animation(Instance.GetTexture(@"Icon.ico")); } }
+
+        public Animation TEST_LOAD
+        {
+            get
+            {
+                var ani = new Animation(Instance.GetTexture(@"Icon.ico"));
+                return ani;
+            }
+        }
 
 
 

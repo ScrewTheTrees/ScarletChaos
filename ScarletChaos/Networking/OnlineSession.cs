@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ScarletChaos.Networking
 {
-    public class GameSession
+    public class OnlineSession
     {
         /// <summary> The host controls all Online activity from NPC and Enemies. </summary>
         public bool IsHost = false;
@@ -21,7 +21,7 @@ namespace ScarletChaos.Networking
 
         public static int[] PortInterval = { 17861, 17862, 17863, 17864, 17865, 17866, 17867, 17868, 17869 };
 
-        public GameSession(bool isHost)
+        public OnlineSession(bool isHost)
         {
             config.EnableUPnP = true;
             config.Port = PortInterval[new Random().Next(0, PortInterval.Length - 1)];

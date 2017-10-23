@@ -19,14 +19,17 @@ namespace ScarletChaos
         public PlayerOptions OptionsPlayer;
         public List<Entity> EntityList = new List<Entity>();
         public TextureContent texturePipeline;
-        public GameSession Session;
+        public OnlineSession Session;
+
+        public Camera GameCam;
 
         public static string GameDirectory = Directory.GetCurrentDirectory();
 
         public GameInstance()
         {
+            DebugLog.LogInfo("Game Instance has been Initialized.");
             graphics = new GraphicsDeviceManager(this);
-            
+
             Content.RootDirectory = "Content";
             PrimaryGameInstance = this;
 
@@ -35,7 +38,11 @@ namespace ScarletChaos
             OptionsGraphics.ApplyGraphicOptions();
             OptionsGraphics.SaveGraphicsOptions();
 
+            GameCam = new Camera(new Viewport(0, 0, ScreenSize.SS_169_1920X1080.Width, ScreenSize.SS_169_1920X1080.Height, -1000, 1000));
+
             OptionsPlayer = new PlayerOptions();
+
+            DebugLog.LogInfo("Game Instance constructor loaded.");
         }
 
 
@@ -44,6 +51,7 @@ namespace ScarletChaos
             e.EntityID = NextEntityID;
             e.Create();
             PrimaryGameInstance.EntityList.Add(e);
+            DebugLog.LogDebug("Created Entity of type: " + e.EntityType + " with id: " + e.EntityID);
             return e;
         }
         public static Entity EntityCreate(Entity e, ulong EntityID)
@@ -51,12 +59,14 @@ namespace ScarletChaos
             e.EntityID = EntityID;
             e.Create();
             PrimaryGameInstance.EntityList.Add(e);
+            DebugLog.LogDebug("Created Entity of type: " + e.EntityType + " with id: " + e.EntityID);
             return e;
         }
         public static Entity EntityDestroy(Entity e)
         {
             e.Destroy();
             PrimaryGameInstance.EntityList.Remove(e);
+            DebugLog.LogDebug("Destroyed Entity of type: " + e.EntityType + " with id: " + e.EntityID);
             return e;
         }
 
@@ -82,6 +92,7 @@ namespace ScarletChaos
         /// </summary>
         protected override void Initialize()
         {
+            DebugLog.LogInfo("Main initialization.");
             // TODO: Add your initialization logic here
             base.Initialize();
         }
@@ -91,6 +102,7 @@ namespace ScarletChaos
         /// </summary>
         protected override void LoadContent()
         {
+            DebugLog.LogInfo("Creating ContentLoaders.");
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             texturePipeline = new TextureContent(GraphicsDevice);
@@ -107,6 +119,7 @@ namespace ScarletChaos
         /// </summary>
         protected override void UnloadContent()
         {
+            DebugLog.LogInfo("Flushed all Textures and unloaded all content.");
             // TODO: Unload any non ContentManager content here
             texturePipeline.FlushAllTextures();
         }
@@ -160,12 +173,13 @@ namespace ScarletChaos
             GraphicsDevice.Clear(Color.Black);
             var deltaTime = gameTime.ElapsedGameTime;
             DrawTime = deltaTime.Milliseconds * 0.001;
-            
-            
 
+            //Roll up shit
+            GameCam.Update();
+            spriteBatch.GraphicsDevice.Viewport = GameCam.MainView;
             spriteBatch.Begin(SpriteSortMode.BackToFront);
 
-            what.DrawAnimation(spriteBatch, new Vector2(200,200), 0);
+            what.DrawAnimation(spriteBatch, new Vector2(200, 200), 0);
 
             Entity[] list = EntityList.ToArray();
             for (var i = 0; i < list.Length; i++)

@@ -80,6 +80,7 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Camera.cs" />
     <Compile Include="DataUtility\IniFile.cs" />
     <Compile Include="DataUtility\PlayerOptions.cs" />
     <Compile Include="DataUtility\ScreenSize.cs" />
@@ -92,7 +93,7 @@
     <Compile Include="GameInstance.cs" />
     <Compile Include="DataUtility\GraphicsOptions.cs" />
     <Compile Include="InputOptions.cs" />
-    <Compile Include="Networking\GameSession.cs" />
+    <Compile Include="Networking\OnlineSession.cs" />
     <Compile Include="Networking\MSG.cs" />
     <Compile Include="Networking\PlayerClient.cs" />
     <Compile Include="Program.cs" />
@@ -109,6 +110,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EngineDesignWorks.txt" />
     <Content Include="Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

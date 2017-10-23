@@ -19,7 +19,7 @@ namespace ScarletChaos.Entities
         //Important control stuff
         public bool CanControl = true;
         public bool IsNpcControlled = true;
-        public NpcAI EntityAI;
+        //public NpcAI EntityAI;
         public String Name = null;
 
         //Movement
