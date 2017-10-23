@@ -11,22 +11,23 @@ namespace ScarletResource
     public class Animation
     {
         public Texture2D Sprite;
+        public SpriteEffects spriteEffect = new SpriteEffects();
+        public Rectangle FrameRect;
+        public Collision collision;
+        public Color ColorBlend = Color.White;
+
+        Vector2 Origin = new Vector2(0, 0);
+        Vector2 Scale = new Vector2(1, 1);
 
         public bool IsAnimated = false;
         public bool Looping = false;
 
         private float Speed = 1f;
-
+        public float Rotation = 0;
         public float FrameIndex = 0f;
         private int FrameIndexTotal = 1;
-
-        public Rectangle FrameRect;
-
         public int FrameWidth;
         public int FrameHeight;
-
-        public int OriginX;
-        public int OriginY;
 
         /// <summary> Standard Sprite, no Animation </summary>
         public Animation(Texture2D sprite) : this(sprite, sprite.Width, sprite.Height, 0, 0, 0) { }
@@ -48,8 +49,8 @@ namespace ScarletResource
         {
             Sprite = sprite;
 
-            FrameWidth = Math.Max(width,1);
-            FrameHeight = Math.Max(height,1);
+            FrameWidth = Math.Max(width, 1);
+            FrameHeight = Math.Max(height, 1);
             FrameRect = new Rectangle(offsetX, offsetY, FrameWidth, FrameHeight);
 
             if (TotalFrames <= 0)
@@ -70,10 +71,10 @@ namespace ScarletResource
         /// <param name="originX">The X Origin (Center) of sprite. </param>
         /// <param name="originY">The Y Origin (Center) of sprite. </param>
         /// <param name="TotalFrames">Manually define the amount of frames.</param>
-        public Animation(Texture2D sprite, int width, int height, int offsetX, int offsetY, int originX, int originY ,int TotalFrames = 0) : this(sprite, width, height, offsetX, offsetY, TotalFrames)
+        public Animation(Texture2D sprite, int width, int height, int offsetX, int offsetY, int originX, int originY, int TotalFrames = 0) : this(sprite, width, height, offsetX, offsetY, TotalFrames)
         {
-            OriginX = originX;
-            OriginY = originY;
+            Origin.X = originX;
+            Origin.Y = originY;
         }
 
 
@@ -104,11 +105,9 @@ namespace ScarletResource
         {
             Speed = 60f / PlaybackSpeedByFramesSecond;
         }
-        public void DrawAnimation(SpriteBatch spriteBatch, Vector2 DrawPosition)
+        public void DrawAnimation(SpriteBatch spriteBatch, Vector2 DrawPosition, Single depth)
         {
-            DrawPosition.X += OriginX;
-            DrawPosition.Y += OriginY;
-            spriteBatch.Draw(Sprite, DrawPosition, FrameRect, Color.White);
+            spriteBatch.Draw(Sprite, DrawPosition, FrameRect, ColorBlend, Rotation, Origin, Scale, spriteEffect, depth);
         }
 
 

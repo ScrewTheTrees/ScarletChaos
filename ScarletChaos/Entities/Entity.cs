@@ -15,6 +15,7 @@ namespace ScarletChaos.Entities
         public ulong LatestStepIndex = 0;
         public int EntityType = ENTITY_BASE; //Must be assigned
         public Animation Sprite;
+        public Single Depth = 0;
 
         /// <summary> Entites that arent visible wont perform Draw events (at all) </summary>
         public bool Visible = true;
@@ -69,7 +70,8 @@ namespace ScarletChaos.Entities
         }
         //End
 
-        //Ohno
+        //Major / Subclass / Group / Variation
+        //Format:  MSGVV
         public const int ENTITY_BASE = 0;
         public const int ENTITY_PLAYABLE = 10000;
         public const int ENTITY_PLAYER = 11000;

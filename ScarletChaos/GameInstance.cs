@@ -26,6 +26,7 @@ namespace ScarletChaos
         public GameInstance()
         {
             graphics = new GraphicsDeviceManager(this);
+            
             Content.RootDirectory = "Content";
             PrimaryGameInstance = this;
 
@@ -162,9 +163,9 @@ namespace ScarletChaos
             
             
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront);
 
-            spriteBatch.Draw(what.Sprite, new Vector2(200,200),Color.White);
+            what.DrawAnimation(spriteBatch, new Vector2(200,200), 0);
 
             Entity[] list = EntityList.ToArray();
             for (var i = 0; i < list.Length; i++)

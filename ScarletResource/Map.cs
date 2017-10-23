@@ -17,5 +17,11 @@ namespace ScarletResource
         public int MapWidth = 64 * 64;
         public int MapHeight = 32 * 64;
 
+        public static string CurrentIDV = MapIDV1;
+
+
+        public static string MapIDV1 = "SCM1";
+
+
     }
 }
