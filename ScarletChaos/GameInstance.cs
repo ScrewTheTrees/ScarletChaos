@@ -257,9 +257,11 @@ namespace ScarletChaos
 
         public static Vector2 GetMouseLocation()
         {
-            Vector2 loc = new Vector2(0,0);
-            loc.X = Mouse.GetState().X * ((float)PrimaryGameInstance.GameCam.ViewW / PrimaryGameInstance.OptionsGraphics.ScreenResolution.Width);
-            loc.Y = Mouse.GetState().Y * ((float)PrimaryGameInstance.GameCam.ViewH / PrimaryGameInstance.OptionsGraphics.ScreenResolution.Height);
+            Vector2 loc = new Vector2(0, 0)
+            {
+                X = Mouse.GetState().X * ((float)PrimaryGameInstance.GameCam.ViewW / PrimaryGameInstance.OptionsGraphics.ScreenResolution.Width),
+                Y = Mouse.GetState().Y * ((float)PrimaryGameInstance.GameCam.ViewH / PrimaryGameInstance.OptionsGraphics.ScreenResolution.Height)
+            };
             return loc;
         }
 
