@@ -14,6 +14,7 @@ namespace ScarletChaos.Entities
         public ulong EntityID;
         public ulong LatestStepIndex = 0;
         public int EntityType = ENTITY_BASE; //Must be assigned
+        public Animation Sprite;
 
         /// <summary> Entites that arent visible wont perform Draw events (at all) </summary>
         public bool Visible = true;
@@ -67,19 +68,6 @@ namespace ScarletChaos.Entities
             return new Vector2(xNew, yNew);
         }
         //End
-
-
-        //Animations
-        public Animation Sprite;
-
-        public void DrawAnimation(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(Sprite.Sprite, GetDrawingPosition(), Sprite.FrameRect, Color.White);
-        }
-        public void DrawAnimation(SpriteBatch spriteBatch, Vector2 Position)
-        {
-            spriteBatch.Draw(Sprite.Sprite, Position, Sprite.FrameRect, Color.White);
-        }
 
         //Ohno
         public const int ENTITY_BASE = 0;

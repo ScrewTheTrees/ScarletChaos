@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using ScarletChaos.Animations;
 using ScarletChaos.DataUtility;
 using ScarletChaos.Entities;
 using ScarletChaos.Networking;
@@ -95,7 +94,7 @@ namespace ScarletChaos
             spriteBatch = new SpriteBatch(GraphicsDevice);
             texturePipeline = new TextureContent(GraphicsDevice);
 
-            what = SolidAnimations.TEST_LOAD; //TODO: Shit
+            what = texturePipeline.solidAnimations.TEST_LOAD; //TODO: Shit
 
 
             // TODO: use this.Content to load your game content here

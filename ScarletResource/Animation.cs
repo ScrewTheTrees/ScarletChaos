@@ -109,5 +109,14 @@ namespace ScarletResource
         {
             Speed = 60f / PlaybackSpeedByFramesSecond;
         }
+
+
+        public void DrawAnimation(SpriteBatch spriteBatch, Vector2 DrawPosition)
+        {
+            spriteBatch.Draw(Sprite, DrawPosition, FrameRect, Color.White);
+        }
+
+
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using ScarletResource.TextureContents;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,11 +15,14 @@ namespace ScarletResource
         private Dictionary<string, Texture2D> LoadedTextures = new Dictionary<string, Texture2D>();
         private Texture2D DefaultTex;
 
+        public SolidAnimations solidAnimations;
+
 
         public TextureContent(GraphicsDevice d)
         {
             Graphics = d;
             DefaultTex = LoadContent("Icon.ico");
+            solidAnimations = new SolidAnimations(this);
         }
 
         /// <summary> Gets the target texture... and loads it if it's not in memory. </summary>
