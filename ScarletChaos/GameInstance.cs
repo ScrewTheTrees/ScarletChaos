@@ -22,14 +22,18 @@ namespace ScarletChaos
         public static TextureContent texturePipeline;
         public static OnlineSession Session;
 
-        public static Camera GameCam;
+        public static Camera GameCam = new Camera(new Viewport(0, 0, 1920, 1080, -1000, 1000));
         public static MouseState StateMouse = Mouse.GetState();
         public static MouseState StateMouseOld = Mouse.GetState();
+        public static KeyboardState StateKeyboard = Keyboard.GetState();
+        public static KeyboardState StateKeyboardOld = Keyboard.GetState();
 
         public static string GameDirectory = Directory.GetCurrentDirectory();
 
         public GameInstance()
         {
+            IsMouseVisible = true;
+
             DebugLog.LogInfo("Game Instance has been Initialized.");
             graphics = new GraphicsDeviceManager(this);
 
@@ -40,9 +44,6 @@ namespace ScarletChaos
             OptionsGraphics.LoadGraphicsOptions();
             OptionsGraphics.ApplyGraphicOptions();
             OptionsGraphics.SaveGraphicsOptions();
-
-            GameCam = new Camera(new Viewport(0, 0, 1920, 1080, -1000, 1000));
-            IsMouseVisible = true;
 
             OptionsPlayer = new PlayerOptions();
 
@@ -143,6 +144,8 @@ namespace ScarletChaos
         {
             StateMouseOld = StateMouse;
             StateMouse = Mouse.GetState();
+            StateKeyboardOld = StateKeyboard;
+            StateKeyboard = Keyboard.GetState();
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
@@ -195,8 +198,7 @@ namespace ScarletChaos
             //TODO: Debug
             if (StateMouse.LeftButton == ButtonState.Pressed && IsActive == true)
             {
-                Activator.CreateInstance(Entity.GetEntityTypeFromID(Entity.ENTITY_PLAYER));
-                var e = Entities[Entities.Count - 1];
+                Entity e = (Entity)Activator.CreateInstance(Entity.GetEntityTypeFromID(Entity.ENTITY_PLAYER));
                 e.SetLocation(GetMouseLocation());
                 e.Sprite = texturePipeline.solidAnimations.GetSprite("kirbytestwalk"); //TODO: Shit
                 e.Visible = true;
