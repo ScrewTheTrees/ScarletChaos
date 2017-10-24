@@ -94,8 +94,8 @@ namespace ScarletResource
                 {
                     for (int y = 0; y < CollisionMapPixel.GetLength(1); y++)
                     {
-                        comp.X = pixel.Location.X + x;
-                        comp.Y = pixel.Location.Y + y;
+                        comp.X += x;
+                        comp.Y += y;
                         if (pixel.CollisionMapPixel[x, y] == true)
                             if (rect.CollisionBox.Contains(comp))
                                 return true; //We struck gold!
