@@ -31,7 +31,9 @@ namespace ScarletResource.TextureContents
                     ani.Origin = new Vector2(11, 11);
                     return ani;
                 case @"Solids\SolidBlock.png":
-                    ani = new Sprite(Instance.GetTexture(@"Solids\SolidBlock.png"));
+                    var Texture = Instance.GetTexture(@"Solids\SolidBlock.png");
+                    ani = new Sprite(Texture);
+                    ani.collision = new Collision(Texture, ani.FrameRect, Collision.COLLISION_RECTANGLE);
                     return ani;
             }
 

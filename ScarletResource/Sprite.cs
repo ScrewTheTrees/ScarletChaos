@@ -97,9 +97,9 @@ namespace ScarletResource
             if (FrameIndex >= FrameIndexTotal && FrameIndexTotal > 0)
             {
                 if (Looping == false)
-                { 
+                {
                     Ended = true;
-                    FrameIndex = FrameIndexTotal-1;
+                    FrameIndex = FrameIndexTotal - 1;
                 }
                 else FrameIndex -= FrameIndexTotal;
             }
@@ -113,6 +113,18 @@ namespace ScarletResource
 
             collision.CollisionBox.X = FrameRect.X;
             collision.CollisionBox.X = FrameRect.Y;
+        }
+
+        /// <summary>CollisionMask collides with other CollisionMask</summary>
+        /// <param name="OtherMask">The other Collision object</param>
+        /// <param name="OffsetX">Optional X Offset of collision checking.</param>
+        /// <param name="OffsetY">Optional Y Offset of collision checking.</param>
+        /// <returns>Whenever it actually collided or not.</returns>
+        public bool CollidesWith(Sprite OtherMask, int OffsetX = 0, int OffsetY = 0)
+        {
+            if (collision == null || OtherMask.collision == null) return false;
+
+            return collision.CollidesWith(OtherMask.collision, OffsetX, OffsetY);
 
         }
 

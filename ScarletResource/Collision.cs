@@ -15,7 +15,10 @@ namespace ScarletResource
         public bool[,] CollisionMapPixel;
         public Vector2 Location = new Vector2();
 
-
+        /// <summary> Collision Instance </summary>
+        /// <param name="tex">Texture</param>
+        /// <param name="rect">Initial rectangle to copy from</param>
+        /// <param name="col">Collision type defined in COLLISION_ Contants</param>
         public Collision(Texture2D tex, Rectangle rect, int col = COLLISION_RECTANGLE)
         {
             if (col == 0 || col == 1)
@@ -49,7 +52,7 @@ namespace ScarletResource
         /// <param name="OffsetX">Optional X Offset of collision checking.</param>
         /// <param name="OffsetY">The position offset to check the collision</param>
         /// <returns>Whenever it actually collided or not.</returns>
-        public bool CollideWith(Collision col2, int OffsetX = 0, int OffsetY = 0)
+        public bool CollidesWith(Collision col2, int OffsetX = 0, int OffsetY = 0)
         {
             Collision col1 = this;
 

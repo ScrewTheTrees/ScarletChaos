@@ -54,13 +54,17 @@ namespace ScarletChaos.Entities
         public void SetLocation(Vector2 vec) { Location.X = vec.X; Location.Y = vec.Y; PreviousLocation.X = vec.X; PreviousLocation.Y = vec.Y; }
         public void SetLocation(float x, float y) { Location.X = x; Location.Y = y; PreviousLocation.X = x; PreviousLocation.Y = y; }
 
+        public bool CollidesWith(Entity e, int OffsetX = 0, int OffsetY = 0)
+        {
+            if (CollisionMask == null || e.CollisionMask == null) return false;
+
+            return CollisionMask.CollidesWith(e.CollisionMask, OffsetX, OffsetY);
+        }
 
         virtual public void UpdateEntityData()
         {
             PreviousLocation.X = Location.X;
             PreviousLocation.Y = Location.Y;
-
-
 
 
             if (CollisionMask != null)
