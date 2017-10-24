@@ -9,15 +9,13 @@ namespace ScarletResource
 {
     public class Map
     {
-        public static List<Map> CurrentMaps = new List<Map>();
+        public static Map CurrentMap;
+        TextureContent TexturePipeline;
 
-        public Map()
+        public Map(TextureContent texturePipeline)
         {
-            CurrentMaps.Add(this);
-        }
-        public void Dispose()
-        {
-            CurrentMaps.Remove(this);
+            TexturePipeline = texturePipeline;
+            CurrentMap = this;
         }
 
         public List<Solid> Solids = new List<Solid>();

@@ -5,15 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using ScarletResource.TextureContents;
 
 namespace ScarletResource.MapObjects
 {
     public class Solid
     {
-        public Sprite Texture;
         public Sprite CollisionMask;
 
-        public int Depth = 0;
+        public int Depth = 100;
 
         /// <summary>Current Solid ID</summary>
         public int SolidID = 0;
@@ -28,17 +29,16 @@ namespace ScarletResource.MapObjects
         /// <summary>Projectiles collide with this.</summary>
         public bool CollideProjectile = true;
 
-        /// <summary>Health for Destructibles.</summary>
-        public float Health = 10000f;
+        /// <summary>Health for Destructibles are not decimal</summary>
+        public int Health = 10000;
 
         public Solid(int solidID)
         {
             SolidID = solidID;
         }
-        public Solid(Sprite texture, Sprite mask ,bool visible, bool destructible, bool jumpThrough, bool collideEntity, bool collideProjectile, int solidID)
+        public Solid(Sprite Mask ,bool visible, bool destructible, bool jumpThrough, bool collideEntity, bool collideProjectile, int solidID)
         {
-            Texture = texture;
-            CollisionMask = mask;
+            CollisionMask = Mask;
             Visible = visible;
             Destructible = destructible;
             JumpThrough = jumpThrough;
@@ -47,6 +47,40 @@ namespace ScarletResource.MapObjects
             SolidID = solidID;
         }
 
+
+
+
+
+
+
+
+
+
+        //Version 1 writing
+        public void WriteToStreamV1(BinaryWriter stream)
+        {
+            stream.Write(CollisionMask.TexPath);
+            stream.Write(Depth);
+            stream.Write(SolidID);
+            stream.Write(Visible);
+            stream.Write(Destructible);
+            stream.Write(JumpThrough);
+            stream.Write(CollideEntity);
+            stream.Write(CollideProjectile);
+            stream.Write(Health);
+        }
+        public void ReadFromStreamV1(BinaryReader stream)
+        {
+            CollisionMask = SolidSprites.GetSprite(stream.ReadString());
+            Depth = stream.ReadInt32();
+            SolidID = stream.ReadInt32();
+            Visible = stream.ReadBoolean();
+            Destructible = stream.ReadBoolean();
+            JumpThrough = stream.ReadBoolean();
+            CollideEntity = stream.ReadBoolean();
+            CollideProjectile = stream.ReadBoolean();
+            Health = stream.ReadInt32();
+        }
 
     }
 }

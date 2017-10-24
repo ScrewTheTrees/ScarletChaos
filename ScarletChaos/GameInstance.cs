@@ -8,6 +8,7 @@ using ScarletResource;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using ScarletResource.TextureContents;
 
 namespace ScarletChaos
 {
@@ -97,7 +98,7 @@ namespace ScarletChaos
         {
             DebugLog.LogInfo("Flushed all Textures and unloaded all content.");
             // TODO: Unload any non ContentManager content here
-            texturePipeline.FlushAllTextures();
+            TextureContent.FlushAllTextures();
         }
 
 
@@ -196,8 +197,7 @@ namespace ScarletChaos
             {
                 Entity e = (Entity)Activator.CreateInstance(Entity.GetEntityTypeFromID(Entity.ENTITY_PLAYER));
                 e.SetLocation(GetMouseLocation());
-                e.Sprite = texturePipeline.solidAnimations.GetSprite("kirbytestwalk"); //TODO: Shit
-                e.Visible = true;
+                e.Sprite = SolidSprites.GetSprite("kirbytestwalk"); //TODO: Shit
 
                 DebugLog.LogDebug("Created Entity with type: " + e.EntityType);
             }

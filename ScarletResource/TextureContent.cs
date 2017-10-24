@@ -11,24 +11,21 @@ namespace ScarletResource
 {
     public class TextureContent
     {
-        private GraphicsDevice Graphics;
-        private Dictionary<string, Texture2D> LoadedTextures = new Dictionary<string, Texture2D>();
-        private Texture2D DefaultTex;
-
-        public SolidSprites solidAnimations;
+        private static GraphicsDevice Graphics;
+        private static Dictionary<string, Texture2D> LoadedTextures = new Dictionary<string, Texture2D>();
+        private static Texture2D DefaultTex;
 
 
         public TextureContent(GraphicsDevice d)
         {
             Graphics = d;
             DefaultTex = LoadContent("Icon.ico");
-            solidAnimations = new SolidSprites(this);
         }
 
         /// <summary> Gets the target texture... and loads it if it's not in memory. </summary>
         /// <param name="texPath">Local path from the "Assets\Textures" folder, dont include the \\ backslash</param>
         /// <returns>A texture, after it has Loaded..</returns>
-        public Texture2D GetTexture(string texPath)
+        public static Texture2D GetTexture(string texPath)
         {
             Texture2D tex = DefaultTex;
 
@@ -42,7 +39,7 @@ namespace ScarletResource
                 return tex = LoadContent(texPath);
             }
         }
-        private Texture2D LoadContent(string path)
+        private static Texture2D LoadContent(string path)
         {
             Texture2D c;
             if (File.Exists(PipeLine.TEXTURES + path))
@@ -57,7 +54,7 @@ namespace ScarletResource
             return c;
         }
 
-        public void FlushAllTextures()
+        public static void FlushAllTextures()
         {
             var k = LoadedTextures.ToArray();
             foreach (var t in k)

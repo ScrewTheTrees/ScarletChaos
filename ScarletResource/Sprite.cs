@@ -11,6 +11,7 @@ namespace ScarletResource
     public class Sprite
     {
         public Texture2D Tex;
+        public String TexPath;
         public SpriteEffects spriteEffect = new SpriteEffects();
         public Rectangle FrameRect;
         public Collision collision;
@@ -33,14 +34,14 @@ namespace ScarletResource
 
         /// <summary> Standard Sprite, no Animation </summary>
         /// <param name="tex">Sprite Texture</param>
-        public Sprite(Texture2D tex) : this(tex, tex.Width, tex.Height, 0, 0, 0) { }
+        public Sprite(Texture2D tex, String texPath) : this(tex, texPath, tex.Width, tex.Height, 0, 0, 0) { }
 
         /// <summary> Simple Animation Sprite </summary>
         /// <param name="tex">Sprite Texture</param>
         /// <param name="width">Width of each Frame</param>
         /// <param name="height">Height of each Frame</param>
         /// <param name="TotalFrames">Manually define the amount of frames.</param>
-        public Sprite(Texture2D tex, int width, int height, int TotalFrames = 0) : this(tex, width, height, 0, 0, TotalFrames) { }
+        public Sprite(Texture2D tex, String texPath, int width, int height, int TotalFrames = 0) : this(tex, texPath, width, height, 0, 0, TotalFrames) { }
 
         /// <summary> Manually define entire sprite. </summary>
         /// <param name="tex">Sprite Texture</param>
@@ -49,9 +50,10 @@ namespace ScarletResource
         /// <param name="offsetX">The starting X Offset of all frames.</param>
         /// <param name="offsetY">The starting Y Offset of all frames.</param>
         /// <param name="TotalFrames">Manually define the amount of frames.</param>
-        public Sprite(Texture2D tex, int width, int height, int offsetX, int offsetY, int TotalFrames = 0)
+        public Sprite(Texture2D tex, String texPath, int width, int height, int offsetX, int offsetY, int TotalFrames = 0)
         {
             Tex = tex;
+            TexPath = texPath;
 
             Offset.X = offsetX;
             Offset.Y = offsetY;
@@ -79,7 +81,7 @@ namespace ScarletResource
         /// <param name="originX">The X Origin (Center) of sprite. </param>
         /// <param name="originY">The Y Origin (Center) of sprite. </param>
         /// <param name="TotalFrames">Manually define the amount of frames.</param>
-        public Sprite(Texture2D tex, int width, int height, int offsetX, int offsetY, int originX, int originY, int TotalFrames = 0) : this(tex, width, height, offsetX, offsetY, TotalFrames)
+        public Sprite(Texture2D tex, String texPath, int width, int height, int offsetX, int offsetY, int originX, int originY, int TotalFrames = 0) : this(tex, texPath, width, height, offsetX, offsetY, TotalFrames)
         {
             Origin.X = originX;
             Origin.Y = originY;
