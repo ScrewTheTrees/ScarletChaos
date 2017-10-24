@@ -22,6 +22,7 @@ namespace ScarletResource
 
         public bool IsAnimated = true;
         public bool Looping = false;
+        public bool Ended = false;
 
         private float Speed = 1;
         public float Rotation = 0;
@@ -93,9 +94,14 @@ namespace ScarletResource
             //Averages at about 60 frames per second ;)
             FrameIndex += (float)(((gameTime.ElapsedGameTime.TotalMilliseconds * 0.001) * 60) * Speed);
 
-            while (FrameIndex >= FrameIndexTotal && FrameIndexTotal > 0)
+            if (FrameIndex >= FrameIndexTotal && FrameIndexTotal > 0)
             {
-                FrameIndex -= FrameIndexTotal;
+                if (Looping == false)
+                { 
+                    Ended = true;
+                    FrameIndex = FrameIndexTotal-1;
+                }
+                else FrameIndex -= FrameIndexTotal;
             }
             FrameRect.X = (int)(Offset.X + ((int)FrameIndex * FrameWidth));
             FrameRect.Y = (int)(Offset.Y);

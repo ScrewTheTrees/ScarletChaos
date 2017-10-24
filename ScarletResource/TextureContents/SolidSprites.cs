@@ -26,6 +26,7 @@ namespace ScarletResource.TextureContents
                 case @"kirbytestwalk":
                     ani = new Sprite(Instance.GetTexture(@"kirbytest.png"), 23, 23, 8, 54, 10);
                     ani.SetAnimationSpeed(10);
+                    ani.Looping = true;
                     ani.Scale = new Vector2(2, 2);
                     ani.Origin = new Vector2(11, 11);
                     return ani;

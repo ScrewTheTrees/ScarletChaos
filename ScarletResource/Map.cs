@@ -39,7 +39,7 @@ namespace ScarletResource
 
         //These wont ever change.
         public static string CurrentIDV = MapIDV1;
-        public static string MapIDV1 = "SCM1";
+        public const string MapIDV1 = "SCM1";
 
         public const int BlockWidth = 64;
         public const int BlockHeight = 64;
