@@ -13,6 +13,7 @@ namespace ScarletResource.MapObjects
     public class Solid
     {
         public Sprite CollisionMask;
+        public Vector2 Position = new Vector2(0, 0);
 
         public int Depth = 100;
 
@@ -36,7 +37,13 @@ namespace ScarletResource.MapObjects
         {
             SolidID = solidID;
         }
-        public Solid(Sprite Mask ,bool visible, bool destructible, bool jumpThrough, bool collideEntity, bool collideProjectile, int solidID)
+        public Solid(int solidID, Vector2 pos)
+        {
+            SolidID = solidID;
+            Position.X = pos.X;
+            Position.Y = pos.Y;
+        }
+        public Solid(Sprite Mask, bool visible, bool destructible, bool jumpThrough, bool collideEntity, bool collideProjectile, int solidID)
         {
             CollisionMask = Mask;
             Visible = visible;
@@ -68,6 +75,8 @@ namespace ScarletResource.MapObjects
             stream.Write(CollideEntity);
             stream.Write(CollideProjectile);
             stream.Write(Health);
+            stream.Write((int)Position.X);
+            stream.Write((int)Position.Y);
         }
         public void ReadFromStreamV1(BinaryReader stream)
         {
@@ -80,6 +89,8 @@ namespace ScarletResource.MapObjects
             CollideEntity = stream.ReadBoolean();
             CollideProjectile = stream.ReadBoolean();
             Health = stream.ReadInt32();
+            Position.X = stream.ReadInt32();
+            Position.Y = stream.ReadInt32();
         }
 
     }

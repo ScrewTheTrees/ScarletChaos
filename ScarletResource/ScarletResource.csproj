@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Collision.cs" />
     <Compile Include="MapObjects\Tile.cs" />
+    <Compile Include="TextureContents\EntitySprites.cs" />
     <Compile Include="TextureContents\SolidSprites.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="PipeLine.cs" />

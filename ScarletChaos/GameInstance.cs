@@ -197,7 +197,7 @@ namespace ScarletChaos
             {
                 Entity e = (Entity)Activator.CreateInstance(Entity.GetEntityTypeFromID(Entity.ENTITY_PLAYER));
                 e.SetLocation(GetMouseLocation());
-                e.Sprite = SolidSprites.GetSprite("kirbytestwalk"); //TODO: Shit
+                e.Sprite = EntitySprites.GetSprite("kirbytestwalk"); //TODO: Shit
 
                 DebugLog.LogDebug("Created Entity with type: " + e.EntityType);
             }

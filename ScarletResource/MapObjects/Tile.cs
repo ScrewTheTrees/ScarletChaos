@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace ScarletResource.MapObjects
 {
     public class Tile
     {
         public Sprite Texture;
-        public Sprite CollisionMask;
 
         public int Depth = 0;
 
-        public int X;
-        public int Y;
+        public Vector2 Position = new Vector2(0, 0);
         public int Width;
         public int Height;
     }
