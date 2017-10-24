@@ -15,7 +15,7 @@ namespace ScarletChaos.Entities
         {
             EntityID = GameInstance.GetNextEntityID();
             Create();
-            GameInstance.EntityList.Add(this);
+            GameInstance.Entities.Add(this);
         }
 
         virtual public ulong EntityID { get; set; }

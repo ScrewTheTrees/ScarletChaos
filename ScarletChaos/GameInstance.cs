@@ -18,7 +18,7 @@ namespace ScarletChaos
         public static SpriteBatch spriteBatch;
         public static GraphicsOptions OptionsGraphics;
         public static PlayerOptions OptionsPlayer;
-        public static List<Entity> EntityList = new List<Entity>();
+        public static List<Entity> Entities = new List<Entity>();
         public static TextureContent texturePipeline;
         public static OnlineSession Session;
 
@@ -126,7 +126,7 @@ namespace ScarletChaos
 
             what.DrawAnimation(spriteBatch, new Vector2(200, 200), 0);
 
-            Entity[] list = EntityList.ToArray();
+            Entity[] list = Entities.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
                 if (list[i].Visible == true)
@@ -167,7 +167,7 @@ namespace ScarletChaos
             while (Delta60 > 1) { Step60(); }
             while (Delta120 > 1) { Step120(); }
 
-            Entity[] list = EntityList.ToArray();
+            Entity[] list = Entities.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
                 list[i].StepRaw();
@@ -179,7 +179,7 @@ namespace ScarletChaos
         private void Step120()
         {
             Delta120 -= 1;
-            Entity[] list = EntityList.ToArray();
+            Entity[] list = Entities.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
                 if (list[i].Active == true)
@@ -196,7 +196,7 @@ namespace ScarletChaos
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 Activator.CreateInstance(Entity.GetEntityTypeFromID(Entity.ENTITY_PLAYER));
-                var e = EntityList[EntityList.Count - 1];
+                var e = Entities[Entities.Count - 1];
                 e.SetLocation(GetMouseLocation());
                 e.Sprite = texturePipeline.solidAnimations.GetSprite("kirbytestwalk"); //TODO: Shit
                 e.Visible = true;
@@ -208,7 +208,7 @@ namespace ScarletChaos
         private void Step60()
         {
             Delta60 -= 1;
-            Entity[] list = EntityList.ToArray();
+            Entity[] list = Entities.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
                 if (list[i].Active == true)
@@ -218,7 +218,7 @@ namespace ScarletChaos
         private void Step30()
         {
             Delta30 -= 1;
-            Entity[] list = EntityList.ToArray();
+            Entity[] list = Entities.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
                 if (list[i].Active == true)
@@ -229,7 +229,7 @@ namespace ScarletChaos
         private void Step10()
         {
             Delta10 -= 1;
-            Entity[] list = EntityList.ToArray();
+            Entity[] list = Entities.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
                 if (list[i].Active == true)
@@ -240,7 +240,7 @@ namespace ScarletChaos
         private void Step1()
         {
             Delta1 -= 1;
-            Entity[] list = EntityList.ToArray();
+            Entity[] list = Entities.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
                 if (list[i].Active == true)
@@ -250,7 +250,7 @@ namespace ScarletChaos
         private void Step1s()
         {
             Delta1s -= 1;
-            Entity[] list = EntityList.ToArray();
+            Entity[] list = Entities.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
                 if (list[i].Active == true)
