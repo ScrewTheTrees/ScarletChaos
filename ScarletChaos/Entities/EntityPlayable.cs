@@ -33,7 +33,7 @@ namespace ScarletChaos.Entities
         virtual public float MaxGravity { get; set; } = 10f;
 
         //Entity Stats System
-        virtual public int EntityTeam { get; set; } = Team.TEAM_NEUTRAL;
+        virtual public int EntityTeam { get; set; } = Team.NEUTRAL;
         virtual public float HealthMax { get; set; } = 10000f;
         virtual public float FocusMax { get; set; } = 10000f;
         virtual public float StaminaMax { get; set; } = 10000f;

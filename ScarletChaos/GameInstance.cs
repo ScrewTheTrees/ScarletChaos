@@ -83,7 +83,7 @@ namespace ScarletChaos
             spriteBatch = new SpriteBatch(GraphicsDevice);
             texturePipeline = new TextureContent(GraphicsDevice);
 
-            what = texturePipeline.solidAnimations.TEST_LOAD; //TODO: Shit
+            what = texturePipeline.solidAnimations.GetSprite("kirbytest.png"); //TODO: Shit
 
 
             // TODO: use this.Content to load your game content here
@@ -198,7 +198,7 @@ namespace ScarletChaos
                 Activator.CreateInstance(Entity.GetEntityTypeFromID(Entity.ENTITY_PLAYER));
                 var e = EntityList[EntityList.Count - 1];
                 e.SetLocation(GetMouseLocation());
-                e.Sprite = texturePipeline.solidAnimations.TEST_LOAD;
+                e.Sprite = texturePipeline.solidAnimations.GetSprite("kirbytest.png"); //TODO: Shit
                 e.Visible = true;
 
                 DebugLog.LogDebug("Created Entity with type: " + e.EntityType);

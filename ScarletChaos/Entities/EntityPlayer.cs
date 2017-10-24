@@ -18,7 +18,7 @@ namespace ScarletChaos.Entities
         public bool IsLocalPlayer = false;
         public new bool IsNpcControlled = false;
 
-        override public int EntityTeam { get; set; } = Team.TEAM_BOSS;
+        override public int EntityTeam { get; set; } = Team.PLAYER;
 
         override public void Draw(SpriteBatch spriteBatch)
         {

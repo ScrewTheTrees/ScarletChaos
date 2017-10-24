@@ -43,8 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collision.cs" />
-    <Compile Include="MapObjects\SolidBlock.cs" />
-    <Compile Include="TextureContents\SolidAnimations.cs" />
+    <Compile Include="MapObjects\Tile.cs" />
+    <Compile Include="TextureContents\SolidSprites.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="PipeLine.cs" />
     <Compile Include="Sprite.cs" />

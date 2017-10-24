@@ -15,14 +15,14 @@ namespace ScarletResource
         private Dictionary<string, Texture2D> LoadedTextures = new Dictionary<string, Texture2D>();
         private Texture2D DefaultTex;
 
-        public SolidAnimations solidAnimations;
+        public SolidSprites solidAnimations;
 
 
         public TextureContent(GraphicsDevice d)
         {
             Graphics = d;
             DefaultTex = LoadContent("Icon.ico");
-            solidAnimations = new SolidAnimations(this);
+            solidAnimations = new SolidSprites(this);
         }
 
         /// <summary> Gets the target texture... and loads it if it's not in memory. </summary>

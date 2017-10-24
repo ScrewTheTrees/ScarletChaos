@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ScarletResource.MapObjects
 {
-    public class SolidBlock : Solid
+    public class Tile
     {
+        public Sprite Texture;
+        public Sprite CollisionMask;
+
+        public int Width;
     }
 }
