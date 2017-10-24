@@ -19,7 +19,7 @@ namespace ScarletChaos.Entities
         }
 
         virtual public ulong EntityID { get; set; }
-        virtual public ulong LatestStepIndex { get; set; }  = 0;
+        virtual public ulong LatestStepIndex { get; set; } = 0;
         virtual public int EntityType { get; set; } = ENTITY_BASE; //Must be assigned
         virtual public Sprite Sprite { get; set; }
         /// <summary>The mask is used as an unrendered sprite that only provides collision.</summary>
@@ -54,11 +54,23 @@ namespace ScarletChaos.Entities
         public void SetLocation(Vector2 vec) { Location.X = vec.X; Location.Y = vec.Y; PreviousLocation.X = vec.X; PreviousLocation.Y = vec.Y; }
         public void SetLocation(float x, float y) { Location.X = x; Location.Y = y; PreviousLocation.X = x; PreviousLocation.Y = y; }
 
-        /// <summary>Updated just before .</summary>
+
         virtual public void UpdateEntityData()
         {
             PreviousLocation.X = Location.X;
             PreviousLocation.Y = Location.Y;
+
+
+
+
+            if (CollisionMask != null)
+                if (CollisionMask.collision != null)
+                {
+                    CollisionMask.FrameRect.X = (int)Location.X;
+                    CollisionMask.FrameRect.Y = (int)Location.Y;
+                    CollisionMask.collision.CollisionBox.X = (int)Location.X;
+                    CollisionMask.collision.CollisionBox.Y = (int)Location.Y;
+                }
         }
 
         /// <summary> This shit calculates where this thing is actually supposed to be drawn.</summary>

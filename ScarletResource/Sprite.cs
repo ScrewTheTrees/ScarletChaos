@@ -113,7 +113,7 @@ namespace ScarletResource
 
             collision.CollisionBox.X = FrameRect.X;
             collision.CollisionBox.X = FrameRect.Y;
-        
+
         }
 
         public int GetCurrentFrame()
