@@ -10,11 +10,9 @@ namespace ScarletResource
     public class Map
     {
         public static Map CurrentMap;
-        TextureContent TexturePipeline;
 
-        public Map(TextureContent texturePipeline)
+        public Map()
         {
-            TexturePipeline = texturePipeline;
             CurrentMap = this;
         }
 
