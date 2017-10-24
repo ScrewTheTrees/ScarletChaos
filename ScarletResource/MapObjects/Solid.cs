@@ -63,7 +63,7 @@ namespace ScarletResource.MapObjects
 
 
 
-        //Version 1 writing
+        //Version 1 writing/reading
         public void WriteToStreamV1(BinaryWriter stream)
         {
             stream.Write(CollisionMask.TexPath);
