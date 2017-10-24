@@ -11,12 +11,15 @@ namespace ScarletResource.MapObjects
     public class Solid
     {
         public bool Visible = false;
-        public Sprite texture;
+        public Sprite Texture;
+        public Sprite Mask;
 
         public bool Destructible = false;
         public bool CollideEntity = true;
         public bool CollideProjectile = true;
 
         public float Health = 10000f;
+
+        
     }
 }

@@ -14,18 +14,18 @@ namespace ScarletChaos.Entities
     /// </summary>
     class EntityPlayer : EntityPlayable
     {
-        public new int EntityType = ENTITY_PLAYER; //Must be assigned
+        override public int EntityType { get; set; } = ENTITY_PLAYER; //Must be assigned
         public bool IsLocalPlayer = false;
         public new bool IsNpcControlled = false;
 
-        public new Team EntityTeam = new Team(true, false, false);
+        override public int EntityTeam { get; set; } = Team.TEAM_BOSS;
 
         override public void Draw(SpriteBatch spriteBatch)
         {
             Sprite.DrawAnimation(spriteBatch, GetDrawingPosition(), 0);
         }
 
-        public new void Step120()
+        override public void Step10()
         {
             if (IsLocalPlayer) CanControl = true; else CanControl = false; //Handle Control
         }

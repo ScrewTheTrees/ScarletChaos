@@ -7,6 +7,7 @@ using ScarletChaos.Networking;
 using ScarletResource;
 using System.Collections.Generic;
 using System.IO;
+using System;
 
 namespace ScarletChaos
 {
@@ -194,10 +195,13 @@ namespace ScarletChaos
             //TODO: Debug
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                var e = new EntityPlayer();
+                Activator.CreateInstance(Entity.GetEntityTypeFromID(Entity.ENTITY_PLAYER));
+                var e = EntityList[EntityList.Count - 1];
                 e.SetLocation(GetMouseLocation());
                 e.Sprite = texturePipeline.solidAnimations.TEST_LOAD;
                 e.Visible = true;
+
+                DebugLog.LogDebug("Created Entity with type: " + e.EntityType);
             }
 
         }

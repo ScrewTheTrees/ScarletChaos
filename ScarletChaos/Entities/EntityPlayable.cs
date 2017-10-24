@@ -14,32 +14,32 @@ namespace ScarletChaos.Entities
     /// </summary>
     class EntityPlayable : Entity
     {
-        public new int EntityType = ENTITY_PLAYABLE; //Must be assigned
+        override public int EntityType { get; set; } = ENTITY_PLAYABLE; //Must be assigned
 
         //Important control stuff
-        public bool CanControl = true;
-        public bool IsNpcControlled = true;
+        virtual public bool CanControl { get; set; } = true;
+        virtual public bool IsNpcControlled { get; set; } = true;
         //public NpcAI EntityAI;
-        public String Name = null;
+        virtual public String Name { get; set; } = null;
 
         //Movement
-        public float SpeedHorizontal = 0f;
-        public float SpeedVertical = 0f;
-        public float SpeedHorizontalMax = 10f;
-        public float SpeedVerticalMax = 10f;
-        public float Friction = 0f;
-        public float GravityDirection = 270f;
-        public float Gravity = 0.25f;
-        public float MaxGravity = 10f;
+        virtual public float SpeedHorizontal { get; set; } = 0f;
+        virtual public float SpeedVertical { get; set; } = 0f;
+        virtual public float SpeedHorizontalMax { get; set; } = 10f;
+        virtual public float SpeedVerticalMax { get; set; } = 10f;
+        virtual public float Friction { get; set; } = 0f;
+        virtual public float GravityDirection { get; set; } = 270f;
+        virtual public float Gravity { get; set; } = 0.25f;
+        virtual public float MaxGravity { get; set; } = 10f;
 
         //Entity Stats System
-        public Team EntityTeam = new Team(false, false, false);
-        public float HealthMax = 10000f;
-        public float FocusMax = 10000f;
-        public float StaminaMax = 10000f;
-        public float Health = 10000f;
-        public float Focus = 10000f;
-        public float Stamina = 10000f;
+        virtual public int EntityTeam { get; set; } = Team.TEAM_NEUTRAL;
+        virtual public float HealthMax { get; set; } = 10000f;
+        virtual public float FocusMax { get; set; } = 10000f;
+        virtual public float StaminaMax { get; set; } = 10000f;
+        virtual public float Health { get; set; } = 10000f;
+        virtual public float Focus { get; set; } = 10000f;
+        virtual public float Stamina { get; set; } = 10000f;
 
         //Input
         public bool[] Press = new bool[InputOptions.PRESS_MAX];

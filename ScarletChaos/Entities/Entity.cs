@@ -18,25 +18,26 @@ namespace ScarletChaos.Entities
             GameInstance.PrimaryGameInstance.EntityList.Add(this);
         }
 
-
-        public ulong EntityID;
-        public ulong LatestStepIndex = 0;
-        public int EntityType = ENTITY_BASE; //Must be assigned
-        public Sprite Sprite;
-        public Single Depth = 0;
+        virtual public ulong EntityID { get; set; }
+        virtual public ulong LatestStepIndex { get; set; }  = 0;
+        virtual public int EntityType { get; set; } = ENTITY_BASE; //Must be assigned
+        virtual public Sprite Sprite { get; set; }
+        /// <summary>The mask is used as an unrendered sprite that only provides collision.</summary>
+        virtual public Sprite Mask { get; set; }
+        virtual public Single Depth { get; set; } = 0;
 
         /// <summary> Entites that arent visible wont perform Draw events (at all) </summary>
-        public bool Visible = true;
+        virtual public bool Visible { get; set; } = true;
         /// <summary> These Entities wont be cleansed on room changes. </summary>
-        public bool Persistent = false;
+        virtual public bool Persistent { get; set; } = false;
         /// <summary> These Entities are Active and will execute Step commands. </summary>
-        public bool Active = true;
+        virtual public bool Active { get; set; } = true;
 
         public Vector2 Location = new Vector2(0, 0);
         public Vector2 PreviousLocation = new Vector2(0, 0);
 
-        public double DrawDelta;
-        public double StepDelta;
+        virtual public double DrawDelta { get; set; }
+        virtual public double StepDelta { get; set; }
 
         virtual public void Create() { }
         virtual public void Destroy() { }
@@ -54,7 +55,7 @@ namespace ScarletChaos.Entities
         public void SetLocation(float x, float y) { Location.X = x; Location.Y = y; PreviousLocation.X = x; PreviousLocation.Y = y; }
 
         /// <summary>Updated just before .</summary>
-        public void UpdateEntityData()
+        virtual public void UpdateEntityData()
         {
             PreviousLocation.X = Location.X;
             PreviousLocation.Y = Location.Y;
@@ -83,8 +84,8 @@ namespace ScarletChaos.Entities
         public const int ENTITY_BASE = 0;
         public const int ENTITY_PLAYABLE = 10000;
         public const int ENTITY_PLAYER = 11000;
-        public const int ENTITY_ENEMY = 20000;
-        public const int ENTITY_NPC = 30000;
+        public const int ENTITY_ENEMY = 12000;
+        public const int ENTITY_NPC = 13000;
 
         public static Type GetEntityTypeFromID(int eid)
         {
@@ -94,7 +95,7 @@ namespace ScarletChaos.Entities
             {
                 case ENTITY_PLAYER: ret = typeof(EntityPlayer); break;
 
-                default: ret = null; break;
+                default: ret = typeof(Entity); DebugLog.LogCritical("Trying to create invalid EntityID: " + eid); break;
             }
 
             return ret;

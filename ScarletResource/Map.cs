@@ -9,9 +9,13 @@ namespace ScarletResource
 {
     public class Map
     {
+        public Map()
+        {
+            CurrentMap = this;
+        }
+
         public List<Solid> Solids = new List<Solid>();
-
-
+        public Map CurrentMap;
 
         public int MapWidth = 64 * 64;
         public int MapHeight = 32 * 64;

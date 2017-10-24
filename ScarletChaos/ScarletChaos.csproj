@@ -98,7 +98,7 @@
     <Compile Include="Networking\PlayerClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataUtility\Teams.cs" />
+    <Compile Include="DataUtility\Team.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
