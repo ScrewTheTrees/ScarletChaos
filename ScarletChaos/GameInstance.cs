@@ -83,10 +83,6 @@ namespace ScarletChaos
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // Create a new TexturePipeline that can be used to load textures
             texturePipeline = new TextureContent(GraphicsDevice);
-
-            what = texturePipeline.solidAnimations.GetSprite("unknown"); //TODO: Shit
-
-
         }
 
         /// <summary>
@@ -111,8 +107,6 @@ namespace ScarletChaos
         public static double StepTime;
         public static double DrawTime;
 
-        Sprite what; //TODO: Remove
-
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
@@ -124,7 +118,6 @@ namespace ScarletChaos
             spriteBatch.GraphicsDevice.Viewport = GameCam.MainView;
             spriteBatch.Begin(SpriteSortMode.BackToFront);
 
-            what.DrawAnimation(spriteBatch, new Vector2(200, 200), 0);
 
             Entity[] list = Entities.ToArray();
             for (var i = 0; i < list.Length; i++)
@@ -136,7 +129,6 @@ namespace ScarletChaos
                     list[i].Sprite.Update(gameTime);
             }
 
-            what.Update(gameTime);
 
             spriteBatch.End();
 
@@ -150,7 +142,7 @@ namespace ScarletChaos
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            //StepTime  is technically a second
+            //StepTime  is technically a second when you screw it over like me
             var deltaTime = gameTime.ElapsedGameTime;
             StepTime = (deltaTime.Milliseconds * 0.001);
             Delta1s += (StepTime) * 0.01;
