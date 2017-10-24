@@ -48,44 +48,44 @@ namespace ScarletResource
         }
 
         /// <summary>Collision with another Collision</summary>
-        /// <param name="col2">The other Collision object</param>
+        /// <param name="collisionOther">The other Collision object</param>
         /// <param name="OffsetX">Optional X Offset of collision checking.</param>
         /// <param name="OffsetY">The position offset to check the collision</param>
         /// <returns>Whenever it actually collided or not.</returns>
-        public bool CollidesWith(Collision col2, int OffsetX = 0, int OffsetY = 0)
+        public bool CollidesWith(Collision collisionOther, int OffsetX = 0, int OffsetY = 0)
         {
-            Collision col1 = this;
+            Collision collisionThis = this;
 
             Location.X = CollisionBox.X + OffsetX;
             Location.Y = CollisionBox.Y + OffsetY;
-            col2.Location.X = col2.CollisionBox.X;
-            col2.Location.Y = col2.CollisionBox.Y;
+            collisionOther.Location.X = collisionOther.CollisionBox.X;
+            collisionOther.Location.Y = collisionOther.CollisionBox.Y;
 
-            if (col1.CollisionType == COLLISION_RECTANGLE && col2.CollisionType == COLLISION_RECTANGLE)
+            if (collisionThis.CollisionType == COLLISION_RECTANGLE && collisionOther.CollisionType == COLLISION_RECTANGLE)
             {
-                if (col1.CollisionBox.Intersects(col2.CollisionBox)) return true;
+                if (collisionThis.CollisionBox.Intersects(collisionOther.CollisionBox)) return true;
             }
-            else if (col1.CollisionType == COLLISION_PIXEL && col2.CollisionType == COLLISION_PIXEL)
+            else if (collisionThis.CollisionType == COLLISION_PIXEL && collisionOther.CollisionType == COLLISION_PIXEL)
             {
                 for (int x = 0; x < CollisionMapPixel.GetLength(0); x++)
                 {
                     for (int y = 0; y < CollisionMapPixel.GetLength(1); y++)
                     {
-                        if (PixelCollidesWith(new Vector2(Location.X + x, Location.Y + y), col2))
+                        if (PixelCollidesWith(new Vector2(Location.X + x, Location.Y + y), collisionOther))
                             return true; //We struck gold!
                     }
                 }
             }
-            else if (col1.CollisionBox.Intersects(col2.CollisionBox))
+            else if (collisionThis.CollisionBox.Intersects(collisionOther.CollisionBox))
             { //We only need to go in here if the Collision box intersects as the collision box is always bigger than the pixelmap.
 
-                var pixel = col1;
-                var rect = col2;
+                var pixel = collisionThis;
+                var rect = collisionOther;
 
-                if (col2.CollisionType == COLLISION_PIXEL)
+                if (collisionOther.CollisionType == COLLISION_PIXEL)
                 {
-                    pixel = col2;
-                    rect = col1;
+                    pixel = collisionOther;
+                    rect = collisionThis;
                 }
 
                 var comp = new Vector2(pixel.Location.X, pixel.Location.Y);
