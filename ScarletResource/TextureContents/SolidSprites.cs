@@ -20,17 +20,18 @@ namespace ScarletResource.TextureContents
 
         public Sprite GetSprite(string TextureName)
         {
+            Sprite ani;
             switch (TextureName)
             {
-                case "kirbytestwalk":
-                    var ani = new Sprite(Instance.GetTexture(@"kirbytest.png"), 23, 23, 8, 54, 10);
+                case @"kirbytestwalk":
+                    ani = new Sprite(Instance.GetTexture(@"kirbytest.png"), 23, 23, 8, 54, 10);
                     ani.SetAnimationSpeed(10);
                     ani.Scale = new Vector2(2, 2);
                     ani.Origin = new Vector2(11, 11);
                     return ani;
-                case "":
-
-                    break;
+                case @"Solids\SolidBlock.png":
+                    ani = new Sprite(Instance.GetTexture(@"Solids\SolidBlock.png"));
+                    return ani;
             }
 
 
