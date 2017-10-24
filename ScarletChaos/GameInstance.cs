@@ -23,6 +23,8 @@ namespace ScarletChaos
         public static OnlineSession Session;
 
         public static Camera GameCam;
+        public static MouseState StateMouse = Mouse.GetState();
+        public static MouseState StateMouseOld = Mouse.GetState();
 
         public static string GameDirectory = Directory.GetCurrentDirectory();
 
@@ -40,6 +42,7 @@ namespace ScarletChaos
             OptionsGraphics.SaveGraphicsOptions();
 
             GameCam = new Camera(new Viewport(0, 0, 1920, 1080, -1000, 1000));
+            IsMouseVisible = true;
 
             OptionsPlayer = new PlayerOptions();
 
@@ -118,7 +121,6 @@ namespace ScarletChaos
             spriteBatch.GraphicsDevice.Viewport = GameCam.MainView;
             spriteBatch.Begin(SpriteSortMode.BackToFront);
 
-
             Entity[] list = Entities.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
@@ -139,6 +141,9 @@ namespace ScarletChaos
         // A: Delta timers are bad for platformers where pixel perfect jumps is a thing. Atleast the Draw event and StepRaw use Delta timers.
         protected override void Update(GameTime gameTime)
         {
+            StateMouseOld = StateMouse;
+            StateMouse = Mouse.GetState();
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -188,7 +193,7 @@ namespace ScarletChaos
             }
 
             //TODO: Debug
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (StateMouse.LeftButton == ButtonState.Pressed && IsActive == true)
             {
                 Activator.CreateInstance(Entity.GetEntityTypeFromID(Entity.ENTITY_PLAYER));
                 var e = Entities[Entities.Count - 1];
