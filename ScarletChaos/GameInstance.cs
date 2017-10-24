@@ -163,8 +163,11 @@ namespace ScarletChaos
             for (var i = 0; i < list.Length; i++)
             {
                 list[i].StepRaw();
-            }
 
+                if (list[i].Sprite != null)
+                    if (list[i].CollisionMask != null)
+                        list[i].CollisionMask.UpdateCollisionLocation();
+            }
 
             base.Update(gameTime);
         }

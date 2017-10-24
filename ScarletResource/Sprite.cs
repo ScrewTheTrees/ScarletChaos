@@ -101,6 +101,15 @@ namespace ScarletResource
             FrameRect.Y = (int)(Offset.Y);
         }
 
+        public void UpdateCollisionLocation()
+        {
+            if (collision == null) return;
+
+            collision.CollisionBox.X = FrameRect.X;
+            collision.CollisionBox.X = FrameRect.Y;
+        
+        }
+
         public int GetCurrentFrame()
         {
             return (int)FrameIndex; //We want it rounded down anyway!

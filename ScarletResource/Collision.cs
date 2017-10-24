@@ -46,13 +46,15 @@ namespace ScarletResource
 
         /// <summary>Collision with another Collision</summary>
         /// <param name="col2">The other Collision object</param>
+        /// <param name="OffsetX">Optional X Offset of collision checking.</param>
+        /// <param name="OffsetY">The position offset to check the collision</param>
         /// <returns>Whenever it actually collided or not.</returns>
-        public bool CollideWith(Collision col2)
+        public bool CollideWith(Collision col2, int OffsetX = 0, int OffsetY = 0)
         {
             Collision col1 = this;
 
-            Location.X = CollisionBox.X;
-            Location.Y = CollisionBox.Y;
+            Location.X = CollisionBox.X + OffsetX;
+            Location.Y = CollisionBox.Y + OffsetY;
             col2.Location.X = col2.CollisionBox.X;
             col2.Location.Y = col2.CollisionBox.Y;
 
