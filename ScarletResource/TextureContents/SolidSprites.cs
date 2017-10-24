@@ -34,7 +34,7 @@ namespace ScarletResource.TextureContents
             }
 
 
-            return new Sprite(Instance.GetTexture(@"unknown.png"), 23, 23, 8, 54, 10);
+            return new Sprite(Instance.GetTexture(@"unknown.png"));
         }
 
 

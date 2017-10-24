@@ -13,6 +13,8 @@ namespace ScarletResource.MapObjects
         public Sprite Texture;
         public Sprite CollisionMask;
 
+        public int Depth = 0;
+
         /// <summary>Current Solid ID</summary>
         public int SolidID = 0;
         /// <summary>Is drawn to the screen.</summary>

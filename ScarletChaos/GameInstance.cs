@@ -14,15 +14,15 @@ namespace ScarletChaos
     public class GameInstance : Game
     {
         public static GameInstance PrimaryGameInstance;
-        public GraphicsDeviceManager graphics;
-        public SpriteBatch spriteBatch;
-        public GraphicsOptions OptionsGraphics;
-        public PlayerOptions OptionsPlayer;
-        public List<Entity> EntityList = new List<Entity>();
-        public TextureContent texturePipeline;
-        public OnlineSession Session;
+        public static GraphicsDeviceManager graphics;
+        public static SpriteBatch spriteBatch;
+        public static GraphicsOptions OptionsGraphics;
+        public static PlayerOptions OptionsPlayer;
+        public static List<Entity> EntityList = new List<Entity>();
+        public static TextureContent texturePipeline;
+        public static OnlineSession Session;
 
-        public Camera GameCam;
+        public static Camera GameCam;
 
         public static string GameDirectory = Directory.GetCurrentDirectory();
 
@@ -48,14 +48,14 @@ namespace ScarletChaos
 
         public static bool IsOnline()
         {
-            if (PrimaryGameInstance.Session == null) return false;
+            if (Session == null) return false;
 
             return true;
         }
         public static bool IsHost()
         {
-            if (PrimaryGameInstance.Session == null) return true;
-            if (PrimaryGameInstance.Session.IsHost == true) return true;
+            if (Session == null) return true;
+            if (Session.IsHost == true) return true;
             return false;
         }
 
@@ -81,12 +81,12 @@ namespace ScarletChaos
             DebugLog.LogInfo("Creating ContentLoaders.");
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            // Create a new TexturePipeline that can be used to load textures
             texturePipeline = new TextureContent(GraphicsDevice);
 
-            what = texturePipeline.solidAnimations.GetSprite("kirbytest.png"); //TODO: Shit
+            what = texturePipeline.solidAnimations.GetSprite("unknown"); //TODO: Shit
 
 
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace ScarletChaos
                 Activator.CreateInstance(Entity.GetEntityTypeFromID(Entity.ENTITY_PLAYER));
                 var e = EntityList[EntityList.Count - 1];
                 e.SetLocation(GetMouseLocation());
-                e.Sprite = texturePipeline.solidAnimations.GetSprite("kirbytest.png"); //TODO: Shit
+                e.Sprite = texturePipeline.solidAnimations.GetSprite("kirbytestwalk"); //TODO: Shit
                 e.Visible = true;
 
                 DebugLog.LogDebug("Created Entity with type: " + e.EntityType);
@@ -263,8 +263,8 @@ namespace ScarletChaos
         {
             Vector2 loc = new Vector2(0, 0)
             {
-                X = Mouse.GetState().X * ((float)PrimaryGameInstance.GameCam.ViewW / PrimaryGameInstance.OptionsGraphics.ScreenResolution.Width),
-                Y = Mouse.GetState().Y * ((float)PrimaryGameInstance.GameCam.ViewH / PrimaryGameInstance.OptionsGraphics.ScreenResolution.Height)
+                X = Mouse.GetState().X * ((float)GameCam.ViewW / OptionsGraphics.ScreenResolution.Width),
+                Y = Mouse.GetState().Y * ((float)GameCam.ViewH / OptionsGraphics.ScreenResolution.Height)
             };
             return loc;
         }

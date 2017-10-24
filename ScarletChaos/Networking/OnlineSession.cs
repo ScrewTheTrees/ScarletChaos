@@ -28,7 +28,7 @@ namespace ScarletChaos.Networking
             config.EnableMessageType(NetIncomingMessageType.UnconnectedData);
             config.MaximumConnections = 32;
 
-            Player = new PlayerClient(config.Port, "127.0.0.1", GameInstance.PrimaryGameInstance.OptionsPlayer.Name);
+            Player = new PlayerClient(config.Port, "127.0.0.1", GameInstance.OptionsPlayer.Name);
 
             if (isHost == true)
             {

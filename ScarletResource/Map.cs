@@ -21,14 +21,12 @@ namespace ScarletResource
         }
 
         public List<Solid> Solids = new List<Solid>();
+        public List<Tile> Tiles = new List<Tile>();
 
         public int MapX = 0;
         public int MapY = 0;
         public int MapWidth = 64 * 64;
         public int MapHeight = 32 * 64;
-
-
-
 
 
 
