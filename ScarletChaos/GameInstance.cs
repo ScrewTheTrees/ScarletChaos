@@ -39,7 +39,7 @@ namespace ScarletChaos
             OptionsGraphics.ApplyGraphicOptions();
             OptionsGraphics.SaveGraphicsOptions();
 
-            GameCam = new Camera(new Viewport(0, 0, ScreenSize.SS_169_1920X1080.Width, ScreenSize.SS_169_1920X1080.Height, -1000, 1000));
+            GameCam = new Camera(new Viewport(0, 0, 1920, 1080, -1000, 1000));
 
             OptionsPlayer = new PlayerOptions();
 
