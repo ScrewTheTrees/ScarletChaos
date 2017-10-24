@@ -12,7 +12,7 @@ namespace ScarletResource
     {
         int CollisionType = COLLISION_RECTANGLE;
         public Rectangle CollisionBox;
-        public bool[,] CollisionMapPixel;
+        public bool[,] CollisionPixelMap;
         public Vector2 Location = new Vector2();
 
         /// <summary> Collision Instance </summary>
@@ -26,7 +26,7 @@ namespace ScarletResource
 
             if (col == 1)
             {
-                CollisionMapPixel = new bool[tex.Width, tex.Height];
+                CollisionPixelMap = new bool[tex.Width, tex.Height];
 
                 Color[] colors1D = new Color[tex.Width * tex.Height];
                 tex.GetData<Color>(colors1D);
@@ -37,8 +37,8 @@ namespace ScarletResource
                     {
                         Color cor = colors1D[x + (y * tex.Width)];
                         if (cor.A > 10)
-                            CollisionMapPixel[x, y] = true;
-                        else CollisionMapPixel[x, y] = false;
+                            CollisionPixelMap[x, y] = true;
+                        else CollisionPixelMap[x, y] = false;
                     }
                 }
 
@@ -67,36 +67,36 @@ namespace ScarletResource
             }
             else if (collisionThis.CollisionType == COLLISION_PIXEL && collisionOther.CollisionType == COLLISION_PIXEL)
             {
-                for (int x = 0; x < CollisionMapPixel.GetLength(0); x++)
+                for (int x = 0; x < CollisionPixelMap.GetLength(0); x++)
                 {
-                    for (int y = 0; y < CollisionMapPixel.GetLength(1); y++)
+                    for (int y = 0; y < CollisionPixelMap.GetLength(1); y++)
                     {
-                        if (PixelCollidesWith(new Vector2(Location.X + x, Location.Y + y), collisionOther))
+                        if (PixelCollidesWithPixelMap(new Vector2(Location.X + x, Location.Y + y), collisionOther))
                             return true; //We struck gold!
                     }
                 }
             }
             else if (collisionThis.CollisionBox.Intersects(collisionOther.CollisionBox))
-            { //We only need to go in here if the Collision box intersects as the collision box is always bigger than the pixelmap.
+            { //We only need to go in here if the Collision box intersects as the collision box is always bigger or the same as the pixelmap.
 
                 var pixel = collisionThis;
                 var rect = collisionOther;
 
                 if (collisionOther.CollisionType == COLLISION_PIXEL)
-                {
+                { //Switch around if the other guy is the pixels collider.
                     pixel = collisionOther;
                     rect = collisionThis;
                 }
 
                 var comp = new Vector2(pixel.Location.X, pixel.Location.Y);
 
-                for (int x = 0; x < CollisionMapPixel.GetLength(0); x++)
+                for (int x = 0; x < CollisionPixelMap.GetLength(0); x++)
                 {
-                    for (int y = 0; y < CollisionMapPixel.GetLength(1); y++)
+                    for (int y = 0; y < CollisionPixelMap.GetLength(1); y++)
                     {
                         comp.X += x;
                         comp.Y += y;
-                        if (pixel.CollisionMapPixel[x, y] == true)
+                        if (pixel.CollisionPixelMap[x, y] == true)
                             if (rect.CollisionBox.Contains(comp))
                                 return true; //We struck gold!
                     }
@@ -105,13 +105,13 @@ namespace ScarletResource
             return false;
         }
 
-        public static bool PixelCollidesWith(Vector2 loc, Collision col2)
+        public static bool PixelCollidesWithPixelMap(Vector2 loc, Collision col2)
         {
-            for (int x = 0; x < col2.CollisionMapPixel.GetLength(0); x++)
+            for (int x = 0; x < col2.CollisionPixelMap.GetLength(0); x++)
             {
-                for (int y = 0; y < col2.CollisionMapPixel.GetLength(1); y++)
+                for (int y = 0; y < col2.CollisionPixelMap.GetLength(1); y++)
                 {
-                    if ((int)loc.X == x && (int)loc.Y == y && col2.CollisionMapPixel[x, y] == true)
+                    if ((int)loc.X == x && (int)loc.Y == y && col2.CollisionPixelMap[x, y] == true)
                         return true; //We struck gold!
 
                 }
