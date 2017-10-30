@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ScarletChaos.Entities.Components;
 
 namespace ScarletChaos.Entities
 {
@@ -20,7 +21,10 @@ namespace ScarletChaos.Entities
         virtual public bool CanControl { get; set; } = true;
         virtual public bool IsNpcControlled { get; set; } = true;
         //public NpcAI EntityAI;
+        /// <summary>  </summary>
         virtual public String Name { get; set; } = null;
+
+        public EntityComponentMovement MovementType { get; set; } = new EntityComponentMovement(EntityComponentMovement.MOVEMENT_NONE);
 
         //Movement
         virtual public float SpeedHorizontal { get; set; } = 0f;

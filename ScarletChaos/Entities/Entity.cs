@@ -20,6 +20,7 @@ namespace ScarletChaos.Entities
 
         virtual public ulong EntityID { get; set; }
         virtual public ulong LatestStepIndex { get; set; } = 0;
+        /// <summary> The Type of entity this entity is. </summary>
         virtual public int EntityType { get; set; } = ENTITY_BASE; //Must be assigned
         virtual public Sprite Sprite { get; set; }
         /// <summary>The mask is used as an unrendered sprite that only provides collision.</summary>

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using ScarletChaos.Entities.Components;
 
 namespace ScarletChaos.Entities
 {
@@ -17,6 +18,8 @@ namespace ScarletChaos.Entities
         override public int EntityType { get; set; } = ENTITY_PLAYER; //Must be assigned
         public bool IsLocalPlayer = false;
         public new bool IsNpcControlled = false;
+
+        public new EntityComponentMovement MovementType { get; set; } = new EntityComponentMovement(EntityComponentMovement.MOVEMENT_PLATFORM);
 
         override public int EntityTeam { get; set; } = Team.PLAYER;
 
