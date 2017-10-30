@@ -14,5 +14,6 @@ namespace ScarletResource
         public static string SOUNDS = Directory.GetCurrentDirectory() + @"\Assets\Sounds\";
         public static string MUSIC = Directory.GetCurrentDirectory() + @"\Assets\Music\";
         public static string MAPS = Directory.GetCurrentDirectory() + @"\Assets\Maps\";
+        public static string FONTS = Directory.GetCurrentDirectory() + @"\Assets\Fonts\";
     }
 }

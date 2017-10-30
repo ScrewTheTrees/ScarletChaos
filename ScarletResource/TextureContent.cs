@@ -20,6 +20,7 @@ namespace ScarletResource
         {
             Graphics = d;
             DefaultTex = LoadContent("Icon.ico");
+            
         }
 
         /// <summary> Gets the target texture... and loads it if it's not in memory. </summary>

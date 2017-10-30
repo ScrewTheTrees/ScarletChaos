@@ -9,6 +9,7 @@ using System.IO;
 using System;
 using ScarletResource.TextureContents;
 using ScarletResource.MapObjects;
+using MonoGame.Framework;
 
 namespace ScarletChaos
 {
@@ -20,7 +21,10 @@ namespace ScarletChaos
         public static GraphicsOptions OptionsGraphics;
         public static PlayerOptions OptionsPlayer;
         public static List<Entity> Entities = new List<Entity>();
-        public static TextureContent texturePipeline;
+
+        public static TextureContent TexturePipeline;
+        public static FontContent FontPipeline;
+
         public static bool DebugDraw = true;
         public static Map CurrentMap = Map.CurrentMap;
 
@@ -34,12 +38,13 @@ namespace ScarletChaos
 
         public GameInstance()
         {
-            IsMouseVisible = true;
+            Content.RootDirectory = PipeLine.ASSETS; //Fix that shit
 
+            IsMouseVisible = true;
+            
             DebugLog.LogInfo("Game Instance has been Initialized.");
             graphics = new GraphicsDeviceManager(this);
 
-            Content.RootDirectory = "Content";
             PrimaryGameInstance = this;
 
             OptionsGraphics = new GraphicsOptions(graphics);
@@ -51,6 +56,7 @@ namespace ScarletChaos
 
 
             CurrentMap = new Map(); //Current map is static anyway.
+
 
             DebugLog.LogInfo("Game Instance constructor loaded.");
         }
@@ -78,7 +84,8 @@ namespace ScarletChaos
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // Create a new TexturePipeline that can be used to load textures
-            texturePipeline = new TextureContent(GraphicsDevice);
+            TexturePipeline = new TextureContent(GraphicsDevice);
+            FontPipeline = new FontContent(Content);
         }
 
         /// <summary>
@@ -90,6 +97,7 @@ namespace ScarletChaos
             DebugLog.LogInfo("Flushed all Textures and unloaded all content.");
             // TODO: Unload any non ContentManager content here
             TextureContent.FlushAllTextures();
+            FontContent.FlushAllFonts();
         }
 
 
@@ -113,6 +121,10 @@ namespace ScarletChaos
             GameCam.Update();
             spriteBatch.GraphicsDevice.Viewport = GameCam.MainView;
             spriteBatch.Begin(SpriteSortMode.BackToFront);
+
+            SpriteFont font = FontContent.GetFont(@"FontArial16");
+
+            spriteBatch.DrawString(font, "I like big butts and i cannot lie.", new Vector2(32, 32), Color.White);
 
             Entity[] list = Entities.ToArray();
             for (var i = 0; i < list.Length; i++)
@@ -140,14 +152,14 @@ namespace ScarletChaos
                 }
             }
 
-
+            
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
         // Q: UrrDurridurr why no pure delta timer fred? 
-        // A: Delta timers are bad for platformers where pixel perfect jumps is a thing. Atleast the Draw event and StepRaw use Delta timers.
+        // A: Delta timers are bad for platformers where pixel perfect jumps is a thing. The Draw event and StepRaw use Delta timers.
         protected override void Update(GameTime gameTime)
         {
             StateMouseOld = StateMouse;
