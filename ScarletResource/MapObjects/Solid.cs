@@ -23,7 +23,7 @@ namespace ScarletResource.MapObjects
         public bool Visible = false;
         /// <summary>Can be destroyed by projectiles.</summary>
         public bool Destructible = false;
-        /// <summary>Can be jumped through (from sideways and under).</summary>
+        /// <summary>Can be jumped through (NOT IMPLEMENTED YET)</summary>
         public bool JumpThrough = false;
         /// <summary>Entities collide with this.</summary>
         public bool CollideEntity = true;

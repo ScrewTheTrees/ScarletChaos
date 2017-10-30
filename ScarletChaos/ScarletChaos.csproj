@@ -91,12 +91,10 @@
     <Compile Include="Entities\EntityPlayable.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="EntityAI\NpcAI.cs" />
+    <Compile Include="ExtensionMath.cs" />
     <Compile Include="GameInstance.cs" />
     <Compile Include="DataUtility\GraphicsOptions.cs" />
     <Compile Include="InputOptions.cs" />
-    <Compile Include="Networking\OnlineSession.cs" />
-    <Compile Include="Networking\MSG.cs" />
-    <Compile Include="Networking\PlayerClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataUtility\Team.cs" />
@@ -127,18 +125,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lidgren.Network\Lidgren.Network.csproj">
-      <Project>{49ba1c69-6104-41ac-a5d8-b54fa9f696e8}</Project>
-      <Name>Lidgren.Network</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ScarletResource\ScarletResource.csproj">
       <Project>{66B36BC4-C3B4-41A1-8EE6-600A24765DBC}</Project>
       <Name>ScarletResource</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Networking\NetworkMessages\Core\" />
-    <Folder Include="Networking\NetworkMessages\Entity\" />
+    <Folder Include="Content\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

@@ -52,7 +52,7 @@ namespace ScarletResource
         /// <param name="OffsetX">Optional X Offset of collision checking.</param>
         /// <param name="OffsetY">The position offset to check the collision</param>
         /// <returns>Whenever it actually collided or not.</returns>
-        public bool CollidesWith(Collision collisionOther, int OffsetX = 0, int OffsetY = 0)
+        public bool CollidesWith(Collision collisionOther, float OffsetX = 0, float OffsetY = 0)
         {
             Collision collisionThis = this;
 

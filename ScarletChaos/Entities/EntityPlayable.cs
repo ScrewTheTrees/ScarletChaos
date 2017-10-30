@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ScarletChaos.Entities.Components;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace ScarletChaos.Entities
 {
@@ -27,6 +28,19 @@ namespace ScarletChaos.Entities
 
         public EntityComponentMovement MovementType { get; set; } = new EntityComponentMovement(EntityComponentMovement.MOVEMENT_NONE);
 
+        override public void Draw(SpriteBatch spriteBatch)
+        {
+            if (Sprite != null)
+                Sprite.DrawAnimation(spriteBatch, GetDrawingPosition(), Depth);
+        }
+        public override void Step120()
+        {
+            base.Step120();
+
+            MovementType.EntityMove(this);
+        }
+
+
         //Movement
         virtual public float SpeedHorizontal { get; set; } = 0f;
         virtual public float SpeedVertical { get; set; } = 0f;
@@ -37,6 +51,12 @@ namespace ScarletChaos.Entities
         virtual public float Gravity { get; } = 0.25f;
         
         virtual public float GravityMod { get; set; } = 0f;
+
+        virtual public float MoveSpeed { get; set; } = 2f;
+        virtual public bool FaceDir { get; set; } = FACEDIR_RIGHT;
+        virtual public bool CanMove { get; set; } = true;
+        virtual public bool OnGround { get; set; } = false;
+
 
         //Entity Stats System
         virtual public int EntityTeam { get; set; } = Team.NEUTRAL;
@@ -51,5 +71,9 @@ namespace ScarletChaos.Entities
         public bool[] Press = new bool[InputOptions.PRESS_MAX];
         public bool[] Pressed = new bool[InputOptions.PRESS_MAX];
         public bool[] Released = new bool[InputOptions.PRESS_MAX];
+
+
+        public const bool FACEDIR_LEFT = false;
+        public const bool FACEDIR_RIGHT = true;
     }
 }

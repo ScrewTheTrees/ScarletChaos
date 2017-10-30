@@ -122,7 +122,7 @@ namespace ScarletResource
         /// <param name="OffsetX">Optional X Offset of collision checking.</param>
         /// <param name="OffsetY">Optional Y Offset of collision checking.</param>
         /// <returns>Whenever it actually collided or not.</returns>
-        public bool CollidesWith(Sprite OtherMask, int OffsetX = 0, int OffsetY = 0)
+        public bool CollidesWith(Sprite OtherMask, float OffsetX = 0, float OffsetY = 0)
         {
             if (collision == null || OtherMask.collision == null) return false;
 

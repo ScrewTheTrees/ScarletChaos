@@ -23,13 +23,9 @@ namespace ScarletChaos.Entities
 
         override public int EntityTeam { get; set; } = Team.PLAYER;
 
-        override public void Draw(SpriteBatch spriteBatch)
-        {
-            Sprite.DrawAnimation(spriteBatch, GetDrawingPosition(), Depth);
-        }
-
         override public void Step10()
         {
+            base.Step10();
             if (IsLocalPlayer) CanControl = true; else CanControl = false; //Handle Control
         }
     }

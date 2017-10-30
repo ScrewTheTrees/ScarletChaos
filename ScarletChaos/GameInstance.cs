@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ScarletChaos.DataUtility;
 using ScarletChaos.Entities;
-using ScarletChaos.Networking;
 using ScarletResource;
 using System.Collections.Generic;
 using System.IO;
@@ -22,7 +21,6 @@ namespace ScarletChaos
         public static PlayerOptions OptionsPlayer;
         public static List<Entity> Entities = new List<Entity>();
         public static TextureContent texturePipeline;
-        public static OnlineSession Session;
         public static bool DebugDraw = true;
         public static Map CurrentMap = Map.CurrentMap;
 
@@ -51,22 +49,10 @@ namespace ScarletChaos
 
             OptionsPlayer = new PlayerOptions();
 
+
             CurrentMap = new Map(); //Current map is static anyway.
 
             DebugLog.LogInfo("Game Instance constructor loaded.");
-        }
-
-        public static bool IsOnline()
-        {
-            if (Session == null) return false;
-
-            return true;
-        }
-        public static bool IsHost()
-        {
-            if (Session == null) return true;
-            if (Session.IsHost == true) return true;
-            return false;
         }
 
 
