@@ -25,7 +25,7 @@ namespace ScarletChaos.Entities
         virtual public Sprite Sprite { get; set; }
         /// <summary>The mask is used as an unrendered sprite that only provides collision.</summary>
         virtual public Sprite CollisionMask { get; set; }
-        virtual public Single Depth { get; set; } = 0;
+        virtual public float Depth { get; set; } = 0f;
 
         /// <summary> Entites that arent visible wont perform Draw events (at all) </summary>
         virtual public bool Visible { get; set; } = true;

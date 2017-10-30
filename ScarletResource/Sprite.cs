@@ -126,6 +126,7 @@ namespace ScarletResource
         {
             if (collision == null || OtherMask.collision == null) return false;
 
+            UpdateCollisionLocation();
             return collision.CollidesWith(OtherMask.collision, OffsetX, OffsetY);
 
         }

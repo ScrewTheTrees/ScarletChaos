@@ -19,6 +19,7 @@ namespace ScarletResource.TextureContents
                     var Texture = TextureContent.GetTexture(@"Solids\SolidBlock.png");
                     ani = new Sprite(Texture, TextureName);
                     ani.collision = new Collision(Texture, ani.FrameRect, Collision.COLLISION_RECTANGLE);
+                    ani.IsAnimated = false;
                     return ani;
             }
 

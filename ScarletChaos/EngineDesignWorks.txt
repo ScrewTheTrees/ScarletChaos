@@ -4,4 +4,6 @@
 
 
 
--1000  to  1000 is the default game draw depth.
+-0.9  to  0.9 is the default game draw depth for ortho
+< -0.9 is for GUI elements
+> 0.9 is for backgrounds

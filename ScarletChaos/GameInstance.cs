@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 using ScarletResource.TextureContents;
+using ScarletResource.MapObjects;
 
 namespace ScarletChaos
 {
@@ -22,6 +23,8 @@ namespace ScarletChaos
         public static List<Entity> Entities = new List<Entity>();
         public static TextureContent texturePipeline;
         public static OnlineSession Session;
+        public static bool DebugDraw = true;
+        public static Map CurrentMap = Map.CurrentMap;
 
         public static Camera GameCam = new Camera(new Viewport(0, 0, 1920, 1080, -1000, 1000));
         public static MouseState StateMouse = Mouse.GetState();
@@ -47,6 +50,8 @@ namespace ScarletChaos
             OptionsGraphics.SaveGraphicsOptions();
 
             OptionsPlayer = new PlayerOptions();
+
+            CurrentMap = new Map(); //Current map is static anyway.
 
             DebugLog.LogInfo("Game Instance constructor loaded.");
         }
@@ -131,6 +136,22 @@ namespace ScarletChaos
 
                 if (list[i].Sprite != null)
                     list[i].Sprite.Update(gameTime);
+
+                if (list[i].CollisionMask != null)
+                    list[i].CollisionMask.Update(gameTime);
+            }
+
+            if (DebugDraw == true)
+            {
+                Solid[] solids = CurrentMap.Solids.ToArray();
+                for (var j = 0; j < solids.Length; j++)
+                {
+                    solids[j].CollisionMask.Update(gameTime);
+                    solids[j].CollisionMask.UpdateCollisionLocation();
+
+                    if (solids[j].Visible == true || DebugDraw == true)
+                        solids[j].Draw(spriteBatch);
+                }
             }
 
 
@@ -150,6 +171,12 @@ namespace ScarletChaos
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            if (MouseRightButtonIsPressed())
+            {
+                CurrentMap.Solids.Add(new Solid(GetMouseLocation()));
+                DebugLog.LogDebug("Created Solid at: (" + GetMouseLocation().X + "," + GetMouseLocation().Y + ")");
+            }
 
             //StepTime  is technically a second when you screw it over like me
             var deltaTime = gameTime.ElapsedGameTime;

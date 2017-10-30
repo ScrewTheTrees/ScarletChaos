@@ -15,7 +15,7 @@ namespace ScarletResource.MapObjects
         public Sprite CollisionMask;
         public Vector2 Position = new Vector2(0, 0);
 
-        public int Depth = 100;
+        public float Depth = 0.1f;
 
         /// <summary>Current Solid ID</summary>
         public int SolidID = 0;
@@ -33,15 +33,17 @@ namespace ScarletResource.MapObjects
         /// <summary>Health for Destructibles are not decimal</summary>
         public int Health = 10000;
 
-        public Solid(int solidID)
-        {
-            SolidID = solidID;
-        }
-        public Solid(int solidID, Vector2 pos)
+
+        public Solid(String mask = @"Solids\SolidBlock.png") : this(GetNewSolidID(), new Vector2(0, 0), mask) { }
+        public Solid(int solidID, String mask = @"Solids\SolidBlock.png") : this(solidID, new Vector2(0, 0), mask) { }
+        public Solid(Vector2 pos, String mask = @"Solids\SolidBlock.png") : this(GetNewSolidID(), pos, mask) { }
+
+        public Solid(int solidID, Vector2 pos, String mask = @"Solids\SolidBlock.png")
         {
             SolidID = solidID;
             Position.X = pos.X;
             Position.Y = pos.Y;
+            CollisionMask = SolidSprites.GetSprite(mask);
         }
         public Solid(Sprite Mask, bool visible, bool destructible, bool jumpThrough, bool collideEntity, bool collideProjectile, int solidID)
         {
@@ -54,14 +56,16 @@ namespace ScarletResource.MapObjects
             SolidID = solidID;
         }
 
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            CollisionMask.DrawAnimation(spriteBatch, Position, Depth);
+        }
 
 
 
 
-
-
-
-
+        public static int NewSolidID = 0;
+        public static int GetNewSolidID() { return NewSolidID; }
 
         //Version 1 writing/reading
         public void WriteToStreamV1(BinaryWriter stream)
@@ -92,6 +96,5 @@ namespace ScarletResource.MapObjects
             Position.X = stream.ReadInt32();
             Position.Y = stream.ReadInt32();
         }
-
     }
 }

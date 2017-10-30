@@ -25,7 +25,7 @@ namespace ScarletChaos.Entities
 
         override public void Draw(SpriteBatch spriteBatch)
         {
-            Sprite.DrawAnimation(spriteBatch, GetDrawingPosition(), 0);
+            Sprite.DrawAnimation(spriteBatch, GetDrawingPosition(), Depth);
         }
 
         override public void Step10()

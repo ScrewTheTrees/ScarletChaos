@@ -85,6 +85,7 @@
     <Compile Include="DataUtility\PlayerOptions.cs" />
     <Compile Include="DataUtility\ScreenSize.cs" />
     <Compile Include="DebugLog.cs" />
+    <Compile Include="Entities\Components\EntityComponentMovement.cs" />
     <Compile Include="Entities\EntityPlayer.cs" />
     <Compile Include="Entities\E_Template.cs" />
     <Compile Include="Entities\EntityPlayable.cs" />
