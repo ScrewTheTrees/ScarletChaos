@@ -26,7 +26,7 @@ namespace ScarletChaos
         public static bool DebugDraw = true;
         public static Map CurrentMap = Map.CurrentMap;
 
-        public static Camera GameCam = new Camera(new Viewport(0, 0, 1920, 1080, -1000, 1000));
+        public static Camera GameCam = new Camera(new Viewport(0, 0, 1920, 1080, -1, 1));
         public static MouseState StateMouse = Mouse.GetState();
         public static MouseState StateMouseOld = Mouse.GetState();
         public static KeyboardState StateKeyboard = Keyboard.GetState();

@@ -17,7 +17,7 @@ namespace ScarletChaos.Entities
     {
         override public int EntityType { get; set; } = ENTITY_PLAYER; //Must be assigned
         public bool IsLocalPlayer = false;
-        public new bool IsNpcControlled = false;
+        override public bool IsNpcControlled { get; set; } = false;
 
         public new EntityComponentMovement MovementType { get; set; } = new EntityComponentMovement(EntityComponentMovement.MOVEMENT_PLATFORM);
 

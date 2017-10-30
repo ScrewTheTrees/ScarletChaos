@@ -15,13 +15,14 @@ namespace ScarletChaos.Entities
     /// </summary>
     class EntityPlayable : Entity
     {
-        override public int EntityType { get; set; } = ENTITY_PLAYABLE; //Must be assigned
+        override public int EntityType { get; set;  } = ENTITY_PLAYABLE;
+        override public bool Persistent { get; set; } = true;
 
         //Important control stuff
         virtual public bool CanControl { get; set; } = true;
         virtual public bool IsNpcControlled { get; set; } = true;
         //public NpcAI EntityAI;
-        /// <summary>  </summary>
+        /// <summary> Name of this Entity to be displayed </summary>
         virtual public String Name { get; set; } = null;
 
         public EntityComponentMovement MovementType { get; set; } = new EntityComponentMovement(EntityComponentMovement.MOVEMENT_NONE);
@@ -33,8 +34,9 @@ namespace ScarletChaos.Entities
         virtual public float SpeedVerticalMax { get; set; } = 10f;
         virtual public float Friction { get; set; } = 0f;
         virtual public float GravityDirection { get; set; } = 270f;
-        virtual public float Gravity { get; set; } = 0.25f;
-        virtual public float MaxGravity { get; set; } = 10f;
+        virtual public float Gravity { get; } = 0.25f;
+        
+        virtual public float GravityMod { get; set; } = 0f;
 
         //Entity Stats System
         virtual public int EntityTeam { get; set; } = Team.NEUTRAL;

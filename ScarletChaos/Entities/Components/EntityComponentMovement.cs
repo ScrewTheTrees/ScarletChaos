@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ScarletResource.MapObjects;
 
 namespace ScarletChaos.Entities.Components
 {
     /// <summary>
-    /// Component in charge of Entity Movement and collisions, 
+    /// Component in charge of EntityPlayable Movement and collisions, 
     /// </summary>
     class EntityComponentMovement
     {
@@ -29,7 +30,16 @@ namespace ScarletChaos.Entities.Components
 
         private void EntityMovePlatformer(EntityPlayable entity)
         {
+            Solid[] collisions = GameInstance.CurrentMap.Solids.ToArray();
 
+            float finalX = entity.Location.X;
+            float finalY = entity.Location.Y;
+
+            entity.SpeedVertical += (float)Math.Sin(entity.GravityDirection) * entity.Gravity;
+            entity.SpeedHorizontal += (float)Math.Cos(entity.GravityDirection) * entity.Gravity;
+
+            entity.SpeedVertical.Clamp(-entity.SpeedVerticalMax, entity.SpeedVerticalMax);
+            entity.SpeedHorizontal.Clamp(-entity.SpeedHorizontalMax, entity.SpeedHorizontalMax);
         }
 
         private void EntityMoveFloating(EntityPlayable entity)
