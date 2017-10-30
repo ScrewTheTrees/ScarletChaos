@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ScarletChaos.Entities.Components;
 using Microsoft.Xna.Framework.Graphics;
+using ScarletResource;
+using Microsoft.Xna.Framework;
 
 namespace ScarletChaos.Entities
 {
@@ -26,12 +28,17 @@ namespace ScarletChaos.Entities
         /// <summary> Name of this Entity to be displayed </summary>
         virtual public String Name { get; set; } = null;
 
-        public EntityComponentMovement MovementType { get; set; } = new EntityComponentMovement(EntityComponentMovement.MOVEMENT_NONE);
+        virtual public EntityComponentMovement MovementType { get; set; } = new EntityComponentMovement(EntityComponentMovement.MOVEMENT_NONE);
 
         override public void Draw(SpriteBatch spriteBatch)
         {
             if (Sprite != null)
                 Sprite.DrawAnimation(spriteBatch, GetDrawingPosition(), Depth);
+
+            spriteBatch.DrawString(FontContent.GetFont("FontArial16"),MovementType.MovementType.ToString(),new Vector2(Location.X, Location.Y - 80),Color.White);
+            spriteBatch.DrawString(FontContent.GetFont("FontArial16"), GravityDirection.ToString(), new Vector2(Location.X, Location.Y - 100), Color.White);
+            spriteBatch.DrawString(FontContent.GetFont("FontArial16"), SpeedHorizontal.ToString(), new Vector2(Location.X, Location.Y - 120), Color.White);
+            spriteBatch.DrawString(FontContent.GetFont("FontArial16"), SpeedVertical.ToString(), new Vector2(Location.X, Location.Y - 140), Color.White);
         }
         public override void Step120()
         {
@@ -48,7 +55,7 @@ namespace ScarletChaos.Entities
         virtual public float SpeedVerticalMax { get; set; } = 10f;
         virtual public float Friction { get; set; } = 0f;
         virtual public float GravityDirection { get; set; } = 270f;
-        virtual public float Gravity { get; } = 0.25f;
+        virtual public float Gravity { get; } = 0.01f;
         
         virtual public float GravityMod { get; set; } = 0f;
 

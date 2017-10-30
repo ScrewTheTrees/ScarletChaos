@@ -37,9 +37,12 @@ namespace ScarletChaos.Entities.Components
             float finalX = entity.Location.X;
             float finalY = entity.Location.Y;
 
+
+            float gravX = (float)((entity.Gravity + entity.GravityMod) * Math.Cos(ExtensionMath.DegToRad(entity.GravityDirection)));
+            float gravY = (float)((entity.Gravity + entity.GravityMod) * -Math.Sin(ExtensionMath.DegToRad(entity.GravityDirection)));
             //Add gravity
-            entity.SpeedHorizontal += (float)Math.Cos(entity.GravityDirection) * (entity.Gravity + entity.GravityMod);
-            entity.SpeedVertical += (float)Math.Sin(entity.GravityDirection) * (entity.Gravity + entity.GravityMod);
+            entity.SpeedHorizontal += gravX;
+            entity.SpeedVertical += gravY;
 
             //Clamp
             entity.SpeedHorizontal.Clamp(-entity.SpeedHorizontalMax, entity.SpeedHorizontalMax);
@@ -60,6 +63,7 @@ namespace ScarletChaos.Entities.Components
                 else entity.SpeedVertical = 0;
             }
 
+            //if (CollisionSolid(entity, collisions, gravX, gravY))
 
 
             finalX += entity.SpeedHorizontal;

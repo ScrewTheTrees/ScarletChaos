@@ -50,9 +50,6 @@ namespace ScarletResource
             }
             else c = DefaultFont;
 
-            if (c == null)
-                throw new Exception("SpriteFont is null!");
-
             return c;
         }
 

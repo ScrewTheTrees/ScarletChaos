@@ -14,5 +14,13 @@ namespace ScarletChaos
             else if (val.CompareTo(max) > 0) return max;
             else return val;
         }
+
+        public static double DegToRad(double angle)
+        {
+            return (Math.PI / 180) * angle;
+        }
+
+
+
     }
 }
