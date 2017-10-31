@@ -24,8 +24,8 @@ namespace ScarletResource.Entities
         /// <summary> The Type of entity this entity is. </summary>
         virtual public int EntityType { get; set; } = ENTITY_BASE; //Must be assigned
         virtual public Sprite Sprite { get; set; }
-        /// <summary>The mask is used as an unrendered sprite that only provides collision.</summary>
-        //virtual public Collision CollisionMask { get; set; }
+        virtual public Collision Mask { get; set; }
+
         virtual public float Depth { get; set; } = 0f;
 
         /// <summary> Entites that arent visible wont perform Draw events (at all) </summary>
@@ -60,10 +60,13 @@ namespace ScarletResource.Entities
         {
             PreviousLocation.X = Location.X;
             PreviousLocation.Y = Location.Y;
+
+            if (Mask != null)
+                Mask.SetOffset((int)Location.X, (int)Location.Y);
         }
 
         /// <summary> This shit calculates where this thing is actually supposed to be drawn.</summary>
-        public Vector2 GetDrawingPosition()
+        public Vector2 GetDrawingLocation()
         {
             var x1 = Location.X;
             var y1 = Location.Y;

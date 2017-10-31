@@ -60,6 +60,7 @@
     <Compile Include="GameInstance.cs" />
     <Compile Include="InputOptions.cs" />
     <Compile Include="MapObjects\Tile.cs" />
+    <Compile Include="Pipeline\Collision.cs" />
     <Compile Include="Pipeline\FontContent.cs" />
     <Compile Include="Pipeline\EntitySprites.cs" />
     <Compile Include="Pipeline\SolidSprites.cs" />

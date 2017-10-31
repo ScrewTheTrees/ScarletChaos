@@ -13,6 +13,7 @@ namespace ScarletResource.MapObjects
     public class Solid
     {
         public Sprite Sprite;
+        public Collision Mask;
         public Vector2 Location = new Vector2(0, 0);
 
         public float Depth = 0.8f; //Solids are not normally drawn

@@ -14,6 +14,8 @@ namespace ScarletResource.Pipeline
         public static Sprite GetSprite(string TextureName)
         {
             Sprite ani;
+            Texture2D texture;
+
             switch (TextureName)
             {
                 case @"kirbytest.png":
@@ -22,6 +24,11 @@ namespace ScarletResource.Pipeline
                     ani.Looping = true;
                     ani.Scale = new Vector2(2, 2);
                     ani.SetOriginCenter();
+                    return ani;
+
+                case @"Masks\MaskPlayerBase.png":
+                    texture = TextureContent.GetTexture(@"Masks\MaskPlayerBase.png");
+                    ani = new Sprite(texture, TextureName);
                     return ani;
             }
 

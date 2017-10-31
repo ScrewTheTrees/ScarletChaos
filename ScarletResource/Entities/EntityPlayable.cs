@@ -34,9 +34,9 @@ namespace ScarletResource.Entities
         override public void Draw(SpriteBatch spriteBatch)
         {
             if (Sprite != null)
-                Sprite.DrawAnimation(spriteBatch, GetDrawingPosition(), Depth);
+                Sprite.DrawAnimation(spriteBatch, GetDrawingLocation(), Depth);
 
-            spriteBatch.DrawString(FontContent.GetFont("FontArial16"), OnGround.ToString(), new Vector2(Location.X, Location.Y - 200), Color.White);
+            spriteBatch.DrawString(FontContent.GetFont("FontArial16"), OnGround.ToString(), new Vector2(Location.X, Location.Y - 100), Color.White);
         }
         public override void Step120()
         {
