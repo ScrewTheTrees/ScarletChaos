@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />
-    <Compile Include="Collision.cs" />
+    <Compile Include="Pipeline\Collision.cs" />
     <Compile Include="DataUtility\GraphicsOptions.cs" />
     <Compile Include="DataUtility\IniFile.cs" />
     <Compile Include="DataUtility\PlayerOptions.cs" />
@@ -60,20 +60,21 @@
     <Compile Include="GameInstance.cs" />
     <Compile Include="InputOptions.cs" />
     <Compile Include="MapObjects\Tile.cs" />
-    <Compile Include="FontContent.cs" />
-    <Compile Include="TextureContents\EntitySprites.cs" />
-    <Compile Include="TextureContents\SolidSprites.cs" />
+    <Compile Include="Pipeline\FontContent.cs" />
+    <Compile Include="Pipeline\EntitySprites.cs" />
+    <Compile Include="Pipeline\SolidSprites.cs" />
     <Compile Include="MapObjects\Map.cs" />
-    <Compile Include="PipeLine.cs" />
-    <Compile Include="Sprite.cs" />
+    <Compile Include="Pipeline\PipeLine.cs" />
+    <Compile Include="Pipeline\Sprite.cs" />
     <Compile Include="MapObjects\Solid.cs" />
-    <Compile Include="TextureContent.cs" />
+    <Compile Include="Pipeline\TextureContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Maps\" />
     <Folder Include="Assets\Music\" />
     <Folder Include="Assets\Sounds\" />
+    <Folder Include="Editor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Textures\Icon.ico">

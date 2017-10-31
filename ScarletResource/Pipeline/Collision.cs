@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ScarletResource
+namespace ScarletResource.Pipeline
 {
     public class Collision
     {

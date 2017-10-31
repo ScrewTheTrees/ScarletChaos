@@ -1,6 +1,7 @@
 ﻿using System;
+using ScarletResource;
 
-namespace ScarletResource
+namespace ScarletChaos
 {
 #if WINDOWS || LINUX
     public static class Program
