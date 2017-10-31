@@ -65,12 +65,12 @@ namespace ScarletResource.Entities
 
         //Entity Stats System
         virtual public int EntityTeam { get; set; } = Team.NEUTRAL;
-        virtual public float HealthMax { get; set; } = 10000f;
-        virtual public float FocusMax { get; set; } = 10000f;
-        virtual public float StaminaMax { get; set; } = 10000f;
-        virtual public float Health { get; set; } = 10000f;
-        virtual public float Focus { get; set; } = 10000f;
-        virtual public float Stamina { get; set; } = 10000f;
+        virtual public int HealthMax { get; set; } = 10000;
+        virtual public int FocusMax { get; set; } = 10000;
+        virtual public int StaminaMax { get; set; } = 10000;
+        virtual public int Health { get; set; } = 10000;
+        virtual public int Focus { get; set; } = 10000;
+        virtual public int Stamina { get; set; } = 10000;
 
         //Input
         public bool[] Press = new bool[InputOptions.PRESS_MAX];

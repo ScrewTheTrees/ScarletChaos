@@ -30,7 +30,6 @@ namespace ScarletResource.MapObjects
         /// <summary>Projectiles collide with this.</summary>
         public bool CollideProjectile = true;
 
-        /// <summary>Health for Destructibles are not decimal</summary>
         public int Health = 10000;
 
 
