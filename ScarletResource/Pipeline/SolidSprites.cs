@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace ScarletResource.Pipeline
 {
@@ -13,15 +14,16 @@ namespace ScarletResource.Pipeline
         public static Sprite GetSprite(string TextureName)
         {
             Sprite ani;
+            Texture2D texture;
             switch (TextureName)
             {
                 case @"Solids\SolidBlock.png":
-                    var Texture = TextureContent.GetTexture(@"Solids\SolidBlock.png");
-                    ani = new Sprite(Texture, TextureName);
-                    ani.collision = new Collision(Texture, ani.FrameRect, Collision.COLLISION_RECTANGLE);
-                    ani.IsAnimated = false;
+                    texture = TextureContent.GetTexture(@"Solids\SolidBlock.png");
+                    ani = new Sprite(texture, TextureName);
+                    ani.collision = new Collision(texture, ani.FrameRect, Collision.COLLISION_RECTANGLE);
                     ani.SetOriginCenter();
                     return ani;
+
             }
 
 
