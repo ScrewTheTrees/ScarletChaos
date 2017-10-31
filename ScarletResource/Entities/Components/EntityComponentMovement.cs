@@ -63,8 +63,13 @@ namespace ScarletResource.Entities.Components
                 else entity.SpeedVertical = 0;
             }
 
-            //if (CollisionSolid(entity, collisions, gravX, gravY))
-
+            if (CollisionSolid(entity, collisions, gravX * 2, gravY * 2))
+            {
+                entity.OnGround = true;
+                entity.SpeedHorizontal = 0;
+                entity.SpeedVertical = 0;
+            }
+            else entity.OnGround = false;
 
             finalX += entity.SpeedHorizontal;
             finalY += entity.SpeedVertical;
@@ -77,9 +82,9 @@ namespace ScarletResource.Entities.Components
         {
             foreach (Solid c in colli)
             {
-                if (e.CollisionMask != null)
-                    if (e.CollisionMask.CollidesWith(c.CollisionMask, offsetX, offsetY) == true)
-                        return true;
+                //if (e.CollisionMask != null)
+                    //if (e.CollisionMask.CollidesWith(c.CollisionMask, offsetX, offsetY) == true)
+                        //return true;
             }
             return false; //No collisions
         }

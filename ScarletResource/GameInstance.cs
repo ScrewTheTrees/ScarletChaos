@@ -37,7 +37,7 @@ namespace ScarletResource
             Content.RootDirectory = FileManager.DIR_ASSETS; //Fix that shit
 
             IsMouseVisible = true;
-            
+
             DebugLog.LogInfo("Game Instance has been Initialized.");
             graphicsDeviceManager = new GraphicsDeviceManager(this);
 
@@ -127,25 +127,16 @@ namespace ScarletResource
 
                 if (list[i].Sprite != null)
                     list[i].Sprite.Update(gameTime);
-
-                if (list[i].CollisionMask != null)
-                    list[i].CollisionMask.Update(gameTime);
             }
 
-            if (DebugDraw == true)
+            Solid[] solids = Map.CurrentMap.Solids.ToArray();
+            for (var j = 0; j < solids.Length; j++)
             {
-                Solid[] solids = Map.CurrentMap.Solids.ToArray();
-                for (var j = 0; j < solids.Length; j++)
-                {
-                    solids[j].CollisionMask.Update(gameTime);
-                    solids[j].CollisionMask.UpdateCollisionLocation();
-
-                    if (solids[j].Visible == true || DebugDraw == true)
-                        solids[j].Draw(spriteBatch);
-                }
+                if (solids[j].Visible == true || DebugDraw == true)
+                    solids[j].Draw(spriteBatch);
             }
 
-            
+
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -209,6 +200,13 @@ namespace ScarletResource
                 if (list[i].Active == true)
                     list[i].UpdateEntityData();
             }
+
+            Solid[] update = Map.CurrentMap.Solids.ToArray();
+            for (var i = 0; i < update.Length; i++)
+            {
+                update[i].UpdateSolidData();
+            }
+            
 
             //TODO: Debug
             if (StateMouse.LeftButton == ButtonState.Pressed && IsActive == true)

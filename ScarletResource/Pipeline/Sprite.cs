@@ -14,7 +14,6 @@ namespace ScarletResource.Pipeline
         public String TexPath;
         public SpriteEffects spriteEffect = new SpriteEffects();
         public Rectangle FrameRect;
-        public Collision collision;
         public Color ColorBlend = Color.White;
 
         public Vector2 Origin = new Vector2(0, 0);
@@ -107,27 +106,6 @@ namespace ScarletResource.Pipeline
             }
             FrameRect.X = (int)(Offset.X + ((int)FrameIndex * FrameWidth));
             FrameRect.Y = (int)(Offset.Y);
-        }
-
-        public void UpdateCollisionLocation()
-        {
-            if (collision == null) return;
-
-            collision.CollisionBox.X = FrameRect.X;
-            collision.CollisionBox.X = FrameRect.Y;
-        }
-
-        /// <summary>CollisionMask collides with other CollisionMask</summary>
-        /// <param name="OtherMask">The other Collision object</param>
-        /// <param name="OffsetX">Optional X Offset of collision checking.</param>
-        /// <param name="OffsetY">Optional Y Offset of collision checking.</param>
-        /// <returns>Whenever it actually collided or not.</returns>
-        public bool CollidesWith(Sprite OtherMask, float OffsetX = 0, float OffsetY = 0)
-        {
-            if (collision == null || OtherMask.collision == null) return false;
-
-            UpdateCollisionLocation();
-            return collision.CollidesWith(OtherMask.collision, OffsetX, OffsetY);
         }
 
         public void SetOrigin(Vector2 ori) { SetOrigin(ori.X, ori.Y); }

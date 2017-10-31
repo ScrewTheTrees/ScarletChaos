@@ -36,10 +36,7 @@ namespace ScarletResource.Entities
             if (Sprite != null)
                 Sprite.DrawAnimation(spriteBatch, GetDrawingPosition(), Depth);
 
-            spriteBatch.DrawString(FontContent.GetFont("FontArial16"),MovementType.MovementType.ToString(),new Vector2(Location.X, Location.Y - 80),Color.White);
-            spriteBatch.DrawString(FontContent.GetFont("FontArial16"), GravityDirection.ToString(), new Vector2(Location.X, Location.Y - 100), Color.White);
-            spriteBatch.DrawString(FontContent.GetFont("FontArial16"), SpeedHorizontal.ToString(), new Vector2(Location.X, Location.Y - 120), Color.White);
-            spriteBatch.DrawString(FontContent.GetFont("FontArial16"), SpeedVertical.ToString(), new Vector2(Location.X, Location.Y - 140), Color.White);
+            spriteBatch.DrawString(FontContent.GetFont("FontArial16"), OnGround.ToString(), new Vector2(Location.X, Location.Y - 200), Color.White);
         }
         public override void Step120()
         {

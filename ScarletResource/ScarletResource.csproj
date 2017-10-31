@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="Camera.cs" />
     <Compile Include="Editor\Editor.cs" />
-    <Compile Include="Pipeline\Collision.cs" />
     <Compile Include="DataUtility\GraphicsOptions.cs" />
     <Compile Include="DataUtility\IniFile.cs" />
     <Compile Include="DataUtility\PlayerOptions.cs" />
@@ -78,7 +77,9 @@
     <Folder Include="Assets\Textures\Entities\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Textures\Masks\MaskPlayerBase.png" />
+    <Content Include="Assets\Textures\Masks\MaskPlayerBase.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Textures\Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

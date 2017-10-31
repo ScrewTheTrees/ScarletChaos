@@ -12,8 +12,9 @@ namespace ScarletResource.MapObjects
 {
     public class Solid
     {
-        public Sprite CollisionMask;
-        public Vector2 Position = new Vector2(0, 0);
+        public Sprite Sprite;
+        //public Collision CollisionMask;
+        public Vector2 Location = new Vector2(0, 0);
 
         public float Depth = 0.8f; //Solids are not normally drawn
 
@@ -41,13 +42,15 @@ namespace ScarletResource.MapObjects
         public Solid(int solidID, Vector2 pos, String mask = @"Solids\SolidBlock.png")
         {
             SolidID = solidID;
-            Position.X = pos.X;
-            Position.Y = pos.Y;
-            CollisionMask = SolidSprites.GetSprite(mask);
+            Location.X = pos.X;
+            Location.Y = pos.Y;
+            Sprite = SolidSprites.GetSprite(mask);
+            //CollisionMask = new Collision(Sprite.Tex);
         }
         public Solid(Sprite Mask, bool visible, bool destructible, bool jumpThrough, bool collideEntity, bool collideProjectile, int solidID)
         {
-            CollisionMask = Mask;
+            Sprite = Mask;
+            //CollisionMask = new Collision(Sprite.Tex);
             Visible = visible;
             Destructible = destructible;
             JumpThrough = jumpThrough;
@@ -58,10 +61,13 @@ namespace ScarletResource.MapObjects
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            CollisionMask.DrawAnimation(spriteBatch, Position, Depth);
+            Sprite.DrawAnimation(spriteBatch, Location, Depth);
         }
 
+        public void UpdateSolidData()
+        {
 
+        }
 
 
         public static int NewSolidID = 0;
@@ -70,7 +76,7 @@ namespace ScarletResource.MapObjects
         //Version 1 writing/reading
         public void WriteToStreamV1(BinaryWriter stream)
         {
-            stream.Write(CollisionMask.TexPath);
+            stream.Write(Sprite.TexPath);
             stream.Write(Depth);
             stream.Write(SolidID);
             stream.Write(Visible);
@@ -79,12 +85,12 @@ namespace ScarletResource.MapObjects
             stream.Write(CollideEntity);
             stream.Write(CollideProjectile);
             stream.Write(Health);
-            stream.Write((int)Position.X);
-            stream.Write((int)Position.Y);
+            stream.Write((int)Location.X);
+            stream.Write((int)Location.Y);
         }
         public void ReadFromStreamV1(BinaryReader stream)
         {
-            CollisionMask = SolidSprites.GetSprite(stream.ReadString());
+            Sprite = SolidSprites.GetSprite(stream.ReadString());
             Depth = stream.ReadInt32();
             SolidID = stream.ReadInt32();
             Visible = stream.ReadBoolean();
@@ -93,8 +99,8 @@ namespace ScarletResource.MapObjects
             CollideEntity = stream.ReadBoolean();
             CollideProjectile = stream.ReadBoolean();
             Health = stream.ReadInt32();
-            Position.X = stream.ReadInt32();
-            Position.Y = stream.ReadInt32();
+            Location.X = stream.ReadInt32();
+            Location.Y = stream.ReadInt32();
         }
     }
 }

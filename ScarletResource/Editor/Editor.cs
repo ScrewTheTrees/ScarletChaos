@@ -119,8 +119,6 @@ namespace ScarletResource.Editor
                 if (list[i].Sprite != null)
                     list[i].Sprite.Update(gameTime);
 
-                if (list[i].CollisionMask != null)
-                    list[i].CollisionMask.Update(gameTime);
             }
 
             if (DebugDraw == true)
@@ -128,9 +126,6 @@ namespace ScarletResource.Editor
                 Solid[] solids = CurrentMap.Solids.ToArray();
                 for (var j = 0; j < solids.Length; j++)
                 {
-                    solids[j].CollisionMask.Update(gameTime);
-                    solids[j].CollisionMask.UpdateCollisionLocation();
-
                     if (solids[j].Visible == true || DebugDraw == true)
                         solids[j].Draw(spriteBatch);
                 }

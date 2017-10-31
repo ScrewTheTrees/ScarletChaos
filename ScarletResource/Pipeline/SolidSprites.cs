@@ -20,10 +20,8 @@ namespace ScarletResource.Pipeline
                 case @"Solids\SolidBlock.png":
                     texture = TextureContent.GetTexture(@"Solids\SolidBlock.png");
                     ani = new Sprite(texture, TextureName);
-                    ani.collision = new Collision(texture, ani.FrameRect, Collision.COLLISION_RECTANGLE);
                     ani.SetOriginCenter();
                     return ani;
-
             }
 
 

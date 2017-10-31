@@ -11,27 +11,6 @@ namespace ScarletResource.Pipeline
 {
     public class EntitySprites
     { 
-
-        public static Sprite GetMask(string MaskName)
-        {
-            Sprite ani;
-            Texture2D texture;
-
-            switch (MaskName)
-            {
-                case @"Masks\MaskPlayerBase.png":
-                    texture = TextureContent.GetTexture(@"Masks\MaskPlayerBase.png");
-                    ani = new Sprite(texture, MaskName);
-                    ani.collision = new Collision(texture, ani.FrameRect, Collision.COLLISION_RECTANGLE);
-                    ani.SetOriginCenter();
-                    return ani;
-            }
-
-
-            return new Sprite(TextureContent.GetTexture(@"unknown.png"), MaskName);
-        }
-
-
         public static Sprite GetSprite(string TextureName)
         {
             Sprite ani;
