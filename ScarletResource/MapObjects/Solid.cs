@@ -13,7 +13,6 @@ namespace ScarletResource.MapObjects
     public class Solid
     {
         public Sprite Sprite;
-        //public Collision CollisionMask;
         public Vector2 Location = new Vector2(0, 0);
 
         public float Depth = 0.8f; //Solids are not normally drawn
@@ -45,12 +44,10 @@ namespace ScarletResource.MapObjects
             Location.X = pos.X;
             Location.Y = pos.Y;
             Sprite = SolidSprites.GetSprite(mask);
-            //CollisionMask = new Collision(Sprite.Tex);
         }
         public Solid(Sprite Mask, bool visible, bool destructible, bool jumpThrough, bool collideEntity, bool collideProjectile, int solidID)
         {
             Sprite = Mask;
-            //CollisionMask = new Collision(Sprite.Tex);
             Visible = visible;
             Destructible = destructible;
             JumpThrough = jumpThrough;
@@ -58,15 +55,9 @@ namespace ScarletResource.MapObjects
             CollideProjectile = collideProjectile;
             SolidID = solidID;
         }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             Sprite.DrawAnimation(spriteBatch, Location, Depth);
-        }
-
-        public void UpdateSolidData()
-        {
-
         }
 
 

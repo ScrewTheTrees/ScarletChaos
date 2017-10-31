@@ -200,12 +200,6 @@ namespace ScarletResource
                 if (list[i].Active == true)
                     list[i].UpdateEntityData();
             }
-
-            Solid[] update = Map.CurrentMap.Solids.ToArray();
-            for (var i = 0; i < update.Length; i++)
-            {
-                update[i].UpdateSolidData();
-            }
             
 
             //TODO: Debug

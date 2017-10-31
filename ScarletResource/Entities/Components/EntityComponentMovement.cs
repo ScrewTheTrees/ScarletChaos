@@ -82,9 +82,7 @@ namespace ScarletResource.Entities.Components
         {
             foreach (Solid c in colli)
             {
-                //if (e.CollisionMask != null)
-                    //if (e.CollisionMask.CollidesWith(c.CollisionMask, offsetX, offsetY) == true)
-                        //return true;
+                return true;
             }
             return false; //No collisions
         }

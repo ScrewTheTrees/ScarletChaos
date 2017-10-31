@@ -137,8 +137,5 @@ namespace ScarletResource.Pipeline
         {
             spriteBatch.Draw(Tex, DrawPosition, FrameRect, ColorBlend, Rotation, Origin, Scale, spriteEffect, depth);
         }
-
-
-
     }
 }
