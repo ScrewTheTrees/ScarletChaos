@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ScarletResource.Entities;
 using ScarletResource;
 using System;
+using ScarletResource.Pipeline;
 
 namespace ScarletResource.Entities
 {

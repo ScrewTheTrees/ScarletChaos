@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ScarletResource.Pipeline;
+using System.IO;
 
 namespace ScarletResource.MapObjects
 {
-    public class Map
+    public class Map : FileManager
     {
         public static Map CurrentMap;
 
@@ -39,5 +41,21 @@ namespace ScarletResource.MapObjects
 
         public const int BlockWidth = 64;
         public const int BlockHeight = 64;
+
+
+
+
+        public void WriteMap(BinaryWriter stream)
+        {
+            stream.Write(CurrentIDV);
+            stream.Write(Solids.Count);
+            foreach (var s in Solids)
+                s.WriteToStreamV1(stream);
+            stream.Write(Tiles.Count);
+            //foreach (var t in Tiles)
+                //t.WriteToStreamV1(stream);
+
+        }
+
     }
 }

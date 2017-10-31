@@ -10,11 +10,11 @@ using Microsoft.Xna.Framework.Content;
 
 namespace ScarletResource.Pipeline
 {
-    public class FontContent : PipeLine
+    public class FontContent : FileManager
     {
         private static ContentManager CM = GameInstance.PrimaryGameInstance.Content;
         private static Dictionary<string, SpriteFont> LoadedFonts = new Dictionary<string, SpriteFont>();
-        private static SpriteFont DefaultFont;
+        private static SpriteFont DefaultFont = GetFont(@"FontArial16");
 
 
         /// <summary> Gets the target font... and loads it if it's not in memory. </summary>
@@ -22,7 +22,6 @@ namespace ScarletResource.Pipeline
         /// <returns>A texture, after it has Loaded..</returns>
         public static SpriteFont GetFont(string fontPath)
         {
-            if (DefaultFont == null) DefaultFont = GetFont(@"FontArial16");
             SpriteFont tex = DefaultFont;
 
             if (LoadedFonts.ContainsKey(fontPath))
@@ -38,9 +37,10 @@ namespace ScarletResource.Pipeline
         private static SpriteFont LoadContent(string path)
         {
             SpriteFont c;
-            if (File.Exists(FONTS + path + ".xnb"))
+            CM.RootDirectory = DIR_FONTS;
+            if (File.Exists(DIR_FONTS + path + ".xnb"))
             {
-                c = CM.Load<SpriteFont>(@"Fonts\" + path);
+                c = CM.Load<SpriteFont>(path);
                 LoadedFonts.Add(path, c);
             }
             else c = DefaultFont;

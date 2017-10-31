@@ -9,6 +9,7 @@ using ScarletResource.Entities.Components;
 using Microsoft.Xna.Framework.Graphics;
 using ScarletResource;
 using Microsoft.Xna.Framework;
+using ScarletResource.Pipeline;
 
 namespace ScarletResource.Entities
 {

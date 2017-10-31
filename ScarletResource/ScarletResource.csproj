@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />
+    <Compile Include="Editor\Editor.cs" />
     <Compile Include="Pipeline\Collision.cs" />
     <Compile Include="DataUtility\GraphicsOptions.cs" />
     <Compile Include="DataUtility\IniFile.cs" />
@@ -64,7 +65,7 @@
     <Compile Include="Pipeline\EntitySprites.cs" />
     <Compile Include="Pipeline\SolidSprites.cs" />
     <Compile Include="MapObjects\Map.cs" />
-    <Compile Include="Pipeline\PipeLine.cs" />
+    <Compile Include="Pipeline\FileManager.cs" />
     <Compile Include="Pipeline\Sprite.cs" />
     <Compile Include="MapObjects\Solid.cs" />
     <Compile Include="Pipeline\TextureContent.cs" />
@@ -74,7 +75,6 @@
     <Folder Include="Assets\Maps\" />
     <Folder Include="Assets\Music\" />
     <Folder Include="Assets\Sounds\" />
-    <Folder Include="Editor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Textures\Icon.ico">

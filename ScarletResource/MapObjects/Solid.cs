@@ -15,7 +15,7 @@ namespace ScarletResource.MapObjects
         public Sprite CollisionMask;
         public Vector2 Position = new Vector2(0, 0);
 
-        public float Depth = 0.1f;
+        public float Depth = 0.8f; //Solids are not normally drawn
 
         /// <summary>Current Solid ID</summary>
         public int SolidID = 0;

@@ -35,7 +35,7 @@ namespace ScarletResource
 
         public GameInstance()
         {
-            Content.RootDirectory = PipeLine.ASSETS; //Fix that shit
+            Content.RootDirectory = FileManager.DIR_ASSETS; //Fix that shit
 
             IsMouseVisible = true;
             
