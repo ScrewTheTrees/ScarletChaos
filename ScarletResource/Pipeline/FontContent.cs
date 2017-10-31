@@ -12,7 +12,7 @@ namespace ScarletResource.Pipeline
 {
     public class FontContent : FileManager
     {
-        private static ContentManager CM = GameInstance.PrimaryGameInstance.Content;
+        private static ContentManager CM = GameInstance.Instance.Content;
         private static Dictionary<string, SpriteFont> LoadedFonts = new Dictionary<string, SpriteFont>();
         private static SpriteFont DefaultFont = GetFont(@"FontArial16");
 

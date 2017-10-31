@@ -11,7 +11,7 @@ namespace ScarletResource.Pipeline
 {
     public class TextureContent : FileManager
     {
-        private static GraphicsDevice Graphics = GameInstance.PrimaryGameInstance.GraphicsDevice;
+        private static GraphicsDevice Graphics = GameInstance.Instance.GraphicsDevice;
         private static Dictionary<string, Texture2D> LoadedTextures = new Dictionary<string, Texture2D>();
         private static Texture2D DefaultTex = LoadContent("Icon.ico");
 

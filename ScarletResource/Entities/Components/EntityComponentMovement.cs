@@ -30,7 +30,7 @@ namespace ScarletResource.Entities.Components
 
         private void EntityMovePlatformer(EntityPlayable entity)
         {
-            Solid[] collisions = GameInstance.CurrentMap.Solids
+            Solid[] collisions = Map.CurrentMap.Solids
                 .Where(x => x.CollideEntity == true)
                 .ToArray();
 

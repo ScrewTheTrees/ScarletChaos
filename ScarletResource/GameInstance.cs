@@ -15,15 +15,14 @@ namespace ScarletResource
 {
     public class GameInstance : Game
     {
-        public static GameInstance PrimaryGameInstance;
-        public static GraphicsDeviceManager graphics;
+        public static GameInstance Instance;
+        public static GraphicsDeviceManager graphicsDeviceManager;
         public static SpriteBatch spriteBatch;
         public static GraphicsOptions OptionsGraphics;
         public static PlayerOptions OptionsPlayer;
         public static List<Entity> Entities = new List<Entity>();
 
         public static bool DebugDraw = true;
-        public static Map CurrentMap = Map.CurrentMap;
 
         public static Camera GameCam = new Camera(new Viewport(0, 0, 1920, 1080, -1, 1));
         public static MouseState StateMouse = Mouse.GetState();
@@ -40,11 +39,11 @@ namespace ScarletResource
             IsMouseVisible = true;
             
             DebugLog.LogInfo("Game Instance has been Initialized.");
-            graphics = new GraphicsDeviceManager(this);
+            graphicsDeviceManager = new GraphicsDeviceManager(this);
 
-            PrimaryGameInstance = this;
+            Instance = this;
 
-            OptionsGraphics = new GraphicsOptions(graphics, "Graphics.ini");
+            OptionsGraphics = new GraphicsOptions(graphicsDeviceManager, "Graphics.ini");
             OptionsGraphics.LoadGraphicsOptions();
             OptionsGraphics.ApplyGraphicOptions();
             OptionsGraphics.SaveGraphicsOptions();
@@ -52,7 +51,7 @@ namespace ScarletResource
             OptionsPlayer = new PlayerOptions();
 
 
-            CurrentMap = new Map(); //Current map is static anyway.
+            new Map(); //Current map is static anyway.
 
 
             DebugLog.LogInfo("Game Instance constructor loaded.");
@@ -135,7 +134,7 @@ namespace ScarletResource
 
             if (DebugDraw == true)
             {
-                Solid[] solids = CurrentMap.Solids.ToArray();
+                Solid[] solids = Map.CurrentMap.Solids.ToArray();
                 for (var j = 0; j < solids.Length; j++)
                 {
                     solids[j].CollisionMask.Update(gameTime);
@@ -166,7 +165,7 @@ namespace ScarletResource
 
             if (MouseRightButtonIsPressed())
             {
-                CurrentMap.Solids.Add(new Solid(GetMouseLocation()));
+                Map.CurrentMap.Solids.Add(new Solid(GetMouseLocation()));
                 DebugLog.LogDebug("Created Solid at: (" + GetMouseLocation().X + "," + GetMouseLocation().Y + ")");
             }
 
