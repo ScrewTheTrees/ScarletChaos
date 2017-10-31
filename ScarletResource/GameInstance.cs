@@ -216,8 +216,6 @@ namespace ScarletResource
                 Entity e = (Entity)Activator.CreateInstance(Entity.GetEntityTypeFromID(Entity.ENTITY_PLAYER));
                 e.SetLocation(GetMouseLocation());
                 e.Sprite = EntitySprites.GetSprite("kirbytest.png"); //TODO: Shit
-
-                DebugLog.LogDebug("Created Entity with type: " + e.EntityType);
             }
 
         }
