@@ -36,12 +36,11 @@ namespace ScarletResource.Pipeline
                     for (int x = 0; x < tex.Width; x++)
                     {
                         Color cor = colors1D[x + (y * tex.Width)];
-                        if (cor.A > 10)
+                        if (cor.A > 20)
                             CollisionPixelMap[x, y] = true;
                         else CollisionPixelMap[x, y] = false;
                     }
                 }
-
             }
 
             CollisionType = col;
@@ -66,13 +65,14 @@ namespace ScarletResource.Pipeline
                 if (collisionThis.CollisionBox.Intersects(collisionOther.CollisionBox)) return true;
             }
             else if (collisionThis.CollisionType == COLLISION_PIXEL && collisionOther.CollisionType == COLLISION_PIXEL)
-            {
+            { //Pure pixel collisions
                 for (int x = 0; x < CollisionPixelMap.GetLength(0); x++)
                 {
                     for (int y = 0; y < CollisionPixelMap.GetLength(1); y++)
                     {
-                        if (PixelCollidesWithPixelMap(new Vector2(Location.X + x, Location.Y + y), collisionOther))
-                            return true; //We struck gold!
+                        if (CollisionPixelMap[x,y]==true) //If its not colliding there is no reason to calculate
+                            if (PixelCollidesWithPixelMap(new Vector2(Location.X + x, Location.Y + y), collisionOther))
+                                return true; //We struck gold!
                     }
                 }
             }
