@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using ScarletResource.TextureContents;
+using ScarletResource.Pipeline;
 
 namespace ScarletResource.MapObjects
 {

@@ -7,7 +7,7 @@ using ScarletResource;
 using System.Collections.Generic;
 using System.IO;
 using System;
-using ScarletResource.TextureContents;
+using ScarletResource.Pipeline;
 using ScarletResource.MapObjects;
 using MonoGame.Framework;
 
@@ -21,9 +21,6 @@ namespace ScarletResource
         public static GraphicsOptions OptionsGraphics;
         public static PlayerOptions OptionsPlayer;
         public static List<Entity> Entities = new List<Entity>();
-
-        public static TextureContent TexturePipeline;
-        public static FontContent FontPipeline;
 
         public static bool DebugDraw = true;
         public static Map CurrentMap = Map.CurrentMap;
@@ -83,9 +80,6 @@ namespace ScarletResource
             DebugLog.LogInfo("Creating ContentLoaders.");
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            // Create a new TexturePipeline that can be used to load textures
-            TexturePipeline = new TextureContent(GraphicsDevice);
-            FontPipeline = new FontContent(Content);
         }
 
         /// <summary>

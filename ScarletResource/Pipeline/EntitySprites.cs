@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace ScarletResource.TextureContents
+namespace ScarletResource.Pipeline
 {
     public class EntitySprites
     {

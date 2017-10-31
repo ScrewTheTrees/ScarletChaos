@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using ScarletResource.TextureContents;
+using ScarletResource.Pipeline;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,27 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScarletResource
+namespace ScarletResource.Pipeline
 {
-    public class TextureContent
+    public class TextureContent : PipeLine
     {
-        private static GraphicsDevice Graphics;
+        private static GraphicsDevice Graphics = GameInstance.PrimaryGameInstance.GraphicsDevice;
         private static Dictionary<string, Texture2D> LoadedTextures = new Dictionary<string, Texture2D>();
         private static Texture2D DefaultTex;
-
-
-        public TextureContent(GraphicsDevice d)
-        {
-            Graphics = d;
-            DefaultTex = LoadContent("Icon.ico");
-            
-        }
 
         /// <summary> Gets the target texture... and loads it if it's not in memory. </summary>
         /// <param name="texPath">Local path from the "Assets\Textures" folder, dont include the \\ backslash</param>
         /// <returns>A texture, after it has Loaded..</returns>
         public static Texture2D GetTexture(string texPath)
         {
+            if (DefaultTex == null) DefaultTex = LoadContent("Icon.ico");
             Texture2D tex = DefaultTex;
 
             if (LoadedTextures.ContainsKey(texPath))
@@ -43,7 +36,7 @@ namespace ScarletResource
         private static Texture2D LoadContent(string path)
         {
             Texture2D c;
-            if (File.Exists(PipeLine.TEXTURES + path))
+            if (File.Exists(TEXTURES + path))
             {
                 var stream = new FileStream(PipeLine.TEXTURES + path, FileMode.Open);
                 c = Texture2D.FromStream(Graphics, stream);
