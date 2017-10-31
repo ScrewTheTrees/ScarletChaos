@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ScarletResource.MapObjects;
 
-namespace ScarletChaos.Entities.Components
+namespace ScarletResource.Entities.Components
 {
     /// <summary>
     /// Component in charge of EntityPlayable Movement and collisions, 
@@ -38,8 +38,8 @@ namespace ScarletChaos.Entities.Components
             float finalY = entity.Location.Y;
 
 
-            float gravX = (float)((entity.Gravity + entity.GravityMod) * Math.Cos(ExtensionMath.DegToRad(entity.GravityDirection)));
-            float gravY = (float)((entity.Gravity + entity.GravityMod) * -Math.Sin(ExtensionMath.DegToRad(entity.GravityDirection)));
+            float gravX = (float)((entity.Gravity + entity.GravityMod) * Math.Cos(entity.GravityDirection.DegToRad()));
+            float gravY = (float)((entity.Gravity + entity.GravityMod) * -Math.Sin(entity.GravityDirection.DegToRad()));
             //Add gravity
             entity.SpeedHorizontal += gravX;
             entity.SpeedVertical += gravY;

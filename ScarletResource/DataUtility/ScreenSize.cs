@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScarletChaos.DataUtility
+namespace ScarletResource.DataUtility
 {
     public struct ScreenSize
     {

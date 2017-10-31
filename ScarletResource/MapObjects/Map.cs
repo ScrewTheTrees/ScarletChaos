@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScarletResource
+namespace ScarletResource.MapObjects
 {
     public class Map
     {

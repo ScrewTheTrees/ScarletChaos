@@ -42,12 +42,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Camera.cs" />
     <Compile Include="Collision.cs" />
+    <Compile Include="DataUtility\GraphicsOptions.cs" />
+    <Compile Include="DataUtility\IniFile.cs" />
+    <Compile Include="DataUtility\PlayerOptions.cs" />
+    <Compile Include="DataUtility\ScreenSize.cs" />
+    <Compile Include="DataUtility\Team.cs" />
+    <Compile Include="DebugLog.cs" />
+    <Compile Include="Entities\Components\EntityComponentMovement.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\EntityPlayable.cs" />
+    <Compile Include="Entities\EntityPlayer.cs" />
+    <Compile Include="Entities\E_Template.cs" />
+    <Compile Include="EntityAI\NpcAI.cs" />
+    <Compile Include="ExtensionMath.cs" />
+    <Compile Include="GameInstance.cs" />
+    <Compile Include="InputOptions.cs" />
     <Compile Include="MapObjects\Tile.cs" />
     <Compile Include="FontContent.cs" />
     <Compile Include="TextureContents\EntitySprites.cs" />
     <Compile Include="TextureContents\SolidSprites.cs" />
-    <Compile Include="Map.cs" />
+    <Compile Include="MapObjects\Map.cs" />
     <Compile Include="PipeLine.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="MapObjects\Solid.cs" />
@@ -69,11 +85,18 @@
     <Content Include="Assets\Textures\Solids\SolidBlock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="EngineDesignWorks.txt" />
+    <Content Include="Icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Fonts\FontArial16.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.manifest" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

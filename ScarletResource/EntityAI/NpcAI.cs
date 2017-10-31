@@ -1,11 +1,11 @@
-﻿using ScarletChaos.Entities;
+﻿using ScarletResource.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScarletChaos.EnityAI
+namespace ScarletResource.EnityAI
 {
     struct NpcAI
     {

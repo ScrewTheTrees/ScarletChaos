@@ -1,16 +1,16 @@
-﻿using ScarletChaos.DataUtility;
-using ScarletChaos.EnityAI;
+﻿using ScarletResource.DataUtility;
+using ScarletResource.EnityAI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ScarletChaos.Entities.Components;
+using ScarletResource.Entities.Components;
 using Microsoft.Xna.Framework.Graphics;
 using ScarletResource;
 using Microsoft.Xna.Framework;
 
-namespace ScarletChaos.Entities
+namespace ScarletResource.Entities
 {
     /// <summary>
     /// Base class for all "playable" objects, this includes everything that the Game / Player can take control of and move around.

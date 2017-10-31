@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace ScarletChaos.DataUtility
+namespace ScarletResource.DataUtility
 {
     class IniFile
     {

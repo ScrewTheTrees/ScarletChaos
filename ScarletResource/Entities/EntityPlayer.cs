@@ -1,4 +1,4 @@
-﻿using ScarletChaos.DataUtility;
+﻿using ScarletResource.DataUtility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using ScarletChaos.Entities.Components;
+using ScarletResource.Entities.Components;
 
-namespace ScarletChaos.Entities
+namespace ScarletResource.Entities
 {
     /// <summary>
     /// The Player class, Both for Local and online players.

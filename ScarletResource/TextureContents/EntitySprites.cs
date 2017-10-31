@@ -10,6 +10,15 @@ namespace ScarletResource.TextureContents
 {
     public class EntitySprites
     {
+        public static Sprite GetMask(string MaskName)
+        {
+
+
+
+            return new Sprite(TextureContent.GetTexture(@"unknown.png"), MaskName);
+        }
+
+
         public static Sprite GetSprite(string TextureName)
         {
             Sprite ani;
@@ -20,7 +29,7 @@ namespace ScarletResource.TextureContents
                     ani.SetAnimationSpeed(10);
                     ani.Looping = true;
                     ani.Scale = new Vector2(2, 2);
-                    ani.Origin = new Vector2(11, 11);
+                    ani.SetOriginCenter();
                     return ani;
             }
 

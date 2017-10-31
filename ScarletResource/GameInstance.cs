@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using ScarletChaos.DataUtility;
-using ScarletChaos.Entities;
+using ScarletResource.DataUtility;
+using ScarletResource.Entities;
 using ScarletResource;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +11,7 @@ using ScarletResource.TextureContents;
 using ScarletResource.MapObjects;
 using MonoGame.Framework;
 
-namespace ScarletChaos
+namespace ScarletResource
 {
     public class GameInstance : Game
     {

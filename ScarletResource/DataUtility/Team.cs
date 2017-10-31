@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScarletChaos.DataUtility
+namespace ScarletResource.DataUtility
 {
 
     //Team Type / Identifier / Minor

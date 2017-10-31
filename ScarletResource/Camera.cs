@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using ScarletChaos.Entities;
+using ScarletResource.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScarletChaos
+namespace ScarletResource
 {
     public class Camera
     {

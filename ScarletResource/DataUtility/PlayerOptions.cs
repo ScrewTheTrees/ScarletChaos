@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScarletChaos.Entities
+namespace ScarletResource.DataUtility
 {
-    class EntityTemplate : Entity
+    public class PlayerOptions
     {
-        public new int EntityType = ENTITY_BASE; //Must be assigned
+        public string Name;
+        public bool PlayingOnline;
+
     }
 }

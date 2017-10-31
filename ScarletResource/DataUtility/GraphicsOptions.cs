@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ScarletChaos.DataUtility;
+using ScarletResource.DataUtility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScarletChaos.DataUtility
+namespace ScarletResource.DataUtility
 {
     public class GraphicsOptions
     {

@@ -20,6 +20,7 @@ namespace ScarletResource.TextureContents
                     ani = new Sprite(Texture, TextureName);
                     ani.collision = new Collision(Texture, ani.FrameRect, Collision.COLLISION_RECTANGLE);
                     ani.IsAnimated = false;
+                    ani.SetOriginCenter();
                     return ani;
             }
 

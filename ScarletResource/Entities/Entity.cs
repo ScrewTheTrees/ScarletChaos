@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ScarletChaos.Entities;
+using ScarletResource.Entities;
 using ScarletResource;
 using System;
 
-namespace ScarletChaos.Entities
+namespace ScarletResource.Entities
 {
     /// <summary>
     /// Parental class for all Game Entities that are used to move around and make logic happen.

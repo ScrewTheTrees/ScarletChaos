@@ -128,7 +128,18 @@ namespace ScarletResource
 
             UpdateCollisionLocation();
             return collision.CollidesWith(OtherMask.collision, OffsetX, OffsetY);
+        }
 
+        public void SetOrigin(Vector2 ori) { SetOrigin(ori.X, ori.Y); }
+        public void SetOrigin(float originX, float originY)
+        {
+            Origin.X = originX;
+            Origin.Y = originY;
+        }
+        public void SetOriginCenter()
+        {
+            Origin.X = FrameWidth / 2;
+            Origin.Y = FrameHeight / 2;
         }
 
         public int GetCurrentFrame()
