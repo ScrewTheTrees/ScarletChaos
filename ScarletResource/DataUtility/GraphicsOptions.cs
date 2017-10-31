@@ -24,7 +24,11 @@ namespace ScarletResource.DataUtility
         public static int SCREENMODE_FULLSCREEN = 1;
         public static int SCREENMODE_BORDERLESSFULLSCREEN = 2;
 
-        public GraphicsOptions(GraphicsDeviceManager graphics) => Graphics = graphics;
+        public GraphicsOptions(GraphicsDeviceManager graphics, string filename)
+        {
+            Graphics = graphics;
+            FILENAME_GRAPHICS = filename;
+        }
 
 
         public void LoadGraphicsOptions()
