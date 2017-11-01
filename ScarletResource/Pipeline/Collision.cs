@@ -14,6 +14,7 @@ namespace ScarletResource.Pipeline
         public Rectangle BoundingBox;
         public int Width, Height;
         public List<PixelOffset> CollisionPixelMap = new List<PixelOffset>();
+        public bool[,] CollisionPixelBoolMap;
 
         public Collision() : this(0, 0, 0, 0) { }
         public Collision(int x, int y, int width, int height)
@@ -68,13 +69,21 @@ namespace ScarletResource.Pipeline
         }
         public bool PixelMapCollidesWithPixelMap(Collision other, int offsetX = 0, int offsetY = 0)
         {
-            for (int i = 0; i < CollisionPixelMap.Count; i++)
+            int x1 = Math.Max(BoundingBox.Left, other.BoundingBox.Left) - BoundingBox.Left;
+            int x2 = Math.Min(BoundingBox.Right, other.BoundingBox.Right) - BoundingBox.Left;
+
+            int y1 = Math.Max(BoundingBox.Top, other.BoundingBox.Top) - BoundingBox.Top;
+            int y2 = Math.Min(BoundingBox.Bottom, other.BoundingBox.Bottom) - BoundingBox.Top;
+
+            // For each single pixel in the intersecting rectangle
+            for (int y = y1 + offsetY; y < y2 + offsetY; y++)
             {
-                var px = CollisionPixelMap[i];
-                //Ignore pixels outside its pixelmap
-                if (other.BoundingBox.Contains(px.OffsetX + BoundingBox.X, px.OffsetY + BoundingBox.Y))
-                    if (PixelCollidesWithPixelMap(px, other, offsetX, offsetY))
-                        return true; //We struck gold!
+                for (int x = x1 + offsetX; x < x2 + offsetX; x++)
+                {
+                    if ((x >= 0 && x < other.CollisionPixelBoolMap.GetLength(0)) && (y >= 0 && y < other.CollisionPixelBoolMap.GetLength(1)))
+                        if (other.CollisionPixelBoolMap[x,y] == true)
+                            return true;
+                }
             }
             return false;
         }
@@ -83,10 +92,12 @@ namespace ScarletResource.Pipeline
         /// <param name="Pixel">The pixel offsetXY, not the actual pixelXY in gameworld</param>
         public bool PixelCollidesWithPixelMap(PixelOffset Pixel, Collision other, int offsetX = 0, int offsetY = 0)
         {
-            foreach (var p in other.CollisionPixelMap)
+            var x = offsetX + Pixel.OffsetX + (other.BoundingBox.X - BoundingBox.X);
+            var y = offsetY + Pixel.OffsetY + (other.BoundingBox.Y - BoundingBox.Y);
+
+            if ((x >= 0 && x < CollisionPixelBoolMap.GetLength(0)) && (y >= 0 && y < CollisionPixelBoolMap.GetLength(1)))
             {
-                if ((p.OffsetX + other.BoundingBox.X == Pixel.OffsetX + offsetX + BoundingBox.X)
-                && (p.OffsetY + other.BoundingBox.Y == Pixel.OffsetY + offsetY + BoundingBox.Y))
+                if (CollisionPixelBoolMap[x, y]==true)
                     return true;
             }
 
@@ -106,6 +117,9 @@ namespace ScarletResource.Pipeline
         {
             CollisionType = COLLISION_PIXELMAP;
             CollisionPixelMap.Clear();
+            CollisionPixelBoolMap = new bool[tex.Width, tex.Height];
+            Width = tex.Width;
+            Height = tex.Height;
 
             Color[] colors1D = new Color[tex.Width * tex.Height];
             tex.GetData(colors1D);
@@ -116,7 +130,11 @@ namespace ScarletResource.Pipeline
                 {
                     Color cor = colors1D[x + (y * tex.Width)];
                     if (cor.A > 20)
+                    {
                         CollisionPixelMap.Add(new PixelOffset(x, y));
+                        CollisionPixelBoolMap[x, y] = true;
+                    }
+                    else CollisionPixelBoolMap[x, y] = false;
                 }
             }
         }
