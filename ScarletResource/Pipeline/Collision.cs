@@ -11,8 +11,8 @@ namespace ScarletResource.Pipeline
     public class Collision
     {
         public int CollisionType = COLLISION_RECTANGLE;
-        Rectangle BoundingBox;
-        int Width, Height;
+        public Rectangle BoundingBox;
+        public int Width, Height;
         public List<PixelOffset> CollisionPixelMap = new List<PixelOffset>();
 
         public Collision() : this(0, 0, 0, 0) { }
@@ -29,40 +29,48 @@ namespace ScarletResource.Pipeline
         }
 
 
-
-        public bool CollidesWith(Collision other)
+        public bool CollidesWith(Collision other, int offsetX = 0, int offsetY = 0)
         {
-            if (RectIntersects(other)) //Rect is the largest calculative unit
+            BoundingBox.Offset(offsetX, offsetY); //Set Bounds
+            var retvar = CollidesWithExec(other, offsetX, offsetY);
+            BoundingBox.Offset(-offsetX, -offsetY); //Reset Bounds
+            return retvar;
+        }
+        private bool CollidesWithExec(Collision other, int offsetX = 0, int offsetY = 0)
+        {
+            if (BoundingBox.Width > 0 && BoundingBox.Height > 0)
             {
-                if (CollisionType == COLLISION_RECTANGLE && other.CollisionType == COLLISION_RECTANGLE) return true;
-                else if (CollisionType == COLLISION_PIXELMAP && other.CollisionType == COLLISION_PIXELMAP)
+                if (RectIntersects(other)) //Rect is the largest.. but fastest calculative unit
                 {
-                    if (BoundingBox.Contains(other.BoundingBox) || other.BoundingBox.Contains(BoundingBox)) return true; //Dont make expensive calculations if we can avoid it.
-                    else if (PixelMapCollidesWithPixelMap(other)) return true; //Both are PixelMaps so lets calculate as such :/
-                }
-                else if ((CollisionType == COLLISION_RECTANGLE && other.CollisionType == COLLISION_PIXELMAP)
-                    || (CollisionType == COLLISION_PIXELMAP && other.CollisionType == COLLISION_RECTANGLE))
-                {
-                    var rect = this; var pixelmap = other;
-                    if (CollisionType == COLLISION_PIXELMAP) { rect = other; pixelmap = this; } //Swap
-                    if (rect.BoundingBox.Contains(pixelmap.BoundingBox)) return true; //The pixelmap is inside the boundingbox entirely so no need to calculate per pixel.
-                    else if (PixelMapCollidesWithRectangle(pixelmap, rect)) return true;
-
+                    if (CollisionType == COLLISION_RECTANGLE && other.CollisionType == COLLISION_RECTANGLE) return true;
+                    else if (CollisionType == COLLISION_PIXELMAP && other.CollisionType == COLLISION_PIXELMAP)
+                    {
+                        if (BoundingBox.Contains(other.BoundingBox) || other.BoundingBox.Contains(BoundingBox)) return true; //Dont make expensive calculations if we can avoid it.
+                        else if (PixelMapCollidesWithPixelMap(other, offsetX, offsetY)) return true; //Both are PixelMaps so lets calculate as such :/
+                    }
+                    else if ((CollisionType == COLLISION_RECTANGLE && other.CollisionType == COLLISION_PIXELMAP)
+                        || (CollisionType == COLLISION_PIXELMAP && other.CollisionType == COLLISION_RECTANGLE))
+                    {
+                        var rect = this; var pixelmap = other;
+                        if (CollisionType == COLLISION_PIXELMAP) { rect = other; pixelmap = this; } //Swap
+                        if (rect.BoundingBox.Contains(pixelmap.BoundingBox)) return true; //The pixelmap is inside the boundingbox entirely so no need to calculate per pixel.
+                        else if (PixelMapCollidesWithRectangle(pixelmap, rect)) return true;
+                    }
                 }
             }
             return false;
         }
-        public bool RectIntersects(Collision other)
+        public bool RectIntersects(Collision other, int offsetX = 0, int offsetY = 0)
         {
             if (BoundingBox.Intersects(other.BoundingBox))
                 return true;
             return false;
         }
-        public bool PixelMapCollidesWithPixelMap(Collision other)
+        public bool PixelMapCollidesWithPixelMap(Collision other, int offsetX = 0, int offsetY = 0)
         {
             for (int x = 0; x < CollisionPixelMap.Count; x++)
             {
-                if (PixelCollidesWithPixelMap(CollisionPixelMap[x], other))
+                if (PixelCollidesWithPixelMap(CollisionPixelMap[x], other, offsetX, offsetY))
                     return true; //We struck gold!
             }
             return false;
@@ -70,18 +78,19 @@ namespace ScarletResource.Pipeline
 
         /// <summary> Check if an PixelOffset from this Collision collides with another Collision </summary>
         /// <param name="Pixel">The pixel offsetXY, not the actual pixelXY in gameworld</param>
-        private bool PixelCollidesWithPixelMap(PixelOffset Pixel, Collision other)
+        public bool PixelCollidesWithPixelMap(PixelOffset Pixel, Collision other, int offsetX = 0, int offsetY = 0)
         {
-            if (other.CollisionPixelMap.Any(p => p.OffsetX + other.BoundingBox.X == Pixel.OffsetX + BoundingBox.X && p.OffsetY + other.BoundingBox.Y == Pixel.OffsetY + BoundingBox.Y))
+            if (other.CollisionPixelMap.Any(p => p.OffsetX + other.BoundingBox.X == Pixel.OffsetX + offsetX + BoundingBox.X
+                                            && p.OffsetY + other.BoundingBox.Y == Pixel.OffsetY + offsetY + BoundingBox.Y))
                 return true;
 
             return false;
         }
 
         /// <summary> Check if an PixelMap from this Collision collides with another Rectangle Collision </summary>
-        private bool PixelMapCollidesWithRectangle(Collision PixelMap, Collision Rect)
+        private bool PixelMapCollidesWithRectangle(Collision PixelMap, Collision Rect, int offsetX = 0, int offsetY = 0)
         {
-            if (PixelMap.CollisionPixelMap.Any(p => Rect.BoundingBox.Contains(p.OffsetX, p.OffsetY)))
+            if (PixelMap.CollisionPixelMap.Any(p => Rect.BoundingBox.Contains(p.OffsetX + offsetX, p.OffsetY + offsetY)))
                 return true;
 
             return false;
@@ -106,7 +115,13 @@ namespace ScarletResource.Pipeline
             }
         }
 
-        public void SetOffset(int x, int y)
+
+        public void SetLocation(int x, int y)
+        {
+            BoundingBox = new Rectangle(0, 0, Width, Height);
+            BoundingBox.Offset(x, y);
+        }
+        public void AddOffset(int x, int y)
         {
             BoundingBox.Offset(x, y);
         }

@@ -62,7 +62,7 @@ namespace ScarletResource.Entities
             PreviousLocation.Y = Location.Y;
 
             if (Mask != null)
-                Mask.SetOffset((int)Location.X, (int)Location.Y);
+                Mask.SetLocation((int)Location.X - Mask.Width / 2, (int)Location.Y - Mask.Height / 2);
         }
 
         /// <summary> This shit calculates where this thing is actually supposed to be drawn.</summary>

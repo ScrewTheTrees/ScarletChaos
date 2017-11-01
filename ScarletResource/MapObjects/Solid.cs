@@ -61,6 +61,13 @@ namespace ScarletResource.MapObjects
         }
 
 
+        public void UpdateSolidData()
+        {
+            if (Mask != null)
+                Mask.SetLocation((int)Location.X - Mask.Width / 2, (int)Location.Y - Mask.Height / 2);
+        }
+
+
         public static int NewSolidID = 0;
         public static int GetNewSolidID() { return NewSolidID; }
 

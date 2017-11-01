@@ -200,8 +200,13 @@ namespace ScarletResource
                 if (list[i].Active == true)
                     list[i].UpdateEntityData();
             }
-            
 
+            Solid[] solids = Map.CurrentMap.Solids.ToArray();
+            //Always update this last, that way it will be ready for the next step.
+            for (var i = 0; i < solids.Length; i++)
+            {
+                solids[i].UpdateSolidData();
+            }
             //TODO: Debug
             if (StateMouse.LeftButton == ButtonState.Pressed && IsActive == true)
             {
