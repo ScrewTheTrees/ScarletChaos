@@ -136,12 +136,11 @@ namespace ScarletResource
                     solids[j].Draw(spriteBatch);
             }
 
-
-            spriteBatch.End();
-
             spriteBatch.DrawString(FontContent.GetFont("FontArial16"), "Entities: " + Entities.Count.ToString(), new Vector2(100, 100), Color.White);
             spriteBatch.DrawString(FontContent.GetFont("FontArial16"), "Solids: " + Map.CurrentMap.Solids.Count.ToString(), new Vector2(100, 120), Color.White);
 
+            spriteBatch.End();
+            
             base.Draw(gameTime);
         }
 
