@@ -68,11 +68,13 @@ namespace ScarletResource.Pipeline
         }
         public bool PixelMapCollidesWithPixelMap(Collision other, int offsetX = 0, int offsetY = 0)
         {
-            //Lets check (Up, Down, Right Left) first
-            foreach (var x in CollisionPixelMap)
+            for (int i = 0; i < CollisionPixelMap.Count; i++)
             {
-                if (PixelCollidesWithPixelMap(x, other, offsetX, offsetY))
-                    return true; //We struck gold!
+                var px = CollisionPixelMap[i];
+                //Ignore pixels outside its pixelmap
+                if (other.BoundingBox.Contains(px.OffsetX + BoundingBox.X, px.OffsetY + BoundingBox.Y))
+                    if (PixelCollidesWithPixelMap(px, other, offsetX, offsetY))
+                        return true; //We struck gold!
             }
             return false;
         }
@@ -81,9 +83,12 @@ namespace ScarletResource.Pipeline
         /// <param name="Pixel">The pixel offsetXY, not the actual pixelXY in gameworld</param>
         public bool PixelCollidesWithPixelMap(PixelOffset Pixel, Collision other, int offsetX = 0, int offsetY = 0)
         {
-            if (other.CollisionPixelMap.Any(p => p.OffsetX + other.BoundingBox.X == Pixel.OffsetX + offsetX + BoundingBox.X
-                                            && p.OffsetY + other.BoundingBox.Y == Pixel.OffsetY + offsetY + BoundingBox.Y))
-                return true;
+            foreach (var p in other.CollisionPixelMap)
+            {
+                if ((p.OffsetX + other.BoundingBox.X == Pixel.OffsetX + offsetX + BoundingBox.X)
+                && (p.OffsetY + other.BoundingBox.Y == Pixel.OffsetY + offsetY + BoundingBox.Y))
+                    return true;
+            }
 
             return false;
         }
