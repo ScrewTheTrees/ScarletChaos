@@ -40,15 +40,8 @@ namespace ScarletResource.Entities.Components
 
             //By using some logic we can reduce the amount of Collideable terrain to only the immediate surroundings and things that can collide.
             //This will allow for us to greatly reduce neccessary calculations for complex movement.
-            Solid[] collisions = Map.CurrentMap.Solids
-                .Where(x => x.CollideEntity == true && x.Mask != null)
-                        .Where(x => (Math.Abs(x.Location.X - entity.Location.X) < x.Mask.Width + w + 64)
-                        && (Math.Abs(x.Location.Y - entity.Location.Y) < x.Mask.Height + h + 64)
-                 ).ToArray();
-
             float finalX = entity.Location.X;
             float finalY = entity.Location.Y;
-
 
             float gravX = (float)((entity.Gravity + entity.GravityMod) * Math.Cos(entity.GravityDirection.DegToRad()));
             float gravY = (float)((entity.Gravity + entity.GravityMod) * -Math.Sin(entity.GravityDirection.DegToRad()));
@@ -60,28 +53,15 @@ namespace ScarletResource.Entities.Components
             entity.SpeedHorizontal.Clamp(-entity.SpeedHorizontalMax, entity.SpeedHorizontalMax);
             entity.SpeedVertical.Clamp(-entity.SpeedVerticalMax, entity.SpeedVerticalMax);
 
-            //Handle Horizontal collisions
-            while (CollisionSolid(entity, collisions, 0, entity.SpeedHorizontal) == true && entity.SpeedHorizontal != 0)
-            {
-                if (entity.SpeedHorizontal >= 1) entity.SpeedHorizontal -= 1;
-                else if (entity.SpeedHorizontal <= -1) entity.SpeedHorizontal += 1;
-                else entity.SpeedHorizontal = 0;
-            }
-            //Handle Vertical collisions
-            while (CollisionSolid(entity, collisions, entity.SpeedVertical, 0) == true && entity.SpeedVertical != 0)
-            {
-                if (entity.SpeedVertical >= 1) entity.SpeedVertical -= 1;
-                else if (entity.SpeedVertical <= -1) entity.SpeedVertical += 1;
-                else entity.SpeedVertical = 0;
-            }
-
-            if (CollisionSolid(entity, collisions, gravX * 2, gravY * 2))
+            if (CollisionSolid(entity, Map.CurrentMap.Solids, gravX * 2, gravY * 2))
             {
                 entity.OnGround = true;
                 entity.SpeedHorizontal = 0;
                 entity.SpeedVertical = 0;
             }
             else entity.OnGround = false;
+
+
 
             finalX += entity.SpeedHorizontal;
             finalY += entity.SpeedVertical;
@@ -90,15 +70,18 @@ namespace ScarletResource.Entities.Components
             entity.Location.Y = finalY;
         }
 
-        private bool CollisionSolid(Entity e, Solid[] colli, float offsetX = 0, float offsetY = 0)
+        private bool CollisionSolid(Entity e, List<Solid> colli, float offsetX = 0, float offsetY = 0)
         {
             if (e.Mask != null)
             {
-                foreach (Solid c in colli)
+                for (int i = 0; i < colli.Count; i++)
                 {
-                    if (c.Mask != null)
-                        if (e.Mask.CollidesWith(c.Mask))
-                            return true;
+                    var c = colli[i];
+
+                    if (Math.Abs(c.Location.X - e.Location.X) < c.Mask.Width + 16 && Math.Abs(c.Location.Y - e.Location.Y) < c.Mask.Height + 16) 
+                        if (c.Mask != null)
+                            if (e.Mask.CollidesWith(c.Mask, (int)offsetX, (int)offsetY))
+                                return true;
                 }
             }
             return false; //No collisions
@@ -108,8 +91,6 @@ namespace ScarletResource.Entities.Components
         {
 
         }
-
-
 
         public const int MOVEMENT_NONE = 0;
         public const int MOVEMENT_PLATFORM = 1;

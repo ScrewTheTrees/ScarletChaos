@@ -139,6 +139,9 @@ namespace ScarletResource
 
             spriteBatch.End();
 
+            spriteBatch.DrawString(FontContent.GetFont("FontArial16"), "Entities: " + Entities.Count.ToString(), new Vector2(100, 100), Color.White);
+            spriteBatch.DrawString(FontContent.GetFont("FontArial16"), "Solids: " + Map.CurrentMap.Solids.Count.ToString(), new Vector2(100, 120), Color.White);
+
             base.Draw(gameTime);
         }
 
@@ -221,7 +224,7 @@ namespace ScarletResource
                 Entity e = (Entity)Activator.CreateInstance(Entity.GetEntityTypeFromID(Entity.ENTITY_PLAYER));
                 e.SetLocation(GetMouseLocation());
                 e.Sprite = EntitySprites.GetSprite("kirbytest.png"); //TODO: Shit
-                e.Mask = new Collision(EntitySprites.GetSprite(@"Masks\MaskPlayerBase.png").Tex, true);
+                e.Mask = new Collision(EntitySprites.GetSprite(@"Masks\MaskPlayerBase.png").Tex, false);
             }
 
         }
