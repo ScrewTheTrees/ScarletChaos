@@ -172,9 +172,9 @@ namespace ScarletResource
             Delta60 += (StepTime) * 60;
             Delta120 += (StepTime) * 120;
 
-            if (Delta120 > 12) Delta120 = 12;
-            if (Delta60 > 6) Delta60 = 6;
-            if (Delta30 > 3) Delta30 = 3;
+            if (Delta120 > 2) Delta120 = 2;
+            if (Delta60 > 2) Delta60 = 2;
+            if (Delta30 > 2) Delta30 = 2;
             if (Delta10 > 2) Delta10 = 2;
             if (Delta1 > 2) Delta1 = 2;
             if (Delta1s > 2) Delta1s = 2;

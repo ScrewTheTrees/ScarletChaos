@@ -61,6 +61,11 @@ namespace ScarletResource.Entities.Components
             }
             else entity.OnGround = false;
 
+            if (CollisionSolid(entity, Map.CurrentMap.Solids))
+            {
+                entity.Location.X -= gravX;
+                entity.Location.Y -= gravY;
+            }
 
 
             finalX += entity.SpeedHorizontal;
