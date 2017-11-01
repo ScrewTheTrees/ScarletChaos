@@ -68,9 +68,10 @@ namespace ScarletResource.Pipeline
         }
         public bool PixelMapCollidesWithPixelMap(Collision other, int offsetX = 0, int offsetY = 0)
         {
-            for (int x = 0; x < CollisionPixelMap.Count; x++)
+            //Lets check (Up, Down, Right Left) first
+            foreach (var x in CollisionPixelMap)
             {
-                if (PixelCollidesWithPixelMap(CollisionPixelMap[x], other, offsetX, offsetY))
+                if (PixelCollidesWithPixelMap(x, other, offsetX, offsetY))
                     return true; //We struck gold!
             }
             return false;
@@ -90,7 +91,7 @@ namespace ScarletResource.Pipeline
         /// <summary> Check if an PixelMap from this Collision collides with another Rectangle Collision </summary>
         private bool PixelMapCollidesWithRectangle(Collision PixelMap, Collision Rect, int offsetX = 0, int offsetY = 0)
         {
-            if (PixelMap.CollisionPixelMap.Any(p => Rect.BoundingBox.Contains(p.OffsetX + offsetX, p.OffsetY + offsetY)))
+            if (PixelMap.CollisionPixelMap.Any(p => Rect.BoundingBox.Contains(p.OffsetX + offsetX + PixelMap.BoundingBox.X, p.OffsetY + offsetY + PixelMap.BoundingBox.Y)))
                 return true;
 
             return false;

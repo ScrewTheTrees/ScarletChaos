@@ -30,12 +30,20 @@ namespace ScarletResource.Entities.Components
 
         private void EntityMovePlatformer(EntityPlayable entity)
         {
+            int w = 0, h = 0;
+
+            if (entity.Mask != null)
+            {
+                h = entity.Mask.Width;
+                w = entity.Mask.Width;
+            }
+
             //By using some logic we can reduce the amount of Collideable terrain to only the immediate surroundings and things that can collide.
             //This will allow for us to greatly reduce neccessary calculations for complex movement.
             Solid[] collisions = Map.CurrentMap.Solids
-                .Where(x => x.CollideEntity == true
-                        && (Math.Abs(x.Location.X - entity.Location.X) < x.Mask.Width + entity.Mask.Width + 64)
-                        && (Math.Abs(x.Location.Y - entity.Location.Y) < x.Mask.Height + entity.Mask.Height + 64)
+                .Where(x => x.CollideEntity == true && x.Mask != null)
+                        .Where(x => (Math.Abs(x.Location.X - entity.Location.X) < x.Mask.Width + w + 64)
+                        && (Math.Abs(x.Location.Y - entity.Location.Y) < x.Mask.Height + h + 64)
                  ).ToArray();
 
             float finalX = entity.Location.X;
@@ -84,9 +92,14 @@ namespace ScarletResource.Entities.Components
 
         private bool CollisionSolid(Entity e, Solid[] colli, float offsetX = 0, float offsetY = 0)
         {
-            foreach (Solid c in colli)
+            if (e.Mask != null)
             {
-                if (e.Mask.CollidesWith(c.Mask)) return true;
+                foreach (Solid c in colli)
+                {
+                    if (c.Mask != null)
+                        if (e.Mask.CollidesWith(c.Mask))
+                            return true;
+                }
             }
             return false; //No collisions
         }

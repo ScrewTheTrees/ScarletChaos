@@ -44,10 +44,12 @@ namespace ScarletResource.MapObjects
             Location.X = pos.X;
             Location.Y = pos.Y;
             Sprite = SolidSprites.GetSprite(mask);
+            Mask = new Collision(Sprite.Tex, true);
         }
-        public Solid(Sprite Mask, bool visible, bool destructible, bool jumpThrough, bool collideEntity, bool collideProjectile, int solidID)
+        public Solid(Sprite mask, bool visible, bool destructible, bool jumpThrough, bool collideEntity, bool collideProjectile, int solidID)
         {
-            Sprite = Mask;
+            Sprite = mask;
+            Mask = new Collision(Sprite.Tex, true);
             Visible = visible;
             Destructible = destructible;
             JumpThrough = jumpThrough;

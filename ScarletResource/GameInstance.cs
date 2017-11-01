@@ -170,6 +170,13 @@ namespace ScarletResource
             Delta60 += (StepTime) * 60;
             Delta120 += (StepTime) * 120;
 
+            if (Delta120 > 12) Delta120 = 12;
+            if (Delta60 > 6) Delta60 = 6;
+            if (Delta30 > 3) Delta30 = 3;
+            if (Delta10 > 2) Delta10 = 2;
+            if (Delta1 > 2) Delta1 = 2;
+            if (Delta1s > 2) Delta1s = 2;
+
             while (Delta1s > 1) { Step1s(); }
             while (Delta1 > 1) { Step1(); }
             while (Delta10 > 1) { Step10(); }
@@ -188,6 +195,7 @@ namespace ScarletResource
         private void Step120()
         {
             Delta120 -= 1;
+
             Entity[] list = Entities.ToArray();
             for (var i = 0; i < list.Length; i++)
             {
@@ -213,6 +221,7 @@ namespace ScarletResource
                 Entity e = (Entity)Activator.CreateInstance(Entity.GetEntityTypeFromID(Entity.ENTITY_PLAYER));
                 e.SetLocation(GetMouseLocation());
                 e.Sprite = EntitySprites.GetSprite("kirbytest.png"); //TODO: Shit
+                e.Mask = new Collision(EntitySprites.GetSprite(@"Masks\MaskPlayerBase.png").Tex, true);
             }
 
         }
