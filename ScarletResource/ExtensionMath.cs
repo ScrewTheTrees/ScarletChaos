@@ -15,15 +15,21 @@ namespace ScarletResource
             else return val;
         }
 
+
+
+
         public static double DegToRad(this double angle)
         {
             return (Math.PI / 180) * angle;
         }
-        public static float DegToRad(this float angle)
+        public static double DegToRad(this float angle)
         {
             return (float)(Math.PI / 180) * angle;
         }
-
+        public static double DegToRad(this int angle)
+        {
+            return (Math.PI / 180) * angle;
+        }
 
     }
 }

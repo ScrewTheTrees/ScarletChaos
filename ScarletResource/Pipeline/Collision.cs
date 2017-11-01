@@ -13,7 +13,7 @@ namespace ScarletResource.Pipeline
         public int CollisionType = COLLISION_RECTANGLE;
         Rectangle BoundingBox;
         int Width, Height;
-        public bool[,] CollisionPixelMap;
+        public List<PixelOffset> CollisionPixelMap = new List<PixelOffset>();
 
         public Collision() : this(0, 0, 0, 0) { }
         public Collision(int x, int y, int width, int height)
@@ -46,6 +46,7 @@ namespace ScarletResource.Pipeline
                     var rect = this; var pixelmap = other;
                     if (CollisionType == COLLISION_PIXELMAP) { rect = other; pixelmap = this; } //Swap
                     if (rect.BoundingBox.Contains(pixelmap.BoundingBox)) return true; //The pixelmap is inside the boundingbox entirely so no need to calculate per pixel.
+                    else if (PixelMapCollidesWithRectangle(pixelmap, rect)) return true;
 
                 }
             }
@@ -59,36 +60,40 @@ namespace ScarletResource.Pipeline
         }
         public bool PixelMapCollidesWithPixelMap(Collision other)
         {
-            for (int x = 0; x < other.CollisionPixelMap.GetLength(0); x++)
+            for (int x = 0; x < CollisionPixelMap.Count; x++)
             {
-                for (int y = 0; y < other.CollisionPixelMap.GetLength(1); y++)
-                {
-                    if (CollisionPixelMap[x, y] == true)
-                        if (PixelCollidesWithPixelMap(new Vector2(x + BoundingBox.X, y + BoundingBox.Y), other))
-                            return true; //We struck gold!
-                }
+                if (PixelCollidesWithPixelMap(CollisionPixelMap[x], other))
+                    return true; //We struck gold!
             }
             return false;
         }
-        public bool PixelCollidesWithPixelMap(Vector2 Pixel, Collision other)
+
+        /// <summary> Check if an PixelOffset from this Collision collides with another Collision </summary>
+        /// <param name="Pixel">The pixel offsetXY, not the actual pixelXY in gameworld</param>
+        private bool PixelCollidesWithPixelMap(PixelOffset Pixel, Collision other)
         {
-            for (int x = 0; x < other.CollisionPixelMap.GetLength(0); x++)
-            {
-                for (int y = 0; y < other.CollisionPixelMap.GetLength(1); y++)
-                {
-                    if ((int)Pixel.X == x + other.BoundingBox.X && (int)Pixel.Y == y + other.BoundingBox.Y && other.CollisionPixelMap[x, y] == true)
-                        return true; //We struck gold!
-                }
-            }
+            if (other.CollisionPixelMap.Any(p => p.OffsetX + other.BoundingBox.X == Pixel.OffsetX + BoundingBox.X && p.OffsetY + other.BoundingBox.Y == Pixel.OffsetY + BoundingBox.Y))
+                return true;
+
             return false;
         }
+
+        /// <summary> Check if an PixelMap from this Collision collides with another Rectangle Collision </summary>
+        private bool PixelMapCollidesWithRectangle(Collision PixelMap, Collision Rect)
+        {
+            if (PixelMap.CollisionPixelMap.Any(p => Rect.BoundingBox.Contains(p.OffsetX, p.OffsetY)))
+                return true;
+
+            return false;
+        }
+
         public void GeneratePixelMap(Texture2D tex)
         {
             CollisionType = COLLISION_PIXELMAP;
-            CollisionPixelMap = new bool[tex.Width, tex.Height];
+            CollisionPixelMap.Clear();
 
             Color[] colors1D = new Color[tex.Width * tex.Height];
-            tex.GetData<Color>(colors1D);
+            tex.GetData(colors1D);
 
             for (int y = 0; y < tex.Height; y++)
             {
@@ -96,8 +101,7 @@ namespace ScarletResource.Pipeline
                 {
                     Color cor = colors1D[x + (y * tex.Width)];
                     if (cor.A > 20)
-                        CollisionPixelMap[x, y] = true;
-                    else CollisionPixelMap[x, y] = false;
+                        CollisionPixelMap.Add(new PixelOffset(x, y));
                 }
             }
         }
@@ -109,5 +113,18 @@ namespace ScarletResource.Pipeline
 
         public const int COLLISION_RECTANGLE = 0;
         public const int COLLISION_PIXELMAP = 1;
+    }
+
+
+    /// <summary> A simple integer Offset for X/Y. </summary>
+    public struct PixelOffset
+    {
+        public PixelOffset(int x, int y)
+        {
+            OffsetX = x;
+            OffsetY = y;
+        }
+        public int OffsetX;
+        public int OffsetY;
     }
 }
